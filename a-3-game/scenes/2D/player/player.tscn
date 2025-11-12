@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxwyepp3mbvej"]
+
+[ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
+[ext_resource type="Texture2D" uid="uid://83d1iu8g1huu" path="res://assets/2D/sprites/test_player_sprite.png" id="1_1ail0"]
+[ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="3_qy10c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qy10c"]
+radius = 60.0171
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5mbw8"]
+radius = 12.0
+
+[sub_resource type="Gradient" id="Gradient_0nwcy"]
+offsets = PackedFloat32Array(0.39333335, 0.72333336)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qy10c"]
+gradient = SubResource("Gradient_0nwcy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.90000004, 0.1)
+metadata/_snap_enabled = true
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+visibility_layer = 32
+scale = Vector2(2, 2)
+script = ExtResource("1_0nwcy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+texture = ExtResource("1_1ail0")
+
+[node name="Flashlight" type="PointLight2D" parent="Sprite2D"]
+texture_filter = 1
+position = Vector2(0.6155081, 93.5961)
+rotation = 3.1415927
+scale = Vector2(1.0016404, 1.2857141)
+texture = ExtResource("3_qy10c")
+
+[node name="Flash Zone" type="Area2D" parent="Sprite2D/Flashlight"]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Flashlight/Flash Zone"]
+position = Vector2(0.11531935, 3.9636335)
+shape = SubResource("CircleShape2D_qy10c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5mbw8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture_filter = 1
+texture = SubResource("GradientTexture2D_qy10c")
