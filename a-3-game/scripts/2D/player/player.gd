@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
+# variables for collectible tracking
+@onready var score_text: Label = $ScoreText
+var score: int
 
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _flashlight: PointLight2D = $Sprite2D/Flashlight
@@ -37,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		_sprite.rotation = movement_dir.angle() - PI / 2
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
-
+		
 	move_and_slide()
 
 
@@ -64,3 +67,8 @@ func _change_flash_color() -> void:
 			_flashlight.color = Color.LIME_GREEN
 		Global.LIGHT_COLOR.BLUE:
 			_flashlight.color = Color.ROYAL_BLUE
+
+func add_score(score_amount):
+	score += score_amount
+	score_text.text = str("SCORE: ", score)
+	

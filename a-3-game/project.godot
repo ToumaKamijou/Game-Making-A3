@@ -70,6 +70,10 @@ change_flash_color={
 2d_render/layer_1="Tiles"
 2d_render/layer_6="Player"
 
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+
 [shader_globals]
 
 SHADER_TIME={
