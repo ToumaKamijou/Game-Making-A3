@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
+
 @onready var _shapecast: ShapeCast2D = $Sprite2D/Flashlight/ShapeCast2D
 
 @onready var _sprite: Sprite2D = $Sprite2D
@@ -40,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	# Check whether flashlight colour matches object. send signal if so
+	# Check whether flashlight color matches object. send signal if so
 	if _shapecast.is_colliding():
 		var collision_count = _shapecast.get_collision_count()
 		for i in range(collision_count):
