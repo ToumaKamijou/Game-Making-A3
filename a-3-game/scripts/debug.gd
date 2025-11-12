@@ -6,6 +6,7 @@ func _unhandled_key_input(event : InputEvent) -> void:
 		var key : int = _event.keycode
 		match key:
 			KEY_R:
+				# Reset the level
 				get_tree().reload_current_scene()
 			KEY_Y:
 				get_tree().quit()
