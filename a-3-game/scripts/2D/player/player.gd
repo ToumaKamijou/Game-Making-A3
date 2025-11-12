@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	
 	if movement_dir:
 		velocity = movement_dir * _walk_speed
-		_sprite.rotation = movement_dir.angle() - PI / 2
+		_sprite.rotation = lerp_angle(_sprite.rotation, movement_dir.angle() - PI / 2, delta * 10)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
 
