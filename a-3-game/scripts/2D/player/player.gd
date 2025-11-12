@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 			if collided.is_in_group("Blue") and flash_color == 3:
 				collided.lit = true
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("show_flashlight"):
 		if _flashlight.enabled == true:
