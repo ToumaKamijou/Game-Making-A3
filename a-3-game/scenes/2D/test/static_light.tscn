@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvarbtspidjhf"]
+
+[ext_resource type="Script" uid="uid://c3w3trvcrpnf" path="res://scripts/2D/test/static_light.gd" id="1_ftl5n"]
+
+[sub_resource type="Gradient" id="Gradient_l8slq"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dxe1e"]
+gradient = SubResource("Gradient_l8slq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.90000004, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ftl5n"]
+radius = 30.0
+
+[node name="StaticLight" type="PointLight2D"]
+texture = SubResource("GradientTexture2D_dxe1e")
+script = ExtResource("1_ftl5n")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_ftl5n")
+target_position = Vector2(0, 0)
+collision_mask = 3

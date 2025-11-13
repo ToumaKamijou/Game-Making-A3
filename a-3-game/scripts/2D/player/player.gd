@@ -10,6 +10,9 @@ class_name Player
 @export var _walk_speed: float = 300.0
 @export var _deceleration: float = 900.0
 
+var _collided_objects: Array[Object] = [] # Holds all the objects seen by the flashlight
+
+
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):
 		var new_value: int = int(value)
@@ -19,7 +22,8 @@ var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 			new_value %= Global.LIGHT_COLOR.size()
 		
 		flash_color = new_value as Global.LIGHT_COLOR
-		_change_flash_color()
+		_flashlight.color = Global.change_flash_color(flash_color)
+
 
 var unlocked_colors: Dictionary = {
 	Global.LIGHT_COLOR.RED: true,
@@ -44,14 +48,30 @@ func _physics_process(delta: float) -> void:
 	# Check whether flashlight color matches object. send signal if so
 	if _shapecast.is_colliding():
 		var collision_count = _shapecast.get_collision_count()
+		var current_collisions: Array[Object] = []
+		
 		for i in range(collision_count):
 			var collided = _shapecast.get_collider(i)
+			if collided == null:
+				continue
+			
+			var color_match := false
 			if collided.is_in_group("Red") and flash_color == 1:
-				collided.lit = true
+				color_match = true
 			if collided.is_in_group("Green") and flash_color == 2:
-				collided.lit = true
+				color_match = true
 			if collided.is_in_group("Blue") and flash_color == 3:
-				collided.lit = true
+				color_match = true
+			
+			if color_match:
+				collided.change_lit_status(true)
+				current_collisions.append(collided)
+		
+		for i in _collided_objects:
+			if not current_collisions.has(i):
+				i.change_lit_status(false)
+		
+		_collided_objects = current_collisions.duplicate()
 
 
 func _input(event: InputEvent) -> void:
@@ -65,15 +85,3 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
-
-
-func _change_flash_color() -> void:
-	match flash_color:
-		Global.LIGHT_COLOR.WHITE:
-			_flashlight.color = Color.WHITE
-		Global.LIGHT_COLOR.RED:
-			_flashlight.color = Color.RED
-		Global.LIGHT_COLOR.GREEN:
-			_flashlight.color = Color.LIME_GREEN
-		Global.LIGHT_COLOR.BLUE:
-			_flashlight.color = Color.ROYAL_BLUE
