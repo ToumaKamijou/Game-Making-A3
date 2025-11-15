@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxwyepp3mbvej"]
+[gd_scene load_steps=9 format=3 uid="uid://cxwyepp3mbvej"]
 
 [ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
 [ext_resource type="Texture2D" uid="uid://83d1iu8g1huu" path="res://assets/2D/sprites/test_player_sprite.png" id="1_1ail0"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy10c"]
 radius = 60.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b2fbk"]
+radius = 55.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5mbw8"]
 radius = 12.0
@@ -38,11 +41,19 @@ rotation = 3.1415927
 scale = Vector2(1.0016404, 1.2857141)
 texture = ExtResource("3_qy10c")
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="Sprite2D/Flashlight"]
+[node name="ShapeCastBodies" type="ShapeCast2D" parent="Sprite2D/Flashlight"]
 position = Vector2(0, 4.5)
 shape = SubResource("CircleShape2D_qy10c")
 target_position = Vector2(0, 0)
 collision_mask = 3
+
+[node name="ShapeCastAreas" type="ShapeCast2D" parent="Sprite2D/Flashlight"]
+position = Vector2(0, 4.5)
+shape = SubResource("CircleShape2D_b2fbk")
+target_position = Vector2(0, 5)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5mbw8")

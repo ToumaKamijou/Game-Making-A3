@@ -1,7 +1,6 @@
 @tool
 extends StaticBody2D
 
-
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
 		_color_type = value

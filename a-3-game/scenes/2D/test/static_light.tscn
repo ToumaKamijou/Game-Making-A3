@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvarbtspidjhf"]
+[gd_scene load_steps=6 format=3 uid="uid://dvarbtspidjhf"]
 
 [ext_resource type="Script" uid="uid://c3w3trvcrpnf" path="res://scripts/2D/test/static_light.gd" id="1_ftl5n"]
 
@@ -15,6 +15,9 @@ metadata/_snap_enabled = true
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftl5n"]
 radius = 30.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1m7g"]
+radius = 26.019224
+
 [node name="StaticLight" type="PointLight2D"]
 texture = SubResource("GradientTexture2D_dxe1e")
 script = ExtResource("1_ftl5n")
@@ -23,3 +26,9 @@ script = ExtResource("1_ftl5n")
 shape = SubResource("CircleShape2D_ftl5n")
 target_position = Vector2(0, 0)
 collision_mask = 3
+
+[node name="Area2D" type="Area2D" parent="." groups=["ColorLight"]]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a1m7g")

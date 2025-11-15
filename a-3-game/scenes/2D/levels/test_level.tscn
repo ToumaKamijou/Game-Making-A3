@@ -69,10 +69,30 @@ _color_type = 3
 position = Vector2(788, 743)
 _color_type = 2
 
+[node name="yellow" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Yellow"] instance=ExtResource("2_1wh7b")]
+position = Vector2(643, 855)
+_color_type = 4
+
+[node name="purple" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Purple"] instance=ExtResource("2_1wh7b")]
+position = Vector2(1342, 877)
+_color_type = 5
+
+[node name="cyan" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Cyan"] instance=ExtResource("2_1wh7b")]
+position = Vector2(1335, 577)
+_color_type = 6
+
 [node name="StaticLight" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
 position = Vector2(689.00006, 723)
 scale = Vector2(5, 5)
+_base_value = 1
 _light_color = 1
+_size = 5.0
+
+[node name="StaticLight2" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
+position = Vector2(1343, 723)
+scale = Vector2(5, 5)
+_base_value = 2
+_light_color = 2
 _size = 5.0
 
 [node name="Display" type="Control" parent="."]
