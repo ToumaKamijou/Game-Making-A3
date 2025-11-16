@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Player
 
-
 @onready var _shapecast: ShapeCast2D = $Sprite2D/Flashlight/ShapeCast2D
 
 @onready var _sprite: Sprite2D = $Sprite2D
@@ -12,6 +11,8 @@ class_name Player
 
 var _collided_objects: Array[Object] = [] # Holds all the objects seen by the flashlight
 
+var checkpoint_manager
+var player
 
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):
@@ -31,6 +32,13 @@ var unlocked_colors: Dictionary = {
 	Global.LIGHT_COLOR.BLUE: true,
 }
 
+func _ready() -> void:
+	add_to_group("player")
+	checkpoint_manager = get_parent().get_node("CheckpointManager")
+	player = get_parent().get_node("Player")
+
+func respawn():
+	player.position = checkpoint_manager.last_location
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and apply it to the character
@@ -70,6 +78,15 @@ func _physics_process(delta: float) -> void:
 		for i in _collided_objects:
 			if not current_collisions.has(i):
 				i.change_lit_status(false)
+		
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			
+			if collision.get_collider().name == "MovingPlatformArea":
+				print("Player is on platform")
+			#if collision.get_collider().name == "SpikesTileMapLayer":
+				#print("Player has respawned")
+				#respawn()
 		
 		_collided_objects = current_collisions.duplicate()
 
