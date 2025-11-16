@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="2_1wh7b"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/test/static_light.tscn" id="6_dxe1e"]
+[ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="4_1wh7b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kpcvt"]
 texture = ExtResource("1_ffd7h")
@@ -74,6 +75,11 @@ position = Vector2(689.00006, 723)
 scale = Vector2(5, 5)
 _light_color = 1
 _size = 5.0
+[node name="coin" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_1wh7b")]
+position = Vector2(806, 542.00006)
+
+[node name="coin2" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_1wh7b")]
+position = Vector2(1114.0001, 542.00006)
 
 [node name="Display" type="Control" parent="."]
 layout_mode = 3

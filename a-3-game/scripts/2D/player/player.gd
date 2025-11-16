@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
+# Variables for collectible tracking
+@onready var _score_text: Label = $ScoreText
+var score: int
 
 @onready var _shapecast: ShapeCast2D = $Sprite2D/Flashlight/ShapeCast2D
 
@@ -42,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		_sprite.rotation = lerp_angle(_sprite.rotation, movement_dir.angle() - PI / 2, delta * 10)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
-	
+		
 	move_and_slide()
 	
 	# Check whether flashlight color matches object. send signal if so
@@ -85,3 +88,8 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
+
+
+func add_score(score_amount):
+	score += score_amount
+	_score_text.text = str("SCORE: ", score)
