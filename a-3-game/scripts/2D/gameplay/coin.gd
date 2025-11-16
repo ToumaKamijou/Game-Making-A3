@@ -23,9 +23,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and _collected == false:
+	if body.is_in_group("Player") and _collected == false:
 		body.add_score(_score_amount)
-		print("collected")
 		_collect_coin()
 
 
