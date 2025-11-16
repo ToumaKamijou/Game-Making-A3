@@ -105,7 +105,7 @@ func _physics_process(_delta: float) -> void:
 		
 		# For some reason, this works while deriving the value from within the other variable does not. Actually, why does this even change the colour of the light?
 		# Shouldn't that only be happening when setting the variable initially? Is it that it executes that function every time the value changes?
-		# If that is what's happening then  
+		# If that is what's happening then we probably do actually need the secondary value?
 		@warning_ignore_start("int_as_enum_without_cast")
 		_light_color = _base_value
 		@warning_ignore_restore("int_as_enum_without_cast")
