@@ -42,10 +42,10 @@ func _physics_process(delta: float) -> void:
 	
 	if movement_dir:
 		velocity = movement_dir * _walk_speed
-		_sprite.rotation = lerp_angle(_sprite.rotation, movement_dir.angle() - PI / 2, delta * 10)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
-		
+	_sprite.rotation = lerp_angle(_sprite.rotation, get_global_mouse_position().angle_to_point(position) + PI / 2, delta * 10)
+	
 	move_and_slide()
 	
 	# Check whether flashlight color matches object. send signal if so
