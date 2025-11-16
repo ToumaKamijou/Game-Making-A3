@@ -54,13 +54,21 @@ func _physics_process(delta: float) -> void:
 			var collided = _shapecast.get_collider(i)
 			if collided == null:
 				continue
+				
+			# --- NEW LOGIC FOR PRISMA GLASS ---
+			# Check if the object is a prisma AND the flashlight is white
+			if collided.is_in_group("Prisma") and flash_color == 0:
+				print("test")
+				collided.change_lit_status(true)
+				current_collisions.append(collided)
+				continue # Skip to the next object, we're done with this one
 			
 			var color_match := false
-			if collided.is_in_group("Red") and flash_color == 1:
+			if collided.is_in_group("Red") and collided.is_in_group("Wall") and flash_color == 1:
 				color_match = true
-			if collided.is_in_group("Green") and flash_color == 2:
+			if collided.is_in_group("Green") and collided.is_in_group("Wall") and flash_color == 2:
 				color_match = true
-			if collided.is_in_group("Blue") and flash_color == 3:
+			if collided.is_in_group("Blue") and collided.is_in_group("Wall") and flash_color == 3:
 				color_match = true
 			
 			if color_match:
