@@ -1,7 +1,7 @@
 extends Area2D
 
 
-# Values adjustable in inspector per separate instance. change here to adjust defaults
+# Values adjustable in inspector per separate instance. Change here to adjust defaults
 @export var _score_amount: int = 1
 @export var _bob_height: float = 15.0
 @export var _bob_speed: float = 2.0
@@ -29,7 +29,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _collect_coin() -> void:
-	# destroy self if collected
+	# Destroy self if collected
 	if _collected == false:
 		var tween = create_tween()
 		tween.tween_property(self, "scale", Vector2(0.0, 0.5), 0.3)

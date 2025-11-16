@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	# Check whether flashlight color matches object. send signal if so
+	# Check whether flashlight color matches object. Send signal if so
 	if _shapecast.is_colliding():
 		var collision_count = _shapecast.get_collision_count()
 		var current_collisions: Array[Object] = []

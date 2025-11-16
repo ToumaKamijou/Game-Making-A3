@@ -25,7 +25,7 @@ var _collided_objects: Array[Object] = [] # Holds all the objects seen by the fl
 
 
 func _physics_process(_delta: float) -> void:
-	# Check whether flashlight color matches object. send signal if so
+	# Check whether flashlight color matches object. Send signal if so
 	if _shapecast.is_colliding():
 		var collision_count = _shapecast.get_collision_count()
 		var current_collisions: Array[Object] = []
