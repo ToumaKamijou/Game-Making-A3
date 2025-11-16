@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jyeu"]
 radius = 3.0
 
-[node name="coin" type="Area2D"]
+[node name="Coin" type="Area2D"]
 scale = Vector2(5, 5)
 collision_layer = 4
 script = ExtResource("1_bmwih")
@@ -20,7 +20,7 @@ texture = ExtResource("1_5jyeu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5jyeu")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xilg1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

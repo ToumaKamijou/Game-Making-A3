@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-# variables for collectible tracking
-@onready var score_text: Label = $ScoreText
+# Variables for collectible tracking
+@onready var _score_text: Label = $ScoreText
 var score: int
 
 @onready var _sprite: Sprite2D = $Sprite2D
@@ -68,7 +68,7 @@ func _change_flash_color() -> void:
 		Global.LIGHT_COLOR.BLUE:
 			_flashlight.color = Color.ROYAL_BLUE
 
+
 func add_score(score_amount):
 	score += score_amount
-	score_text.text = str("SCORE: ", score)
-	
+	_score_text.text = str("SCORE: ", score)
