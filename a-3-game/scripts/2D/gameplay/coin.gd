@@ -32,7 +32,7 @@ func _collect_coin() -> void:
 	# destroy self if collected
 	if _collected == false:
 		var tween = create_tween()
-		tween.tween_property(self, "scale", Vector2(0.0, 0.0), 0.5)
+		tween.tween_property(self, "scale", Vector2(0.0, 0.5), 0.3)
 		
 		_audio.play()
 		_collected = true
