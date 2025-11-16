@@ -48,7 +48,7 @@ var lit = false:
 				#    This triggers the laser's _ready() and sets its @onready vars.
 				add_child(_laser_instance)
 				
-				# 3. NOW that it's in the tree, it's safe to position it and call its functions.
+				# 3. NOW that it's in the tree, it's safe to position it and call its functionss.
 				_laser_instance.global_position = laser_origin.global_position
 				_laser_instance.global_rotation = laser_origin.global_rotation
 				
