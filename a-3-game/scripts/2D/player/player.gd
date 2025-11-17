@@ -62,13 +62,41 @@ func _physics_process(delta: float) -> void:
 			var collided = _shapecast.get_collider(i)
 			if collided == null:
 				continue
+				
+			## --- NEW LOGIC FOR PRISMA GLASS ---
+			## Check if the object is a prisma AND the flashlight is white
+			#if collided.is_in_group("Prisma") and flash_color == 0:
+				#print("test")
+				#collided.change_lit_status(true)
+				#current_collisions.append(collided)
+				#continue # Skip to the next object, we're done with this one
+						# --- REVISED PRISMA LOGIC ---
+			if collided.is_in_group("Prisma"):
+				var prisma_color_type = collided._color_type
+				var activate = false
+				
+				# Condition 1: WHITE light hits a COLORED prisma
+				if flash_color == Global.LIGHT_COLOR.WHITE and prisma_color_type != Global.LIGHT_COLOR.WHITE:
+					activate = true
+				
+				# Condition 2: COLORED light hits a WHITE prisma
+				elif flash_color != Global.LIGHT_COLOR.WHITE and prisma_color_type == Global.LIGHT_COLOR.WHITE:
+					# Inform the prisma of our color BEFORE activating it
+					collided.set_incoming_light_color(flash_color)
+					activate = true
+
+				if activate:
+					collided.change_lit_status(true)
+					current_collisions.append(collided)
+
+				continue # We're done with this object, move to the next one
 			
 			var color_match := false
-			if collided.is_in_group("Red") and flash_color == 1:
+			if collided.is_in_group("Red") and collided.is_in_group("Wall") and flash_color == 1:
 				color_match = true
-			if collided.is_in_group("Green") and flash_color == 2:
+			if collided.is_in_group("Green") and collided.is_in_group("Wall") and flash_color == 2:
 				color_match = true
-			if collided.is_in_group("Blue") and flash_color == 3:
+			if collided.is_in_group("Blue") and collided.is_in_group("Wall") and flash_color == 3:
 				color_match = true
 			
 			if color_match:
@@ -104,6 +132,6 @@ func _input(event: InputEvent) -> void:
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
 
 
-func add_score(score_amount):
-	score += score_amount
-	_score_text.text = str("SCORE: ", score)
+#func add_score(score_amount):
+	#score += score_amount
+	#_score_text.text = str("SCORE: ", score)
