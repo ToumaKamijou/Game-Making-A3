@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxwyepp3mbvej"]
+[gd_scene load_steps=10 format=3 uid="uid://cxwyepp3mbvej"]
 
 [ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
 [ext_resource type="Texture2D" uid="uid://83d1iu8g1huu" path="res://assets/2D/sprites/test_player_sprite.png" id="1_1ail0"]
 [ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="3_qy10c"]
+[ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="4_b2fbk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy10c"]
 radius = 60.0
@@ -20,6 +21,10 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.90000004, 0.1)
 metadata/_snap_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_qy10c"]
+font = ExtResource("4_b2fbk")
+font_size = 10
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 32
@@ -44,14 +49,26 @@ shape = SubResource("CircleShape2D_qy10c")
 target_position = Vector2(0, 0)
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionBody" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5mbw8")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Player Camera" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="Player Light" type="PointLight2D" parent="."]
 texture_filter = 1
 texture = SubResource("GradientTexture2D_qy10c")
+
+[node name="ScoreText" type="Label" parent="."]
+texture_filter = 1
+offset_left = -34.0
+offset_top = -50.0
+offset_right = 34.0
+offset_bottom = -22.0
+text = "SCORE: 0"
+label_settings = SubResource("LabelSettings_qy10c")
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1

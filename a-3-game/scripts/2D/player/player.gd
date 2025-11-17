@@ -47,13 +47,13 @@ func _physics_process(delta: float) -> void:
 	
 	if movement_dir:
 		velocity = movement_dir * _walk_speed
-		_sprite.rotation = lerp_angle(_sprite.rotation, movement_dir.angle() - PI / 2, delta * 10)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
+	_sprite.rotation = lerp_angle(_sprite.rotation, get_global_mouse_position().angle_to_point(position) + PI / 2, delta * 10)
 	
 	move_and_slide()
 	
-	# Check whether flashlight color matches object. send signal if so
+	# Check whether flashlight color matches object. Send signal if so
 	if _shapecast.is_colliding():
 		var collision_count = _shapecast.get_collision_count()
 		var current_collisions: Array[Object] = []
@@ -102,3 +102,8 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
+
+
+func add_score(score_amount):
+	score += score_amount
+	_score_text.text = str("SCORE: ", score)
