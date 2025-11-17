@@ -92,11 +92,11 @@ func _physics_process(delta: float) -> void:
 				continue # We're done with this object, move to the next one
 			
 			var color_match := false
-			if collided.is_in_group("Red") and collided.is_in_group("Wall") and flash_color == 1:
+			if collided.is_in_group("Red") and flash_color == 1:
 				color_match = true
-			if collided.is_in_group("Green") and collided.is_in_group("Wall") and flash_color == 2:
+			if collided.is_in_group("Green") and flash_color == 2:
 				color_match = true
-			if collided.is_in_group("Blue") and collided.is_in_group("Wall") and flash_color == 3:
+			if collided.is_in_group("Blue") and flash_color == 3:
 				color_match = true
 			
 			if color_match:

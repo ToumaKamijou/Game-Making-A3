@@ -3,6 +3,8 @@ extends Node2D
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var line: Line2D = $Line2D
 
+@onready var _shapecast: ShapeCast2D = $HiddenObjectCheck
+
 var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
 var _currently_lit_object: Object = null
@@ -12,6 +14,19 @@ func set_laser_properties(p_color_enum: Global.LIGHT_COLOR, p_visual_color: Colo
 	line.default_color = p_visual_color
 
 func _physics_process(delta: float) -> void:
+	 # Check if the laser is currently being blocked. Re-enable object if so. Not entirely sure why this doesn't work. 
+	if _shapecast.is_colliding():
+		var collision_count = _shapecast.get_collision_count()
+		
+		for i in range(collision_count):
+			var collided = _shapecast.get_collider(i)
+			if collided == null:
+				continue
+				
+			if collided.is_in_group("Flashable") and i != 0 and collided.laser != null:
+				#collided.laser = null
+				collided.lasered = false
+	
 	raycast.force_raycast_update()
 	var cast_point: Vector2
 	if raycast.is_colliding():
@@ -26,17 +41,23 @@ func _physics_process(delta: float) -> void:
 		collider = raycast.get_collider()
 
 	if collider != _currently_lit_object:
+
 		# Deactivate old target object if it changed this frame.
 		if is_instance_valid(_currently_lit_object) and _currently_lit_object.has_method("change_lit_status"):
 			_currently_lit_object.change_lit_status(false)
 		
-		# ...and try to activate the new object.
+		# Activate the new object.
 		if is_instance_valid(collider):
 			if collider.is_in_group("Prisma"):
 				if laser_color_enum != Global.LIGHT_COLOR.WHITE and collider._color_type == Global.LIGHT_COLOR.WHITE:
 					collider.set_incoming_light_color(laser_color_enum)
 					collider.change_lit_status(true)
 					
+			if collider.is_in_group("Flashable") and collider._color_type == laser_color_enum:
+				#collider.override = false
+				collider.laser = self
+				collider.lasered = true
+				
 	_currently_lit_object = collider
 
 func _exit_tree() -> void:

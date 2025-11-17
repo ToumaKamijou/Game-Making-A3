@@ -1,6 +1,8 @@
 @tool
 extends StaticBody2D
 
+var laser: Node2D = null
+var lasered = false
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -15,16 +17,27 @@ extends StaticBody2D
 
 var lit = false:
 	set(value):
-		if value == true:
-			var tween = create_tween()
-			tween.tween_property(self, "modulate:a", 0.0, 0.1)
-			set_collision_layer_value(1, false)
-		else:
-			var tween = create_tween()
-			tween.tween_property(self, "modulate:a", 1.0, 0.1)
-			await get_tree().create_timer(0.15).timeout
-			set_collision_layer_value(1, true)
+			if value == true:
+				var tween = create_tween()
+				tween.tween_property(self, "modulate:a", 0.0, 0.1)
+				set_collision_layer_value(1, false)
+			else:
+				var tween = create_tween()
+				tween.tween_property(self, "modulate:a", 1.0, 0.1)
+				await get_tree().create_timer(0.15).timeout
+				set_collision_layer_value(1, true)
 
+func _ready() -> void:
+	if not is_in_group("Flashable"):
+		add_to_group("Flashable")
+
+func _physics_process(delta: float) -> void:
+	if lasered == true:
+		if is_instance_valid(laser):
+			change_lit_status(true)
+		else:
+			lasered = false
+			change_lit_status(false)
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
