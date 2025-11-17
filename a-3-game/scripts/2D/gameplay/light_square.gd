@@ -50,7 +50,7 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 		var final_laser_color: Color
 		if _color_type == Global.LIGHT_COLOR.WHITE:
 			final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
-			_laser_instance.set_laser_color(final_laser_color)
+			_laser_instance.set_laser_properties(_incoming_light_color, final_laser_color)
 
 var lit = false:
 	set(value):
@@ -63,17 +63,19 @@ var lit = false:
 				_laser_instance.global_rotation = laser_origin.global_rotation
 				_laser_instance.get_node("RayCast2D").add_exception(self)
 
-				# --- THE CORE NEW LOGIC ---
-				var final_laser_color: Color
+				# --- THIS IS THE ONLY PART THAT CHANGES ---
 				
-				# If this prisma is WHITE, use the stored incoming light color.
+				# First, determine what the outgoing laser's color should be, just like before.
+				var outgoing_laser_enum: Global.LIGHT_COLOR
 				if _color_type == Global.LIGHT_COLOR.WHITE:
-					final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
-				# Otherwise (if this is a colored prisma), use its own color.
+					outgoing_laser_enum = _incoming_light_color
 				else:
-					final_laser_color = COLOR_MAP.get(_color_type, Color.BLACK)
+					outgoing_laser_enum = _color_type
+				
+				var visual_color = COLOR_MAP.get(outgoing_laser_enum, Color.BLACK)
 
-				_laser_instance.set_laser_color(final_laser_color)
+				# NOW, use the new function to pass BOTH the enum and the visual color to the laser.
+				_laser_instance.set_laser_properties(outgoing_laser_enum, visual_color)
 		else:
 			if is_instance_valid(_laser_instance):
 				_laser_instance.queue_free()
