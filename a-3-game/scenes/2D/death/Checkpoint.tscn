@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfxd2d47uaq1q"]
+
+[ext_resource type="Script" uid="uid://nsml3ec71qjh" path="res://scenes/2D/death/Checkpoint.gd" id="1_6rm0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sg52y"]
+size = Vector2(170, 377)
+
+[node name="Checkpoint" type="Area2D"]
+script = ExtResource("1_6rm0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_sg52y")
+
+[node name="RespawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, -127)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
