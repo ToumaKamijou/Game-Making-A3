@@ -76,6 +76,7 @@ func _physics_process(delta: float) -> void:
 		for i in _collided_objects:
 			if not current_collisions.has(i):
 				i.change_lit_status(false)
+				i.player_lit = false
 		
 		_collided_objects = current_collisions.duplicate()
 		
