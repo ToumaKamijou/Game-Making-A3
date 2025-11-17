@@ -14,6 +14,9 @@ var _collided_objects: Array[Object] = [] # Holds all the objects seen by the fl
 var checkpoint_manager
 var player
 
+var score: int = 0
+@onready var _score_text = $ScoreText
+
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):
 		var new_value: int = int(value)
@@ -132,6 +135,6 @@ func _input(event: InputEvent) -> void:
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
 
 
-#func add_score(score_amount):
-	#score += score_amount
-	#_score_text.text = str("SCORE: ", score)
+func add_score(score_amount):
+	score += score_amount
+	_score_text.text = str("SCORE: ", score)
