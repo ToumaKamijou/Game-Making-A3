@@ -6,6 +6,9 @@ enum LIGHT_COLOR {
 	RED = 1,
 	GREEN = 2,
 	BLUE = 3,
+	YELLOW = 4,
+	PURPLE = 5,
+	CYAN = 6
 }
 
 
@@ -19,6 +22,12 @@ func change_flash_color(new_color: LIGHT_COLOR) -> Color:
 			return Color.LIME_GREEN
 		Global.LIGHT_COLOR.BLUE:
 			return Color.ROYAL_BLUE
+		Global.LIGHT_COLOR.YELLOW:
+			return Color.YELLOW
+		Global.LIGHT_COLOR.PURPLE:
+			return Color.REBECCA_PURPLE
+		Global.LIGHT_COLOR.CYAN:
+			return Color.CYAN
 	return Color.WHITE # Fallback
 
 
@@ -32,4 +41,10 @@ func change_color_group(new_color: LIGHT_COLOR) -> String:
 			return "Green"
 		Global.LIGHT_COLOR.BLUE:
 			return "Blue"
+		Global.LIGHT_COLOR.YELLOW:
+			return "Yellow"
+		Global.LIGHT_COLOR.PURPLE:
+			return "Purple"
+		Global.LIGHT_COLOR.CYAN:
+			return "Cyan"
 	return "" # Fallback

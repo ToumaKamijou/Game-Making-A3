@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4p3kp"]
 size = Vector2(100, 100)
 
-[node name="FlashableWall" type="StaticBody2D"]
+[node name="FlashableWall" type="StaticBody2D" groups=["Flashable"]]
 collision_layer = 3
 script = ExtResource("1_4p3kp")
 
