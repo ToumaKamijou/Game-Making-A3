@@ -70,7 +70,7 @@ func _physics_process(delta: float) -> void:
 				color_match = true
 			
 			if color_match:
-				collided.change_lit_status(true)
+				collided.player_lit = true
 				current_collisions.append(collided)
 		
 		for i in _collided_objects:

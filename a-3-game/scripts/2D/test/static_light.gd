@@ -40,6 +40,8 @@ func _physics_process(_delta: float) -> void:
 			if collided == null:
 				continue
 			
+			collided.override = true
+			
 			var color_match := false
 			if collided.is_in_group("Red") and _light_color == 1:
 				color_match = true
@@ -53,6 +55,7 @@ func _physics_process(_delta: float) -> void:
 				color_match = true
 			if collided.is_in_group("Cyan") and _light_color == 6:
 				color_match = true
+			
 			
 			if color_match:
 				collided.change_lit_status(true)

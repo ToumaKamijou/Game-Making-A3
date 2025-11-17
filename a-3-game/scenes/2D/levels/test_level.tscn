@@ -69,6 +69,10 @@ _color_type = 3
 position = Vector2(788, 743)
 _color_type = 2
 
+[node name="green2" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Green"] instance=ExtResource("2_1wh7b")]
+position = Vector2(808, 926)
+_color_type = 2
+
 [node name="yellow" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Yellow"] instance=ExtResource("2_1wh7b")]
 position = Vector2(643, 855)
 _color_type = 4
