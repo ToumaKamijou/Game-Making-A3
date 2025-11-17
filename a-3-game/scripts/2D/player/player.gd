@@ -84,9 +84,9 @@ func _physics_process(delta: float) -> void:
 			
 			if collision.get_collider().name == "MovingPlatformArea":
 				print("Player is on platform")
-			#if collision.get_collider().name == "SpikesTileMapLayer":
-				#print("Player has respawned")
-				#respawn()
+			if collision.get_collider().name == "SpikesTileMapLayer":
+				print("Player has respawned")
+				respawn()
 		
 		_collided_objects = current_collisions.duplicate()
 
