@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cb375mffsapay"]
+[gd_scene load_steps=18 format=4 uid="uid://cb375mffsapay"]
 
 [ext_resource type="Texture2D" uid="uid://bj485ule5ltb0" path="res://assets/2D/sprites/tilemaps/stone_tile.png" id="1_ffd7h"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
@@ -8,8 +8,7 @@
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="4_1wh7b"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/test/static_light.tscn" id="6_dxe1e"]
-[ext_resource type="Script" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_3g276"]
-[ext_resource type="PackedScene" uid="uid://bshtrwutu635t" path="res://scenes/2D/gameplay/light_square.tscn" id="9_bf67w"]
+[ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_3g276"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="9_lm303"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="10_l6063"]
 
@@ -125,7 +124,7 @@ _light_color = 1
 _size = 5.0
 
 [node name="StaticLight3" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
-position = Vector2(457.00006, 413.00006)
+position = Vector2(303.00006, 425)
 scale = Vector2(5, 5)
 _size = 5.0
 
@@ -142,25 +141,6 @@ scale = Vector2(5, 5)
 _base_value = 2
 _light_color = 2
 _size = 5.0
-[node name="Laserblocks" type="Node2D" parent="SubViewportContainer/SubViewport"]
-
-[node name="LightSquare5" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(701, 487)
-
-[node name="LightSquare" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(862.00006, 480.00006)
-rotation = 1.5707964
-_color_type = 1
-
-[node name="LightSquare2" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(488.00003, 631)
-rotation = 1.5707964
-_color_type = 2
-
-[node name="LightSquare3" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(522, 520)
-rotation = 1.5707964
-_color_type = 3
 
 [node name="CheckpointManager" type="Node" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("7_3g276")
