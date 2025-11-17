@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://bj485ule5ltb0" path="res://assets/2D/sprites/tilemaps/stone_tile.png" id="1_ffd7h"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
+[ext_resource type="Script" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="2_1wh7b"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
+[ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="4_1wh7b"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/test/static_light.tscn" id="6_dxe1e"]
 [ext_resource type="PackedScene" uid="uid://bshtrwutu635t" path="res://scenes/2D/gameplay/light_square.tscn" id="7_3g276"]
 
@@ -93,6 +94,11 @@ _color_type = 3
 [node name="LightSquare4" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("7_3g276")]
 position = Vector2(716.00006, 519)
 rotation = 1.5865043
+[node name="coin" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_1wh7b")]
+position = Vector2(806, 542.00006)
+
+[node name="coin2" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_1wh7b")]
+position = Vector2(1114.0001, 542.00006)
 
 [node name="Display" type="Control" parent="."]
 layout_mode = 3
