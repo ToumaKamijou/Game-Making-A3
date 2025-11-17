@@ -41,8 +41,8 @@ func _physics_process(_delta: float) -> void:
 				continue
 			
 			# Not sure why this (commented out) doesn't work. Just checking all the groups separately does also achieve the same thing.
-			#if collided.is_in_group("Flashable"):
-			if collided.is_in_group("Red") or collided.is_in_group("Green") or collided.is_in_group("Blue") or collided.is_in_group("Yellow") or collided.is_in_group("Purple") or collided.is_in_group("Cyan"):
+			if collided.is_in_group("Flashable"):
+			#if collided.is_in_group("Red") or collided.is_in_group("Green") or collided.is_in_group("Blue") or collided.is_in_group("Yellow") or collided.is_in_group("Purple") or collided.is_in_group("Cyan"):
 				collided.override = true
 			
 			var color_match := false

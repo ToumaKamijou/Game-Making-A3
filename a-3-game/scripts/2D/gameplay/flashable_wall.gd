@@ -33,5 +33,9 @@ var player_lit = false:
 		else:
 			pass
 
+func _ready() -> void:
+	if not is_in_group("Flashable"):
+		add_to_group("Flashable")
+
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
