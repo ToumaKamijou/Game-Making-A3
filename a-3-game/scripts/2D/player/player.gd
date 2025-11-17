@@ -132,6 +132,6 @@ func _input(event: InputEvent) -> void:
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
 
 
-func add_score(score_amount):
-	score += score_amount
-	_score_text.text = str("SCORE: ", score)
+#func add_score(score_amount):
+	#score += score_amount
+	#_score_text.text = str("SCORE: ", score)
