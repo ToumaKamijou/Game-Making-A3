@@ -90,6 +90,10 @@ _color_type = 2
 position = Vector2(1229.9999, 448.99997)
 _color_type = 3
 
+[node name="LightSquare4" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("7_3g276")]
+position = Vector2(863.99994, 418.99997)
+rotation = 1.5865043
+
 [node name="Display" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
