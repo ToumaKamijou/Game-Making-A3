@@ -70,8 +70,19 @@ func _physics_process(_delta: float) -> void:
 		
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
 	if _flash_color != 0:
-		var tween = create_tween()
+		if _base_value == 0 or 4 or 5 or 6:
+			var tween = create_tween()
+			if _flash_color == 1:
+				tween.tween_property(self, "color", Color.RED, .5)
+				_light_color = Global.LIGHT_COLOR.RED
+			if _flash_color == 2:
+				tween.tween_property(self, "color", Color.LIME_GREEN, .5)
+				_light_color = Global.LIGHT_COLOR.GREEN
+			if _flash_color == 3:
+				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
+				_light_color = Global.LIGHT_COLOR.BLUE
 		if _base_value == 1:
+			var tween = create_tween()
 			if _flash_color == 1:
 				tween.tween_property(self, "color", Color.RED, .5)
 				_light_color = Global.LIGHT_COLOR.RED
@@ -82,6 +93,7 @@ func _physics_process(_delta: float) -> void:
 				tween.tween_property(self, "color", Color.PURPLE, .5)
 				_light_color = Global.LIGHT_COLOR.PURPLE
 		elif _base_value == 2:
+			var tween = create_tween()
 			if _flash_color == 1:
 				tween.tween_property(self, "color", Color.YELLOW, .5)
 				_light_color = Global.LIGHT_COLOR.YELLOW
@@ -92,6 +104,7 @@ func _physics_process(_delta: float) -> void:
 				tween.tween_property(self, "color", Color.CYAN, .5)
 				_light_color = Global.LIGHT_COLOR.CYAN
 		elif _base_value == 3:
+			var tween = create_tween()
 			if _flash_color == 1:
 				tween.tween_property(self, "color", Color.PURPLE, .5)
 				_light_color = Global.LIGHT_COLOR.PURPLE

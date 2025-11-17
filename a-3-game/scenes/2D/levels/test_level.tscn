@@ -92,6 +92,18 @@ _base_value = 1
 _light_color = 1
 _size = 5.0
 
+[node name="StaticLight3" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
+position = Vector2(457.00006, 413.00006)
+scale = Vector2(5, 5)
+_size = 5.0
+
+[node name="StaticLight4" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
+position = Vector2(290.00006, 766)
+scale = Vector2(5, 5)
+_base_value = 5
+_light_color = 5
+_size = 5.0
+
 [node name="StaticLight2" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
 position = Vector2(1343, 723)
 scale = Vector2(5, 5)
