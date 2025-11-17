@@ -66,23 +66,24 @@ func _physics_process(_delta: float) -> void:
 		
 		for i in _collided_objects:
 			if not current_collisions.has(i):
+				i.override = false
 				i.change_lit_status(false)
 		
 		_collided_objects = current_collisions.duplicate()
 		
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
 	if _flash_color != 0:
-		if _base_value == 0 or 4 or 5 or 6:
-			var tween = create_tween()
-			if _flash_color == 1:
-				tween.tween_property(self, "color", Color.RED, .5)
-				_light_color = Global.LIGHT_COLOR.RED
-			if _flash_color == 2:
-				tween.tween_property(self, "color", Color.LIME_GREEN, .5)
-				_light_color = Global.LIGHT_COLOR.GREEN
-			if _flash_color == 3:
-				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
-				_light_color = Global.LIGHT_COLOR.BLUE
+		#if _base_value == 0 or 4 or 5 or 6:
+			#var tween = create_tween()
+			#if _flash_color == 1:
+				#tween.tween_property(self, "color", Color.RED, .5)
+				#_light_color = Global.LIGHT_COLOR.RED
+			#if _flash_color == 2:
+				#tween.tween_property(self, "color", Color.LIME_GREEN, .5)
+				#_light_color = Global.LIGHT_COLOR.GREEN
+			#if _flash_color == 3:
+				#tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
+				#_light_color = Global.LIGHT_COLOR.BLUE
 		if _base_value == 1:
 			var tween = create_tween()
 			if _flash_color == 1:

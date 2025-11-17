@@ -109,9 +109,11 @@ func _input(event: InputEvent) -> void:
 		if _flashlight.enabled == true:
 			_flashlight.enabled = false
 			_shapecast_body.enabled = false
+			_shapecast_area.enabled = false
 		else:
 			_flashlight.enabled = true
 			_shapecast_body.enabled = true
+			_shapecast_area.enabled = true
 	
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
