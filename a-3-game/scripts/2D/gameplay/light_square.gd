@@ -63,9 +63,8 @@ var lit = false:
 				_laser_instance.global_rotation = laser_origin.global_rotation
 				_laser_instance.get_node("RayCast2D").add_exception(self)
 
-				# --- THIS IS THE ONLY PART THAT CHANGES ---
 				
-				# First, determine what the outgoing laser's color should be, just like before.
+				# Determine what the outgoing laser's color should be.
 				var outgoing_laser_enum: Global.LIGHT_COLOR
 				if _color_type == Global.LIGHT_COLOR.WHITE:
 					outgoing_laser_enum = _incoming_light_color
@@ -73,8 +72,6 @@ var lit = false:
 					outgoing_laser_enum = _color_type
 				
 				var visual_color = COLOR_MAP.get(outgoing_laser_enum, Color.BLACK)
-
-				# NOW, use the new function to pass BOTH the enum and the visual color to the laser.
 				_laser_instance.set_laser_properties(outgoing_laser_enum, visual_color)
 		else:
 			if is_instance_valid(_laser_instance):
