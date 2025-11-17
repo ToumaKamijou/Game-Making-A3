@@ -7,7 +7,7 @@ var _flash_color: int = 0
 @onready var _shapecast: ShapeCast2D = $ShapeCast2D
 
 # This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
-@export_range(1, 6, 1) var _base_value: int
+@export_range(0, 6, 1) var _base_value: int
 
 @export var _light_color: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -40,6 +40,9 @@ func _physics_process(_delta: float) -> void:
 			if collided == null:
 				continue
 			
+			if collided.is_in_group("Flashable"):
+				collided.override = true
+			
 			var color_match := false
 			if collided.is_in_group("Red") and _light_color == 1:
 				color_match = true
@@ -53,6 +56,7 @@ func _physics_process(_delta: float) -> void:
 				color_match = true
 			if collided.is_in_group("Cyan") and _light_color == 6:
 				color_match = true
+			
 			
 			if color_match:
 				collided.change_lit_status(true)

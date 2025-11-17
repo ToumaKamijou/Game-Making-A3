@@ -1,6 +1,8 @@
 @tool
 extends StaticBody2D
 
+var override = false
+
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
 		_color_type = value
@@ -24,6 +26,12 @@ var lit = false:
 			await get_tree().create_timer(0.15).timeout
 			set_collision_layer_value(1, true)
 
+var player_lit = false:
+	set(value):
+		if value == true and override == false:
+			change_lit_status(true)
+		else:
+			pass
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
