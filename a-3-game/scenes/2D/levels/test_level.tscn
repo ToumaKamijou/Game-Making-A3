@@ -79,11 +79,11 @@ _size = 5.0
 [node name="Laserblocks" type="Node2D" parent="SubViewportContainer/SubViewport"]
 
 [node name="LightSquare" parent="SubViewportContainer/SubViewport/Laserblocks" groups=["Prisma"] instance=ExtResource("7_3g276")]
-position = Vector2(967, 548)
+position = Vector2(712, 381.00006)
 _color_type = 1
 
 [node name="LightSquare2" parent="SubViewportContainer/SubViewport/Laserblocks" groups=["Prisma"] instance=ExtResource("7_3g276")]
-position = Vector2(791.00006, 544)
+position = Vector2(1237, 585)
 _color_type = 2
 
 [node name="LightSquare3" parent="SubViewportContainer/SubViewport/Laserblocks" groups=["Prisma"] instance=ExtResource("7_3g276")]
@@ -91,7 +91,7 @@ position = Vector2(1229.9999, 448.99997)
 _color_type = 3
 
 [node name="LightSquare4" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("7_3g276")]
-position = Vector2(863.99994, 418.99997)
+position = Vector2(716.00006, 519)
 rotation = 1.5865043
 
 [node name="Display" type="Control" parent="."]
