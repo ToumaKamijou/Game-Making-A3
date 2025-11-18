@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bknmbf6ecy1wh"]
+
+[ext_resource type="Script" uid="uid://cqjn5nu4i2lo2" path="res://scripts/2D/gameplay/mirror.gd" id="1_ibukl"]
+[ext_resource type="Texture2D" uid="uid://bnuvescriai02" path="res://assets/2D/sprites/arrow.png" id="2_a28n0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwod3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ygl27"]
+blend_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ygl27"]
+size = Vector2(20, 20)
+
+[node name="Mirror" type="StaticBody2D"]
+scale = Vector2(3.13, 3.13)
+disable_mode = 2
+script = ExtResource("1_ibukl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kwod3")
+
+[node name="Mesh2D" type="MeshInstance2D" parent="."]
+material = SubResource("CanvasItemMaterial_ygl27")
+mesh = SubResource("QuadMesh_ygl27")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("2_a28n0")
+
+[node name="LaserOrigin" type="Node2D" parent="."]

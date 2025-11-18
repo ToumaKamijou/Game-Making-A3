@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		# ...and try to activate the new object.
 		if is_instance_valid(collider):
 			# We only care about activating other prismas for now.
-			if collider.is_in_group("Prisma"):
+			if collider.is_in_group("Prisma") or collider.is_in_group("Mirror"):
 				var prisma_color_type = collider._color_type
 				
 				# Activation condition: A COLORED laser hits a WHITE prisma.
