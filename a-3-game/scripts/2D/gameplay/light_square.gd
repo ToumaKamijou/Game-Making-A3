@@ -2,6 +2,10 @@ extends StaticBody2D
 
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
+var blocked = false
+var transferring = false
+var laser: Node2D
+
 @onready var laser_origin: Node2D = $LaserOrigin
 @onready var mesh: MeshInstance2D = $Mesh2D
 
@@ -12,23 +16,19 @@ const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 			var previous_group := get_groups()
 			for i in previous_group:
 				remove_from_group(i)
-			# Make sure all prismas are in the "Prisma" group for easy finding
-			add_to_group("Prisma")
 			var new_group := Global.change_color_group(value)
 			if new_group != "":
 				add_to_group(new_group)
 
 var _laser_instance: Node2D = null
 
-# --- NEW VARIABLE ---
-# This will temporarily store the color of the flashlight shining on us.
 var _incoming_light_color: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
 const COLOR_MAP = {
 	Global.LIGHT_COLOR.WHITE: Color.WHITE,
 	Global.LIGHT_COLOR.RED: Color.RED,
-	Global.LIGHT_COLOR.GREEN: Color.GREEN,
-	Global.LIGHT_COLOR.BLUE: Color.BLUE,
+	Global.LIGHT_COLOR.GREEN: Color.LIME_GREEN,
+	Global.LIGHT_COLOR.BLUE: Color.ROYAL_BLUE,
 }
 
 func _ready():
@@ -37,15 +37,11 @@ func _ready():
 	if not is_in_group("Prisma"):
 		add_to_group("Prisma")
 
-# --- NEW FUNCTION ---
-# The player will call this function right before calling change_lit_status.
-# --- THIS IS THE KEY CHANGE ---
+
 func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
-	# First, store the new incoming color. This is important for when
-	# the laser is first created.
 	_incoming_light_color = color
 
-	# NEW LOGIC: If a laser already exists, update its color immediately.
+	# If a laser already exists, update its color immediately.
 	if is_instance_valid(_laser_instance):
 		var final_laser_color: Color
 		if _color_type == Global.LIGHT_COLOR.WHITE:
@@ -80,3 +76,11 @@ var lit = false:
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
+
+func _physics_process(delta: float) -> void:
+	if blocked == true:
+		change_lit_status(false)
+	elif is_instance_valid(_laser_instance) or transferring == true and is_instance_valid(laser):
+		change_lit_status(true)
+	else:
+		change_lit_status(false)

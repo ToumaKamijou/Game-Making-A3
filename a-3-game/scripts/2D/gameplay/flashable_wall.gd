@@ -2,7 +2,9 @@
 extends StaticBody2D
 
 var laser: Node2D = null
-var lasered = false
+var blocked = false
+
+var player = false
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -32,12 +34,12 @@ func _ready() -> void:
 		add_to_group("Flashable")
 
 func _physics_process(delta: float) -> void:
-	if lasered == true:
-		if is_instance_valid(laser):
-			change_lit_status(true)
-		else:
-			lasered = false
-			change_lit_status(false)
+	if blocked == true:
+		change_lit_status(false)
+	elif is_instance_valid(laser) or player == true:
+		change_lit_status(true)
+	else:
+		change_lit_status(false)
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status

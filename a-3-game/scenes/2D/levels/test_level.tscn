@@ -110,20 +110,40 @@ _size = 5.0
 [node name="Laserblocks" type="Node2D" parent="SubViewportContainer/SubViewport"]
 
 [node name="LightSquare5" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(701, 487)
+position = Vector2(700, 480.00003)
 
 [node name="LightSquare" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
 position = Vector2(862.00006, 480.00006)
 rotation = 1.5707964
 _color_type = 2
 
+[node name="LightSquare6" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
+position = Vector2(871.0001, 767)
+rotation = 3.1415927
+_color_type = 2
+
+[node name="LightSquare4" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
+position = Vector2(707, 622)
+rotation = 1.5707964
+_color_type = 2
+
+[node name="LightSquare7" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
+position = Vector2(549, 620)
+rotation = 3.1415927
+_color_type = 2
+
+[node name="LightSquare8" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
+position = Vector2(552.00006, 373.00003)
+rotation = -1.5707964
+_color_type = 2
+
 [node name="LightSquare2" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(488.00003, 631)
+position = Vector2(438.00003, 612.00006)
 rotation = 1.5707964
 _color_type = 1
 
 [node name="LightSquare3" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(522, 520)
+position = Vector2(446.00006, 521.00006)
 rotation = 1.5707964
 _color_type = 3
 
@@ -151,8 +171,10 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="Game" type="Sprite2D" parent="Display"]
 texture_filter = 1
 texture = SubResource("ViewportTexture_ffd7h")
 centered = false
+metadata/_edit_lock_ = true
