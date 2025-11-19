@@ -2,9 +2,10 @@ extends StaticBody2D
 
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
-var blocked = false
-var transferring = false
+var blocked := false
+var transferring := false
 var laser: Node2D
+var player := false
 
 @onready var laser_origin: Node2D = $LaserOrigin
 @onready var mesh: MeshInstance2D = $Mesh2D
@@ -78,9 +79,9 @@ func change_lit_status(new_status: bool) -> void:
 	lit = new_status
 
 func _physics_process(delta: float) -> void:
-	if blocked == true:
+	if blocked == true and player == false:
 		change_lit_status(false)
-	elif is_instance_valid(_laser_instance) or transferring == true and is_instance_valid(laser):
+	elif is_instance_valid(_laser_instance) or transferring == true and is_instance_valid(laser) or player == true:
 		change_lit_status(true)
 	else:
 		change_lit_status(false)

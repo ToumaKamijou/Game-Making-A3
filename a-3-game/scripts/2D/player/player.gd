@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
 						activate = true
 
 				if activate:
-					collided.change_lit_status(true)
+					collided.player = true
 					current_collisions.append(collided)
 
 				continue
@@ -92,14 +92,13 @@ func _physics_process(delta: float) -> void:
 				color_match = true
 			
 			if color_match:
-				collided.change_lit_status(true)
 				collided.player = true
 				current_collisions.append(collided)
 		
 		for i in _collided_objects:
 			if not current_collisions.has(i):
 				i.change_lit_status(false)
-				if i.is_in_group("Flashable"):
+				if i.has_method("change_lit_status"):
 					i.player = false
 		
 		for i in get_slide_collision_count():

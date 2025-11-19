@@ -2,9 +2,9 @@
 extends StaticBody2D
 
 var laser: Node2D = null
-var blocked = false
+var blocked := false
 
-var player = false
+var player := false
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -21,13 +21,15 @@ var lit = false:
 	set(value):
 			if value == true:
 				var tween = create_tween()
-				tween.tween_property(self, "modulate:a", 0.0, 0.1)
+				tween.tween_property(self, "modulate:a", 0.0, 0.3)
 				set_collision_layer_value(1, false)
+				add_to_group("Disappeared")
 			else:
 				var tween = create_tween()
-				tween.tween_property(self, "modulate:a", 1.0, 0.1)
+				tween.tween_property(self, "modulate:a", 1.0, 0.3)
 				await get_tree().create_timer(0.15).timeout
 				set_collision_layer_value(1, true)
+				remove_from_group("Disappeared")
 
 func _ready() -> void:
 	if not is_in_group("Flashable"):
