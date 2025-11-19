@@ -73,14 +73,6 @@ func _physics_process(delta: float) -> void:
 			if collided == null:
 				continue
 				
-			## --- NEW LOGIC FOR PRISMA GLASS ---
-			## Check if the object is a prisma AND the flashlight is white
-			#if collided.is_in_group("Prisma") and flash_color == 0:
-				#print("test")
-				#collided.change_lit_status(true)
-				#current_collisions.append(collided)
-				#continue # Skip to the next object, we're done with this one
-						# --- REVISED PRISMA LOGIC ---
 			if collided.is_in_group("Prisma"):
 				var prisma_color_type = collided._color_type
 				var activate = false
@@ -89,33 +81,36 @@ func _physics_process(delta: float) -> void:
 				if flash_color == Global.LIGHT_COLOR.WHITE and prisma_color_type != Global.LIGHT_COLOR.WHITE:
 					activate = true
 				
-				# Condition 2: COLORED light hits a WHITE prisma
-				elif flash_color != Global.LIGHT_COLOR.WHITE and prisma_color_type == Global.LIGHT_COLOR.WHITE:
-					# Inform the prisma of our color BEFORE activating it
-					collided.set_incoming_light_color(flash_color)
-					activate = true
+				# Condition 2: COLORED light hits a WHITE or matching prisma
+				elif flash_color != Global.LIGHT_COLOR.WHITE:
+					if prisma_color_type == Global.LIGHT_COLOR.WHITE or prisma_color_type == flash_color:
+						collided.set_incoming_light_color(flash_color)
+						activate = true
 
 				if activate:
-					collided.change_lit_status(true)
+					collided.player = true
 					current_collisions.append(collided)
 
-				continue # We're done with this object, move to the next one
+				continue
 			
 			var color_match := false
-			if collided.is_in_group("Red") and collided.is_in_group("Wall") and flash_color == 1:
+			if collided.is_in_group("Red") and flash_color == 1:
 				color_match = true
-			if collided.is_in_group("Green") and collided.is_in_group("Wall") and flash_color == 2:
+			if collided.is_in_group("Green") and flash_color == 2:
 				color_match = true
-			if collided.is_in_group("Blue") and collided.is_in_group("Wall") and flash_color == 3:
+			if collided.is_in_group("Blue") and flash_color == 3:
 				color_match = true
 			
 			if color_match:
+				collided.player = true
 				collided.player_lit = true
 				current_collisions.append(collided)
 		
 		for i in _collided_objects:
 			if not current_collisions.has(i):
 				i.change_lit_status(false)
+				if i.has_method("change_lit_status"):
+					i.player = false
 				i.player_lit = false
 		
 		for i in get_slide_collision_count():

@@ -1,57 +1,69 @@
 extends Node2D
 
-@onready var raycast: RayCast2D = $RayCast2D
+@onready var visual: RayCast2D = $RayCast2D
 @onready var line: Line2D = $Line2D
 
-# NEW: The laser needs to know its own color enum to pass to other prismas.
+@onready var raycast: RayCast2D = $RayCast2D2
+
 var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
-# NEW: This will store the object the laser is currently hitting.
 var _currently_lit_object: Object = null
 
-# NEW: A function to give the laser the information it needs when it's created.
+func _ready() -> void:
+	# Fixes visual bug (by just making it invisible)
+	visible = false
+	await get_tree().create_timer(0.05).timeout
+	visible = true
+
 func set_laser_properties(p_color_enum: Global.LIGHT_COLOR, p_visual_color: Color) -> void:
 	laser_color_enum = p_color_enum
 	line.default_color = p_visual_color
 
 func _physics_process(delta: float) -> void:
-	# --- Part 1: Update the visual line (your existing code) ---
+	visual.force_raycast_update()
 	raycast.force_raycast_update()
 	var cast_point: Vector2
-	if raycast.is_colliding():
-		cast_point = to_local(raycast.get_collision_point())
+	if visual.is_colliding():
+		cast_point = to_local(visual.get_collision_point())
 	else:
-		cast_point = raycast.target_position
+		cast_point = visual.target_position
 	line.set_point_position(1, cast_point)
 
-	# --- Part 2: NEW - Handle activating other objects ---
+	# Handle activating other objects
 	var collider: Object = null
 	if raycast.is_colliding():
+		if raycast.get_collider().is_in_group("Disappeared"):
+			raycast.add_exception(raycast.get_collider())
+			raycast.force_raycast_update()
 		collider = raycast.get_collider()
-
-	# If the object we're hitting is different from the one last frame...
+		# Check if laser is currently being blocked and communicate this if so.
+		if collider.has_method("change_lit_status"):
+			if visual.is_colliding() and collider != visual.get_collider():
+				if raycast.get_collision_point() - global_position < Vector2(0,0) and raycast.get_collision_point() - global_position < visual.get_collision_point() - global_position or raycast.get_collision_point() - global_position > Vector2(0,0) and raycast.get_collision_point() - global_position > visual.get_collision_point() - global_position:
+					collider.blocked = true
+			else:
+				collider.blocked = false
+	
+	
 	if collider != _currently_lit_object:
-		# ...deactivate the old object if it exists and can be deactivated.
+		# Deactivate old target object if it changed this frame.
 		if is_instance_valid(_currently_lit_object) and _currently_lit_object.has_method("change_lit_status"):
 			_currently_lit_object.change_lit_status(false)
 		
-		# ...and try to activate the new object.
+		# Activate the new object.
 		if is_instance_valid(collider):
-			# We only care about activating other prismas for now.
 			if collider.is_in_group("Prisma"):
-				var prisma_color_type = collider._color_type
-				
-				# Activation condition: A COLORED laser hits a WHITE prisma.
-				if laser_color_enum != Global.LIGHT_COLOR.WHITE and prisma_color_type == Global.LIGHT_COLOR.WHITE:
-					# Tell the white prisma what color we are...
+				if laser_color_enum != Global.LIGHT_COLOR.WHITE and collider._color_type == Global.LIGHT_COLOR.WHITE or laser_color_enum == collider._color_type:
 					collider.set_incoming_light_color(laser_color_enum)
-					# ...then turn it on using the function you want to keep!
-					collider.change_lit_status(true)
-
-	# Update the state for the next frame
+					collider.transferring = true
+					collider.laser = self
+					
+			if collider.is_in_group("Flashable") and collider._color_type == laser_color_enum:
+				#collider.override = false
+				collider.laser = self
+	
 	_currently_lit_object = collider
 
-# NEW: When the laser is destroyed, make sure it deactivates anything it was lighting up.
 func _exit_tree() -> void:
 	if is_instance_valid(_currently_lit_object) and _currently_lit_object.has_method("change_lit_status"):
 		_currently_lit_object.change_lit_status(false)
