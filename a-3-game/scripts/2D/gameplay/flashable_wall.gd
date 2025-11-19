@@ -5,6 +5,7 @@ var laser: Node2D = null
 var blocked := false
 
 var player := false
+var override = false
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -42,6 +43,16 @@ func _physics_process(delta: float) -> void:
 		change_lit_status(true)
 	else:
 		change_lit_status(false)
+var player_lit = false:
+	set(value):
+		if value == true and override == false:
+			change_lit_status(true)
+		else:
+			pass
+
+func _ready() -> void:
+	if not is_in_group("Flashable"):
+		add_to_group("Flashable")
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status

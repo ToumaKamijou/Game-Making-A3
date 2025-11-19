@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://cb375mffsapay"]
+[gd_scene load_steps=18 format=4 uid="uid://cb375mffsapay"]
 
 [ext_resource type="Texture2D" uid="uid://bj485ule5ltb0" path="res://assets/2D/sprites/tilemaps/stone_tile.png" id="1_ffd7h"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
+[ext_resource type="Script" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="2_1wh7b"]
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_hxop3"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
@@ -102,9 +102,26 @@ _color_type = 3
 position = Vector2(705, 741)
 _color_type = 2
 
+[node name="green2" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Green"] instance=ExtResource("2_1wh7b")]
+position = Vector2(808, 926)
+_color_type = 2
+
+[node name="yellow" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Yellow"] instance=ExtResource("2_1wh7b")]
+position = Vector2(643, 855)
+_color_type = 4
+
+[node name="purple" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Purple"] instance=ExtResource("2_1wh7b")]
+position = Vector2(1342, 877)
+_color_type = 5
+
+[node name="cyan" parent="SubViewportContainer/SubViewport/ColorTesting" groups=["Cyan"] instance=ExtResource("2_1wh7b")]
+position = Vector2(1335, 577)
+_color_type = 6
+
 [node name="StaticLight" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
 position = Vector2(689.00006, 723)
 scale = Vector2(5, 5)
+_base_value = 1
 _light_color = 1
 _size = 5.0
 
@@ -151,6 +168,24 @@ _color_type = 1
 position = Vector2(354.00003, 563)
 rotation = 1.5707964
 _color_type = 3
+[node name="StaticLight3" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
+position = Vector2(303.00006, 425)
+scale = Vector2(5, 5)
+_size = 5.0
+
+[node name="StaticLight4" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
+position = Vector2(290.00006, 766)
+scale = Vector2(5, 5)
+_base_value = 5
+_light_color = 5
+_size = 5.0
+
+[node name="StaticLight2" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
+position = Vector2(1343, 723)
+scale = Vector2(5, 5)
+_base_value = 2
+_light_color = 2
+_size = 5.0
 
 [node name="CheckpointManager" type="Node" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("7_3g276")
