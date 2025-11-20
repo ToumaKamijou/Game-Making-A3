@@ -5,7 +5,8 @@ const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 var blocked := false
 var transferring := false
 var laser: Node2D
-var player := false
+var player_lit := false
+var override := false
 
 @onready var laser_origin: Node2D = $LaserOrigin
 @onready var mesh: MeshInstance2D = $Mesh2D
@@ -30,6 +31,9 @@ const COLOR_MAP = {
 	Global.LIGHT_COLOR.RED: Color.RED,
 	Global.LIGHT_COLOR.GREEN: Color.LIME_GREEN,
 	Global.LIGHT_COLOR.BLUE: Color.ROYAL_BLUE,
+	Global.LIGHT_COLOR.YELLOW: Color.YELLOW,
+	Global.LIGHT_COLOR.PURPLE: Color.REBECCA_PURPLE,
+	Global.LIGHT_COLOR.CYAN: Color.CYAN
 }
 
 func _ready():
@@ -65,6 +69,18 @@ var lit = false:
 				var outgoing_laser_enum: Global.LIGHT_COLOR
 				if _color_type == Global.LIGHT_COLOR.WHITE:
 					outgoing_laser_enum = _incoming_light_color
+				elif _color_type == Global.LIGHT_COLOR.RED and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
+					outgoing_laser_enum = Global.LIGHT_COLOR.YELLOW
+				elif _color_type == Global.LIGHT_COLOR.RED and _incoming_light_color == Global.LIGHT_COLOR.BLUE:
+					outgoing_laser_enum = Global.LIGHT_COLOR.PURPLE
+				elif _color_type == Global.LIGHT_COLOR.GREEN and _incoming_light_color == Global.LIGHT_COLOR.RED:
+					outgoing_laser_enum = Global.LIGHT_COLOR.YELLOW
+				elif _color_type == Global.LIGHT_COLOR.GREEN and _incoming_light_color == Global.LIGHT_COLOR.BLUE:
+					outgoing_laser_enum = Global.LIGHT_COLOR.CYAN
+				elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.RED:
+					outgoing_laser_enum = Global.LIGHT_COLOR.PURPLE
+				elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
+					outgoing_laser_enum = Global.LIGHT_COLOR.CYAN
 				else:
 					outgoing_laser_enum = _color_type
 				
@@ -79,9 +95,11 @@ func change_lit_status(new_status: bool) -> void:
 	lit = new_status
 
 func _physics_process(delta: float) -> void:
-	if blocked == true and player == false:
+	if blocked == true and player_lit == false:
 		change_lit_status(false)
-	elif is_instance_valid(_laser_instance) or transferring == true and is_instance_valid(laser) or player == true:
+	elif is_instance_valid(_laser_instance) or transferring == true and is_instance_valid(laser):
+		change_lit_status(true)
+	elif player_lit == true and override == false:
 		change_lit_status(true)
 	else:
 		change_lit_status(false)

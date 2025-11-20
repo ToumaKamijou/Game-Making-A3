@@ -4,8 +4,9 @@ extends StaticBody2D
 var laser: Node2D = null
 var blocked := false
 
-var player := false
-var override = false
+var player_lit := false
+var override := false
+var matched := false
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -28,31 +29,26 @@ var lit = false:
 			else:
 				var tween = create_tween()
 				tween.tween_property(self, "modulate:a", 1.0, 0.3)
-				await get_tree().create_timer(0.15).timeout
+				#await get_tree().create_timer(0.15).timeout
 				set_collision_layer_value(1, true)
 				remove_from_group("Disappeared")
 
 func _ready() -> void:
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
+		
 
 func _physics_process(delta: float) -> void:
 	if blocked == true:
 		change_lit_status(false)
-	elif is_instance_valid(laser) or player == true:
+	elif is_instance_valid(laser):
+		change_lit_status(true)
+	elif player_lit == true and override == false:
+		change_lit_status(true)
+	elif override == true and matched == true:
 		change_lit_status(true)
 	else:
 		change_lit_status(false)
-var player_lit = false:
-	set(value):
-		if value == true and override == false:
-			change_lit_status(true)
-		else:
-			pass
-
-func _ready() -> void:
-	if not is_in_group("Flashable"):
-		add_to_group("Flashable")
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status

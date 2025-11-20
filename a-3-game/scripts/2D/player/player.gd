@@ -83,12 +83,13 @@ func _physics_process(delta: float) -> void:
 				
 				# Condition 2: COLORED light hits a WHITE or matching prisma
 				elif flash_color != Global.LIGHT_COLOR.WHITE:
-					if prisma_color_type == Global.LIGHT_COLOR.WHITE or prisma_color_type == flash_color:
-						collided.set_incoming_light_color(flash_color)
-						activate = true
-
+					#if prisma_color_type == Global.LIGHT_COLOR.WHITE or prisma_color_type == flash_color:
+					collided.set_incoming_light_color(flash_color)
+					activate = true
+#
 				if activate:
-					collided.player = true
+					#collided.set_incoming_light_color(flash_color)
+					collided.player_lit = true
 					current_collisions.append(collided)
 
 				continue
@@ -102,7 +103,6 @@ func _physics_process(delta: float) -> void:
 				color_match = true
 			
 			if color_match:
-				collided.player = true
 				collided.player_lit = true
 				current_collisions.append(collided)
 		
@@ -110,8 +110,7 @@ func _physics_process(delta: float) -> void:
 			if not current_collisions.has(i):
 				i.change_lit_status(false)
 				if i.has_method("change_lit_status"):
-					i.player = false
-				i.player_lit = false
+					i.player_lit = false
 		
 		for i in get_slide_collision_count():
 			var collision = get_slide_collision(i)
@@ -144,7 +143,6 @@ func _physics_process(delta: float) -> void:
 			if not current_collisions.has(i):
 				i.get_parent()._flash_color = 0
 		
-		# I just copied and adapted this from the above. No idea what it does
 		_collided_areas = current_collisions.duplicate()
 
 

@@ -55,11 +55,12 @@ func _physics_process(delta: float) -> void:
 			if collider.is_in_group("Prisma"):
 				if laser_color_enum != Global.LIGHT_COLOR.WHITE and collider._color_type == Global.LIGHT_COLOR.WHITE or laser_color_enum == collider._color_type:
 					collider.set_incoming_light_color(laser_color_enum)
+					collider.override = false
 					collider.transferring = true
 					collider.laser = self
 					
 			if collider.is_in_group("Flashable") and collider._color_type == laser_color_enum:
-				#collider.override = false
+				collider.override = false
 				collider.laser = self
 	
 	_currently_lit_object = collider
