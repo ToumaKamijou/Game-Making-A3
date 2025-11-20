@@ -72,27 +72,6 @@ func _physics_process(delta: float) -> void:
 			var collided = _shapecast_body.get_collider(i)
 			if collided == null:
 				continue
-				
-			if collided.is_in_group("Prisma"):
-				var prisma_color_type = collided._color_type
-				var activate = false
-				
-				# Condition 1: WHITE light hits a COLORED prisma
-				if flash_color == Global.LIGHT_COLOR.WHITE and prisma_color_type != Global.LIGHT_COLOR.WHITE:
-					activate = true
-				
-				# Condition 2: COLORED light hits a WHITE or matching prisma
-				elif flash_color != Global.LIGHT_COLOR.WHITE:
-					#if prisma_color_type == Global.LIGHT_COLOR.WHITE or prisma_color_type == flash_color:
-					collided.set_incoming_light_color(flash_color)
-					activate = true
-#
-				if activate:
-					#collided.set_incoming_light_color(flash_color)
-					collided.player_lit = true
-					current_collisions.append(collided)
-
-				continue
 			
 			var color_match := false
 			if collided.is_in_group("Red") and flash_color == 1:
@@ -101,17 +80,28 @@ func _physics_process(delta: float) -> void:
 				color_match = true
 			if collided.is_in_group("Blue") and flash_color == 3:
 				color_match = true
+				
+			if collided.is_in_group("Prisma"):
+				color_match = true
 			
 			if color_match:
+				if collided.is_in_group("Prisma"):
+					if not collided.is_in_group("Yellow") and not collided.is_in_group("Purple") and not collided.is_in_group("Cyan"):
+						collided.set_incoming_light_color(flash_color)
+						collided.player_lit = true
+					elif flash_color != 0:
+						continue
+				
 				collided.player_lit = true
 				current_collisions.append(collided)
 		
 		for i in _collided_objects:
 			if not current_collisions.has(i):
-				i.change_lit_status(false)
 				if i.has_method("change_lit_status"):
 					i.player_lit = false
-		
+	
+		_collided_objects = current_collisions.duplicate()
+	
 		for i in get_slide_collision_count():
 			var collision = get_slide_collision(i)
 			
@@ -120,8 +110,6 @@ func _physics_process(delta: float) -> void:
 			if collision.get_collider().name == "SpikesTileMapLayer":
 				print("Player has respawned")
 				respawn()
-		
-		_collided_objects = current_collisions.duplicate()
 		
 # Check whether flashlight is colliding with another light. Send signal if so.
 # This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
@@ -159,7 +147,6 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
-
 
 func add_score(score_amount):
 	score += score_amount

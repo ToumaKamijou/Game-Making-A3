@@ -10,7 +10,7 @@ var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 var _currently_lit_object: Object = null
 
 func _ready() -> void:
-	# Fixes visual bug (by just making it invisible)
+	# Fixes visual bug (by making it invisible)
 	visible = false
 	await get_tree().create_timer(0.05).timeout
 	visible = true
@@ -20,8 +20,6 @@ func set_laser_properties(p_color_enum: Global.LIGHT_COLOR, p_visual_color: Colo
 	line.default_color = p_visual_color
 
 func _physics_process(delta: float) -> void:
-	visual.force_raycast_update()
-	raycast.force_raycast_update()
 	var cast_point: Vector2
 	if visual.is_colliding():
 		cast_point = to_local(visual.get_collision_point())
@@ -32,11 +30,13 @@ func _physics_process(delta: float) -> void:
 	# Handle activating other objects
 	var collider: Object = null
 	if raycast.is_colliding():
+		# This check (which fixes laser collisions not applying through disappeared blocks) breaks the per-frame updating of disappeared state. Not sure of solution. 
 		if raycast.get_collider().is_in_group("Disappeared"):
 			raycast.add_exception(raycast.get_collider())
 			raycast.force_raycast_update()
 		collider = raycast.get_collider()
-		# Check if laser is currently being blocked and communicate this if so.
+		
+		# Check if laser is currently being blocked and communicate this if so. Currently broken, see above.
 		if collider.has_method("change_lit_status"):
 			if visual.is_colliding() and collider != visual.get_collider():
 				if raycast.get_collision_point() - global_position < Vector2(0,0) and raycast.get_collision_point() - global_position < visual.get_collision_point() - global_position or raycast.get_collision_point() - global_position > Vector2(0,0) and raycast.get_collision_point() - global_position > visual.get_collision_point() - global_position:
@@ -44,27 +44,26 @@ func _physics_process(delta: float) -> void:
 			else:
 				collider.blocked = false
 	
-	
-	if collider != _currently_lit_object:
-		# Deactivate old target object if it changed this frame.
-		if is_instance_valid(_currently_lit_object) and _currently_lit_object.has_method("change_lit_status"):
-			_currently_lit_object.change_lit_status(false)
-		
+	if collider:
 		# Activate the new object.
 		if is_instance_valid(collider):
 			if collider.is_in_group("Prisma"):
-				if laser_color_enum != Global.LIGHT_COLOR.WHITE and collider._color_type == Global.LIGHT_COLOR.WHITE or laser_color_enum == collider._color_type:
+				if collider.is_in_group("Yellow") or collider.is_in_group("Purple") or collider.is_in_group("Cyan"):
+					pass
+				else:
 					collider.set_incoming_light_color(laser_color_enum)
 					collider.override = false
 					collider.transferring = true
 					collider.laser = self
 					
-			if collider.is_in_group("Flashable") and collider._color_type == laser_color_enum:
-				collider.override = false
-				collider.laser = self
+			if collider.is_in_group("Flashable"):
+				if collider._color_type == laser_color_enum:
+					collider.override = false
+					collider.laser = self
 	
 	_currently_lit_object = collider
 
 func _exit_tree() -> void:
-	if is_instance_valid(_currently_lit_object) and _currently_lit_object.has_method("change_lit_status"):
-		_currently_lit_object.change_lit_status(false)
+	if is_instance_valid(_currently_lit_object) and _currently_lit_object.is_in_group("Prisma"):
+		_currently_lit_object.transferring = false
+		

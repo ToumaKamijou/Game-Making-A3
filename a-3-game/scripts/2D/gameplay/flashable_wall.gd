@@ -29,6 +29,7 @@ var lit = false:
 			else:
 				var tween = create_tween()
 				tween.tween_property(self, "modulate:a", 1.0, 0.3)
+				# Waiting creates issues with the lasers.
 				#await get_tree().create_timer(0.15).timeout
 				set_collision_layer_value(1, true)
 				remove_from_group("Disappeared")

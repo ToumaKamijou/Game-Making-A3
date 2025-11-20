@@ -27,7 +27,7 @@ func change_flash_color(new_color: LIGHT_COLOR) -> Color:
 		Global.LIGHT_COLOR.PURPLE:
 			return Color.REBECCA_PURPLE
 		Global.LIGHT_COLOR.CYAN:
-			return Color.CYAN
+			return Color.TURQUOISE
 	return Color.WHITE # Fallback
 
 

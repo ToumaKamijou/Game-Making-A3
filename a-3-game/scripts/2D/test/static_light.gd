@@ -58,6 +58,11 @@ func _physics_process(_delta: float) -> void:
 				if collided.is_in_group("Cyan") and _light_color == 6:
 					color_match = true
 			
+				if collided.is_in_group("Prisma"):
+					if collided.is_in_group("Yellow") or collided.is_in_group("Purple") or collided.is_in_group("Cyan") and _light_color != 0:
+						continue
+					else:
+						color_match = true
 			
 				if color_match:
 					collided.change_lit_status(true)

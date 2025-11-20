@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bshtrwutu635t"]
+[gd_scene load_steps=6 format=3 uid="uid://bshtrwutu635t"]
 
 [ext_resource type="Script" uid="uid://c00fmu5gm0cgi" path="res://scripts/2D/gameplay/laser_block.gd" id="1_w0qqi"]
 [ext_resource type="Texture2D" uid="uid://bnuvescriai02" path="res://assets/2D/sprites/arrow.png" id="2_ygl27"]
@@ -7,23 +7,13 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5qfx"]
 transparency = 1
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.3
 
 [sub_resource type="QuadMesh" id="QuadMesh_ygl27"]
 material = SubResource("StandardMaterial3D_i5qfx")
 size = Vector2(20, 20)
-
-[sub_resource type="Gradient" id="Gradient_i5qfx"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dunwg"]
-gradient = SubResource("Gradient_i5qfx")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.90000004, 0.2)
-metadata/_snap_enabled = true
 
 [node name="LightSquare" type="StaticBody2D"]
 scale = Vector2(3.13, 3.13)
@@ -44,8 +34,3 @@ scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_ygl27")
 
 [node name="LaserOrigin" type="Node2D" parent="."]
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-energy = 2.0
-texture = SubResource("GradientTexture2D_dunwg")

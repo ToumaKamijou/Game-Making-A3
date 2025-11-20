@@ -1,5 +1,6 @@
 extends CanvasModulate
 
+@export var _color: Color = Color("050505ff")
 
 func _ready() -> void:
-	color = Color("050505ff")
+	color = _color
