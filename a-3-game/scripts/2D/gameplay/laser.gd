@@ -33,7 +33,6 @@ func _physics_process(delta: float) -> void:
 	if raycast.is_colliding():
 		# Check whether target object is gone and skip it if so. 
 		if raycast.get_collider().is_in_group("Disappeared"):
-			raycast.get_collider().laser_color_new = laser_color_enum
 			raycast.add_exception(raycast.get_collider())
 			raycast.force_raycast_update()
 		collider = raycast.get_collider()
@@ -63,8 +62,6 @@ func _physics_process(delta: float) -> void:
 				if collider._color_type == laser_color_enum:
 					collider.override = false
 					collider.laser = self
-					collider.laser_color = laser_color_enum
-					collider.laser_color_new = laser_color_enum
 	
 	_currently_lit_object = collider
 

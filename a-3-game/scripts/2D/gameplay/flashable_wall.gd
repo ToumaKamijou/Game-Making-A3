@@ -44,7 +44,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if blocked == true:
 		change_lit_status(false)
-	elif is_instance_valid(laser) and laser_color == laser_color_new:
+	elif is_instance_valid(laser):
 		change_lit_status(true)
 	elif player_lit == true and override == false:
 		change_lit_status(true)

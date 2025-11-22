@@ -13,9 +13,12 @@ class_name Player
 
 var _collided_objects: Array[Object] = [] # Holds all the objects seen by the flashlight
 var _collided_areas: Array[Area2D] = []
+var _collided_zones: Array[Area2D] = []
 
-var checkpoint_manager
-var player
+@onready var checkpoint_manager: Node2D = get_parent().get_node("CheckpointManager")
+@onready var player: CharacterBody2D = self
+@onready var area_check: ShapeCast2D = $AreaCheck
+var safe := false
 
 var score: int = 0
 @onready var _score_text = $ScoreText
@@ -41,11 +44,6 @@ var unlocked_colors: Dictionary = {
 	Global.LIGHT_COLOR.PURPLE: false,
 	Global.LIGHT_COLOR.CYAN: false
 }
-
-func _ready() -> void:
-	add_to_group("player")
-	checkpoint_manager = get_parent().get_node("CheckpointManager")
-	player = get_parent().get_node("Player")
 
 func respawn():
 	player.position = checkpoint_manager.last_location
@@ -102,15 +100,7 @@ func _physics_process(delta: float) -> void:
 	
 		_collided_objects = current_collisions.duplicate()
 	
-		for i in get_slide_collision_count():
-			var collision = get_slide_collision(i)
-			
-			if collision.get_collider().name == "MovingPlatformArea":
-				print("Player is on platform")
-			if collision.get_collider().name == "SpikesTileMapLayer":
-				print("Player has respawned")
-				respawn()
-		
+	
 # Check whether flashlight is colliding with another light. Send signal if so.
 # This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
 	if _shapecast_area.is_colliding():
@@ -132,6 +122,28 @@ func _physics_process(delta: float) -> void:
 				i.get_parent()._flash_color = 0
 		
 		_collided_areas = current_collisions.duplicate()
+		
+	# Sort out moving platforms and deathzones.
+	if area_check.is_colliding():
+		var collision_count = area_check.get_collision_count()
+		var current_collisions: Array[Area2D] = []
+		for i in collision_count:
+			var collided = area_check.get_collider(i)
+			if collided.is_in_group("Mover"):
+				if not collided.is_in_group("Hazard"):
+					safe = true
+				global_position.y += collided.get_owner().center.global_position.y - collided.get_owner().old.y
+			if collided.is_in_group("Hazard") and safe == false:
+				respawn()
+				
+			current_collisions.append(collided)
+				
+		for i in _collided_zones:
+			if not current_collisions.has(i):
+				if i.is_in_group("Mover"):
+					safe = false
+	
+		_collided_zones = current_collisions.duplicate()
 
 
 func _input(event: InputEvent) -> void:
