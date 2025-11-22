@@ -1,14 +1,16 @@
 @tool
 extends StaticBody2D
 
+
 var laser: Node2D = null
 var blocked := false
-var laser_color: int
-var laser_color_new: int
+#var laser_color: int
+#var laser_color_new: int
 
 var player_lit := false
 var override := false
 var matched := false
+
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -36,12 +38,14 @@ var lit = false:
 				set_collision_layer_value(1, true)
 				remove_from_group("Disappeared")
 
+
 func _ready() -> void:
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
 		
 
-func _physics_process(delta: float) -> void:
+
+func _physics_process(_delta: float) -> void:
 	if blocked == true:
 		change_lit_status(false)
 	elif is_instance_valid(laser):
@@ -52,6 +56,7 @@ func _physics_process(delta: float) -> void:
 		change_lit_status(true)
 	else:
 		change_lit_status(false)
+
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status

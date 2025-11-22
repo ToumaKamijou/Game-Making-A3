@@ -15,13 +15,14 @@ var _collided_objects: Array[Object] = [] # Holds all the objects seen by the fl
 var _collided_areas: Array[Area2D] = []
 var _collided_zones: Array[Area2D] = []
 
-@onready var checkpoint_manager: Node2D = get_parent().get_node("CheckpointManager")
-@onready var player: CharacterBody2D = self
-@onready var area_check: ShapeCast2D = $AreaCheck
+@onready var _checkpoint_manager: Node2D = get_parent().get_node("CheckpointManager")
+@onready var _player: CharacterBody2D = self
+@onready var _area_check: ShapeCast2D = $AreaCheck
 var safe := false
 
 var score: int = 0
-@onready var _score_text = $ScoreText
+@onready var _score_text: RichTextLabel = $"../../../Display/ScoreContainer/Score"
+
 
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):
@@ -45,8 +46,10 @@ var unlocked_colors: Dictionary = {
 	Global.LIGHT_COLOR.CYAN: false
 }
 
+
 func respawn():
-	player.position = checkpoint_manager.last_location
+	_player.position = _checkpoint_manager.last_location
+
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and apply it to the character
@@ -101,7 +104,6 @@ func _physics_process(delta: float) -> void:
 	
 		_collided_objects = current_collisions.duplicate()
 	
-	
 # Check whether flashlight is colliding with another light. Send signal if so.
 # This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
 	if _shapecast_area.is_colliding():
@@ -125,11 +127,11 @@ func _physics_process(delta: float) -> void:
 		_collided_areas = current_collisions.duplicate()
 		
 	# Sort out moving platforms and deathzones.
-	if area_check.is_colliding():
-		var collision_count = area_check.get_collision_count()
+	if _area_check.is_colliding():
+		var collision_count = _area_check.get_collision_count()
 		var current_collisions: Array[Area2D] = []
 		for i in collision_count:
-			var collided = area_check.get_collider(i)
+			var collided = _area_check.get_collider(i)
 			if collided.is_in_group("Mover"):
 				if not collided.is_in_group("Hazard"):
 					safe = true
@@ -160,6 +162,7 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
+
 
 func add_score(score_amount):
 	score += score_amount

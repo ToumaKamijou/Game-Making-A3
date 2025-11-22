@@ -20,7 +20,7 @@ func set_laser_properties(p_color_enum: Global.LIGHT_COLOR, p_visual_color: Colo
 	laser_color_enum = p_color_enum
 	line.default_color = p_visual_color
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var cast_point: Vector2
 	if visual.is_colliding():
 		cast_point = to_local(visual.get_collision_point())
