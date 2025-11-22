@@ -84,11 +84,12 @@ func _physics_process(delta: float) -> void:
 			
 			if color_match:
 				if collided.is_in_group("Prisma"):
-					if not collided.is_in_group("Yellow") and not collided.is_in_group("Purple") and not collided.is_in_group("Cyan"):
+					if not collided.is_in_group("Yellow") and not collided.is_in_group("Purple") and not collided.is_in_group("Cyan") or flash_color == 0:
 						collided.set_incoming_light_color(flash_color)
-						collided.player_lit = true
-					elif flash_color != 0:
+						
+					else:
 						continue
+						
 				
 				collided.player_lit = true
 				current_collisions.append(collided)

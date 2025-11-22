@@ -181,17 +181,17 @@ rotation = 1.5707964
 _color_type = 2
 
 [node name="LightSquare13" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(406, 744)
+position = Vector2(271, 577.99994)
 rotation = 1.5707964
 _color_type = 4
 
 [node name="LightSquare14" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(411.00003, 650.00006)
+position = Vector2(276.00006, 484)
 rotation = 1.5707964
 _color_type = 5
 
 [node name="LightSquare16" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(334, 695.00006)
+position = Vector2(202.00002, 667)
 rotation = 1.5707964
 _color_type = 6
 
