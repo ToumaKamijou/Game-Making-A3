@@ -3,6 +3,8 @@ extends StaticBody2D
 
 var laser: Node2D = null
 var blocked := false
+var laser_color: int
+var laser_color_new: int
 
 var player_lit := false
 var override := false
@@ -42,7 +44,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if blocked == true:
 		change_lit_status(false)
-	elif is_instance_valid(laser):
+	elif is_instance_valid(laser) and laser_color == laser_color_new:
 		change_lit_status(true)
 	elif player_lit == true and override == false:
 		change_lit_status(true)

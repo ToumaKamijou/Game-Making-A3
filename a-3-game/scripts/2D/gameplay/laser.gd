@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var raycast: RayCast2D = $RayCast2D2
 
+
 var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
 var _currently_lit_object: Object = null
@@ -30,17 +31,19 @@ func _physics_process(delta: float) -> void:
 	# Handle activating other objects
 	var collider: Object = null
 	if raycast.is_colliding():
-		# This check (which fixes laser collisions not applying through disappeared blocks) breaks the per-frame updating of disappeared state. Not sure of solution. 
+		# Check whether target object is gone and skip it if so. 
 		if raycast.get_collider().is_in_group("Disappeared"):
+			raycast.get_collider().laser_color_new = laser_color_enum
 			raycast.add_exception(raycast.get_collider())
 			raycast.force_raycast_update()
 		collider = raycast.get_collider()
 		
-		# Check if laser is currently being blocked and communicate this if so. Currently broken, see above.
+		# Check if laser is currently being blocked and communicate this if so.
 		if collider.has_method("change_lit_status"):
 			if visual.is_colliding() and collider != visual.get_collider():
-				if raycast.get_collision_point() - global_position < Vector2(0,0) and raycast.get_collision_point() - global_position < visual.get_collision_point() - global_position or raycast.get_collision_point() - global_position > Vector2(0,0) and raycast.get_collision_point() - global_position > visual.get_collision_point() - global_position:
+				if raycast.get_collision_point() != visual.get_collision_point():
 					collider.blocked = true
+
 			else:
 				collider.blocked = false
 	
@@ -48,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		# Activate the new object.
 		if is_instance_valid(collider):
 			if collider.is_in_group("Prisma"):
-				if collider.is_in_group("Yellow") or collider.is_in_group("Purple") or collider.is_in_group("Cyan"):
+				if collider.is_in_group("Yellow") or collider.is_in_group("Purple") or collider.is_in_group("Cyan") and laser_color_enum != 0:
 					pass
 				else:
 					collider.set_incoming_light_color(laser_color_enum)
@@ -60,6 +63,8 @@ func _physics_process(delta: float) -> void:
 				if collider._color_type == laser_color_enum:
 					collider.override = false
 					collider.laser = self
+					collider.laser_color = laser_color_enum
+					collider.laser_color_new = laser_color_enum
 	
 	_currently_lit_object = collider
 

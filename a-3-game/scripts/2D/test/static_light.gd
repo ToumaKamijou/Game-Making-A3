@@ -42,9 +42,10 @@ func _physics_process(_delta: float) -> void:
 			
 			if collided.has_method("change_lit_status"):
 				collided.override = true
+
 				
+			var color_match := false
 			if collided.is_in_group("Flashable"):
-				var color_match := false
 				if collided.is_in_group("Red") and _light_color == 1:
 					color_match = true
 				if collided.is_in_group("Green") and _light_color == 2:
@@ -58,16 +59,19 @@ func _physics_process(_delta: float) -> void:
 				if collided.is_in_group("Cyan") and _light_color == 6:
 					color_match = true
 			
-				if collided.is_in_group("Prisma"):
-					if collided.is_in_group("Yellow") or collided.is_in_group("Purple") or collided.is_in_group("Cyan") and _light_color != 0:
-						continue
-					else:
-						color_match = true
+			if collided.is_in_group("Prisma"):
+				if collided.is_in_group("Yellow") or collided.is_in_group("Purple") or collided.is_in_group("Cyan") and _light_color != 0:
+					continue
+				else:
+					color_match = true
 			
-				if color_match:
-					collided.change_lit_status(true)
-					collided.matched = true
-					current_collisions.append(collided)
+			if color_match:
+				if collided.is_in_group("Prisma"):
+					collided.set_incoming_light_color(_light_color)
+				collided.change_lit_status(true)
+				collided.matched = true
+				
+				current_collisions.append(collided)
 		
 		for i in _collided_objects:
 			if not current_collisions.has(i):

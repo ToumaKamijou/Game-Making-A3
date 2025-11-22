@@ -56,22 +56,28 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 		var final_laser_color: Color
 		if _color_type == Global.LIGHT_COLOR.WHITE:
 			final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
+			_laser_instance.set_laser_properties(_incoming_light_color, final_laser_color)
 		elif _color_type == Global.LIGHT_COLOR.RED and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
 			final_laser_color = COLOR_MAP.get(4, Color.BLACK)
+			_laser_instance.set_laser_properties(4, final_laser_color)
 		elif _color_type == Global.LIGHT_COLOR.RED and _incoming_light_color == Global.LIGHT_COLOR.BLUE:
 			final_laser_color = COLOR_MAP.get(5, Color.BLACK)
+			_laser_instance.set_laser_properties(5, final_laser_color)
 		elif _color_type == Global.LIGHT_COLOR.GREEN and _incoming_light_color == Global.LIGHT_COLOR.RED:
 			final_laser_color = COLOR_MAP.get(4, Color.BLACK)
+			_laser_instance.set_laser_properties(4, final_laser_color)
 		elif _color_type == Global.LIGHT_COLOR.GREEN and _incoming_light_color == Global.LIGHT_COLOR.BLUE:
 			final_laser_color = COLOR_MAP.get(6, Color.BLACK)
+			_laser_instance.set_laser_properties(6, final_laser_color)
 		elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.RED:
 			final_laser_color = COLOR_MAP.get(5, Color.BLACK)
+			_laser_instance.set_laser_properties(5, final_laser_color)
 		elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
 			final_laser_color = COLOR_MAP.get(6, Color.BLACK)
+			_laser_instance.set_laser_properties(6, final_laser_color)
 		else:
 			final_laser_color = COLOR_MAP.get(_color_type, Color.BLACK)
-		
-		_laser_instance.set_laser_properties(_incoming_light_color, final_laser_color)
+			_laser_instance.set_laser_properties(_color_type, final_laser_color)
 
 var lit = false:
 	set(value):
@@ -84,29 +90,6 @@ var lit = false:
 				_laser_instance.global_position = laser_origin.global_position
 				_laser_instance.global_rotation = laser_origin.global_rotation
 				_laser_instance.get_node("RayCast2D").add_exception(self)
-
-				
-				# Determine what the outgoing laser's color should be.
-				var outgoing_laser_enum: Global.LIGHT_COLOR
-				if _color_type == Global.LIGHT_COLOR.WHITE:
-					outgoing_laser_enum = _incoming_light_color
-				elif _color_type == Global.LIGHT_COLOR.RED and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
-					outgoing_laser_enum = Global.LIGHT_COLOR.YELLOW
-				elif _color_type == Global.LIGHT_COLOR.RED and _incoming_light_color == Global.LIGHT_COLOR.BLUE:
-					outgoing_laser_enum = Global.LIGHT_COLOR.PURPLE
-				elif _color_type == Global.LIGHT_COLOR.GREEN and _incoming_light_color == Global.LIGHT_COLOR.RED:
-					outgoing_laser_enum = Global.LIGHT_COLOR.YELLOW
-				elif _color_type == Global.LIGHT_COLOR.GREEN and _incoming_light_color == Global.LIGHT_COLOR.BLUE:
-					outgoing_laser_enum = Global.LIGHT_COLOR.CYAN
-				elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.RED:
-					outgoing_laser_enum = Global.LIGHT_COLOR.PURPLE
-				elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
-					outgoing_laser_enum = Global.LIGHT_COLOR.CYAN
-				else:
-					outgoing_laser_enum = _color_type
-				
-				var visual_color = COLOR_MAP.get(outgoing_laser_enum, Color.BLACK)
-				_laser_instance.set_laser_properties(outgoing_laser_enum, visual_color)
 		else:
 			light.visible = false
 			if is_instance_valid(_laser_instance):
@@ -121,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		change_lit_status(false)
 	elif transferring == true and is_instance_valid(laser):
 		change_lit_status(true)
-	elif player_lit == true and override == false and transferring == false:
+	elif player_lit == true and override == false:
 		change_lit_status(true)
 	elif override == true and matched == true:
 		change_lit_status(true)
