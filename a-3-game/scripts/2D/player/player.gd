@@ -130,7 +130,7 @@ func _physics_process(delta: float) -> void:
 		_collided_areas = current_collisions.duplicate()
 		
 	# Sort out moving platforms and deathzones. Shapecast is necessary so that invulnerability can be properly checked.
-	if area_check.is_colliding():
+	if _area_check.is_colliding():
 		var collision_count = _area_check.get_collision_count()
 
 		var current_collisions: Array[Area2D] = []
