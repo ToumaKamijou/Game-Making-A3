@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bknmbf6ecy1wh"]
+[gd_scene load_steps=8 format=3 uid="uid://bknmbf6ecy1wh"]
 
 [ext_resource type="Script" uid="uid://cqjn5nu4i2lo2" path="res://scripts/2D/gameplay/mirror.gd" id="1_ibukl"]
 [ext_resource type="Texture2D" uid="uid://bnuvescriai02" path="res://assets/2D/sprites/arrow.png" id="2_a28n0"]
@@ -10,6 +10,14 @@ blend_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_ygl27"]
 size = Vector2(20, 20)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ibukl"]
+blend_mode = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_ibukl"]
+font_size = 36
+font_color = Color(0.74605376, 0.78511566, 0, 1)
+shadow_size = 0
 
 [node name="Mirror" type="StaticBody2D"]
 scale = Vector2(3.13, 3.13)
@@ -26,7 +34,18 @@ mesh = SubResource("QuadMesh_ygl27")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+self_modulate = Color(0.5489626, 0.5489626, 0.54896253, 1)
+material = SubResource("CanvasItemMaterial_ibukl")
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_a28n0")
 
 [node name="LaserOrigin" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -6.3897743
+offset_top = -7.6677265
+offset_right = 135.61023
+offset_bottom = 42.332275
+scale = Vector2(0.09, 0.09)
+text = "MIRROR"
+label_settings = SubResource("LabelSettings_ibukl")
