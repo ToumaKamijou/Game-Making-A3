@@ -17,3 +17,5 @@ mesh = SubResource("BoxMesh_1iclr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4p3kp")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]

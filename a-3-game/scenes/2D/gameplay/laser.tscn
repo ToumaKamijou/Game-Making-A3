@@ -15,9 +15,9 @@ points = PackedVector2Array(0, -1, 0, 42)
 width = 5.0
 default_color = Color(0.8534464, 0.0005975914, 0.85694593, 1)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCastVisual" type="RayCast2D" parent="."]
 target_position = Vector2(0, 500)
 
-[node name="RayCast2D2" type="RayCast2D" parent="."]
+[node name="RayCastCollision" type="RayCast2D" parent="."]
 target_position = Vector2(0, 500)
 collision_mask = 2

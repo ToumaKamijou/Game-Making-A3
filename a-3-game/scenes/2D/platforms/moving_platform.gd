@@ -14,5 +14,6 @@ func move_tween():
 	tween.tween_property(path_follow_2D, "progress_ratio", 0.0, 10.0)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	# Store previous frame's position to be able to access relative distance in the player script.
 	old = center.global_position

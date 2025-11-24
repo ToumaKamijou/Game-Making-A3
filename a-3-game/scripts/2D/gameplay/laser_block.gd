@@ -29,6 +29,7 @@ var _laser_instance: Node2D = null
 var _incoming_light_color: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
 const COLOR_MAP = {
+	# Colors are at .8 transparency purely for visual elegance. This is also where the lasers derive their colors from.
 	Global.LIGHT_COLOR.WHITE: Color(1, 1, 1, 0.8),
 	Global.LIGHT_COLOR.RED: Color(1, 0, 0, 0.8),
 	Global.LIGHT_COLOR.GREEN: Color(0.19607843, 0.8039216, 0.19607843, 0.8),
@@ -42,7 +43,7 @@ const COLOR_MAP = {
 func _ready():
 	if COLOR_MAP.has(_color_type):
 		mesh.modulate = COLOR_MAP[_color_type]
-		# Doesn't work as it should.
+		# Change color of the light. Doesn't work as it should.
 		#light.texture.gradient.set_color(0, mesh.modulate)
 	if not is_in_group("Prisma"):
 		add_to_group("Prisma")
@@ -51,7 +52,7 @@ func _ready():
 func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 	_incoming_light_color = color
 
-	# Update laser color every frame.
+	# Update laser color (this function is called every frame while the object is active).
 	if is_instance_valid(_laser_instance):
 		var final_laser_color: Color
 		if _color_type == Global.LIGHT_COLOR.WHITE:
@@ -83,13 +84,14 @@ var lit = false:
 	set(value):
 		if value:
 			light.visible = true
+			# Create laser.
 			if not is_instance_valid(_laser_instance):
 				_laser_instance = LASER_SCENE.instantiate()
 				add_child(_laser_instance)
 
 				_laser_instance.global_position = laser_origin.global_position
 				_laser_instance.global_rotation = laser_origin.global_rotation
-				_laser_instance.get_node("RayCast2D").add_exception(self)
+				_laser_instance.origin = laser_origin
 		else:
 			light.visible = false
 			if is_instance_valid(_laser_instance):
@@ -99,14 +101,19 @@ var lit = false:
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if player_lit == false and blocked == true:
 		change_lit_status(false)
+	# Check whether it is currently transferring a laser.
 	elif transferring == true and is_instance_valid(laser):
 		change_lit_status(true)
+	# Check whether player is interacting and a static light is not overriding this.
 	elif player_lit == true and override == false:
 		change_lit_status(true)
+	# Check if static light is interacting.
 	elif override == true and matched == true:
 		change_lit_status(true)
+	# Default state.
 	else:
 		change_lit_status(false)

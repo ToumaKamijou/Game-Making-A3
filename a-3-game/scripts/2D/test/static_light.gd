@@ -30,7 +30,7 @@ var _collided_objects: Array[Object] = [] # Holds all the objects seen by the li
 
 
 func _physics_process(_delta: float) -> void:
-	# Check whether light color matches object. send signal if so
+	# Check whether light color matches object. Communicate necessary information if so.
 	if _shapecast.is_colliding():
 		var collision_count = _shapecast.get_collision_count()
 		var current_collisions: Array[Object] = []
@@ -42,8 +42,8 @@ func _physics_process(_delta: float) -> void:
 			
 			if collided.has_method("change_lit_status"):
 				collided.override = true
-
-				
+			
+			# Differs from player script in that this checks all six colors as opposed to three.
 			var color_match := false
 			if collided.is_in_group("Flashable"):
 				if collided.is_in_group("Red") and _light_color == 1:
@@ -68,19 +68,17 @@ func _physics_process(_delta: float) -> void:
 			if color_match:
 				if collided.is_in_group("Prisma"):
 					collided.set_incoming_light_color(_light_color)
-				collided.change_lit_status(true)
 				collided.matched = true
-				
 				current_collisions.append(collided)
 		
 		for i in _collided_objects:
 			if not current_collisions.has(i):
 				i.override = false
 				i.matched = false
-				i.change_lit_status(false)
 		
 		_collided_objects = current_collisions.duplicate()
 		
+	# Calculate color mixing. Not yet adapted to allow two static lights to mix.
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
 	if _flash_color != 0:
 		if _base_value == 0 or 4 or 5 or 6:
@@ -128,14 +126,8 @@ func _physics_process(_delta: float) -> void:
 				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
 				_light_color = Global.LIGHT_COLOR.BLUE
 	else:
-		# This tween obviously does not work right now. I could do it with a bunch of if statements but thought we should probably just find a way to find a dynamic variable first.
-		# Basically, we need to call the value within the global script that is equivalent to whatever the _base_value represents.
+		# This tween needs to call the base value as a color. It seems silly to create an entirely new dictionary here just for that, so someone else can figure out a better method.
 		#var tween = create_tween()
 		#tween.tween_property(self, "color", _base_value as Global.LIGHT_COLOR, 1)
 		
-		# For some reason, this works while deriving the value from within the other variable does not. Actually, why does this even change the colour of the light?
-		# Shouldn't that only be happening when setting the variable initially? Is it that it executes that function every time the value changes?
-		# If that is what's happening then we probably do actually need the secondary value?
-		@warning_ignore_start("int_as_enum_without_cast")
-		_light_color = _base_value
-		@warning_ignore_restore("int_as_enum_without_cast")
+		_light_color = _base_value as Global.LIGHT_COLOR
