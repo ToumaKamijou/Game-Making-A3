@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
 var blocked := false

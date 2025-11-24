@@ -129,5 +129,6 @@ func _physics_process(_delta: float) -> void:
 		# This tween needs to call the base value as a color. It seems silly to create an entirely new dictionary here just for that, so someone else can figure out a better method.
 		#var tween = create_tween()
 		#tween.tween_property(self, "color", _base_value as Global.LIGHT_COLOR, 1)
-		
-		_light_color = _base_value as Global.LIGHT_COLOR
+		@warning_ignore_start("int_as_enum_without_cast")
+		_light_color = _base_value
+		@warning_ignore_restore("int_as_enum_without_cast")

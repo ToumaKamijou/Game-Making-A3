@@ -30,7 +30,7 @@ func _physics_process(_delta: float) -> void:
 	
 	# Handle activating other objects
 	var collider: Object = null
-	if raycast.is_colliding():
+	if raycast.is_colliding() and !raycast.get_collider().laser:
 		collider = raycast.get_collider()
 	# Check if laser is currently being blocked and communicate this if so.
 		if collider.has_method("change_lit_status"):
@@ -48,7 +48,6 @@ func _physics_process(_delta: float) -> void:
 			raycast.force_raycast_update()
 			collider = raycast.get_collider()
 
-	if is_instance_valid(collider):
 		if collider.is_in_group("Prisma"):
 			if collider.is_in_group("Yellow") or collider.is_in_group("Purple") or collider.is_in_group("Cyan") and laser_color_enum != 0:
 				pass

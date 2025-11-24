@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cb375mffsapay"]
+[gd_scene load_steps=27 format=4 uid="uid://cb375mffsapay"]
 
 [ext_resource type="Texture2D" uid="uid://bj485ule5ltb0" path="res://assets/2D/sprites/tilemaps/stone_tile.png" id="1_ffd7h"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_hxop3"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="4_1wh7b"]
-[ext_resource type="Script" uid="uid://b00ku2ioalccn" path="res://scenes/2D/levels/spikes.gd" id="4_6latm"]
+[ext_resource type="Script" path="res://scenes/2D/levels/spikes.gd" id="4_6latm"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/test/static_light.tscn" id="6_dxe1e"]
-[ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_3g276"]
+[ext_resource type="Script" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_3g276"]
+[ext_resource type="PackedScene" uid="uid://bknmbf6ecy1wh" path="res://scenes/2D/gameplay/mirror.tscn" id="8_hxop3"]
 [ext_resource type="PackedScene" uid="uid://bshtrwutu635t" path="res://scenes/2D/gameplay/laser_block.tscn" id="9_bf67w"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="9_lm303"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="10_l6063"]
@@ -224,6 +225,16 @@ position = Vector2(445, 300)
 rotation = -1.5707964
 _color_type = 2
 
+[node name="Mirror2" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("8_hxop3")]
+position = Vector2(765.99994, 475.99997)
+rotation = 2.3666666
+scale = Vector2(3.1300004, 3.1300004)
+
+[node name="Mirror3" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("8_hxop3")]
+position = Vector2(659.00006, 310.99997)
+rotation = 1.1536627
+scale = Vector2(3.1300004, 3.1300004)
+
 [node name="CheckpointManager" type="Node2D" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("7_3g276")
 
@@ -256,6 +267,7 @@ grow_vertical = 2
 pivot_offset = Vector2(-4, -3)
 script = ExtResource("14_y1faj")
 _viewport = NodePath("../SubViewportContainer/SubViewport")
+metadata/_edit_lock_ = true
 
 [node name="Subpixel Snapper" type="Sprite2D" parent="Display" node_paths=PackedStringArray("_main_viewport")]
 texture_filter = 1
@@ -263,6 +275,7 @@ texture = SubResource("ViewportTexture_ffd7h")
 centered = false
 script = ExtResource("15_rgq2g")
 _main_viewport = NodePath("../../SubViewportContainer/SubViewport")
+metadata/_edit_lock_ = true
 
 [node name="ScoreContainer" type="CanvasLayer" parent="Display"]
 
