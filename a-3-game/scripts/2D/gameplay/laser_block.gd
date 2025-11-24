@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
 var blocked := false
@@ -37,8 +38,8 @@ const COLOR_MAP = {
 	Global.LIGHT_COLOR.YELLOW: Color(1, 1, 0, 0.8),
 	Global.LIGHT_COLOR.PURPLE: Color(0.4, 0.2, 0.6, 0.8),
 	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863, 0.8)
-
 }
+
 
 func _ready():
 	if COLOR_MAP.has(_color_type):
@@ -98,11 +99,12 @@ var lit = false:
 				_laser_instance.queue_free()
 				_laser_instance = null
 
+
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
 
 func _physics_process(_delta: float) -> void:
-	# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
+# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if player_lit == false and blocked == true:
 		change_lit_status(false)
 	# Check whether it is currently transferring a laser.

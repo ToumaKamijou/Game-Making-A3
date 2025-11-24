@@ -1,10 +1,9 @@
-[gd_scene load_steps=26 format=4 uid="uid://cb375mffsapay"]
+[gd_scene load_steps=21 format=4 uid="uid://cb375mffsapay"]
 
 [ext_resource type="Texture2D" uid="uid://bj485ule5ltb0" path="res://assets/2D/sprites/tilemaps/stone_tile.png" id="1_ffd7h"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
+[ext_resource type="Script" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="2_1wh7b"]
-[ext_resource type="Shader" uid="uid://dn51qad71h4f3" path="res://shaders/pixel_art_upscale.gdshader" id="2_rgq2g"]
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_hxop3"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="4_1wh7b"]
@@ -14,12 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bshtrwutu635t" path="res://scenes/2D/gameplay/laser_block.tscn" id="9_bf67w"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="9_lm303"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="10_l6063"]
-[ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="14_bf67w"]
-[ext_resource type="Script" uid="uid://chfyxg1fadd5e" path="res://scripts/UI/main_display.gd" id="14_y1faj"]
-[ext_resource type="Script" uid="uid://bx765gtmglxap" path="res://scripts/UI/subpixel_snapper.gd" id="15_rgq2g"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vigiv"]
-shader = ExtResource("2_rgq2g")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kpcvt"]
 texture = ExtResource("1_ffd7h")
@@ -66,7 +59,6 @@ script = ExtResource("1_kpcvt")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
-material = SubResource("ShaderMaterial_vigiv")
 custom_minimum_size = Vector2(1920, 1080)
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,7 +82,6 @@ tile_map_data = PackedByteArray("AAAXAA0AAAAAAAAAAAAXAAwAAAAAAAAAAAAXAAsAAAAAAAA
 tile_set = SubResource("TileSet_1wh7b")
 
 [node name="SpikesTileMapLayer" type="TileMapLayer" parent="SubViewportContainer/SubViewport/TileMapLayers"]
-texture_filter = 1
 tile_map_data = PackedByteArray("AABJABoAAAAAAAAAAABJABsAAAAAAAEAAABKABoAAAABAAAAAABKABsAAAABAAEAAABLABoAAAAAAAAAAABLABsAAAAAAAEAAABMABoAAAABAAAAAABMABsAAAABAAEAAABNABoAAAAAAAAAAABNABsAAAAAAAEAAABOABoAAAABAAAAAABOABsAAAABAAEAAABNABwAAAAAAAAAAABNAB0AAAAAAAEAAABOABwAAAABAAAAAABOAB0AAAABAAEAAABLABwAAAAAAAAAAABLAB0AAAAAAAEAAABMABwAAAABAAAAAABMAB0AAAABAAEAAABJABwAAAAAAAAAAABJAB0AAAAAAAEAAABKABwAAAABAAAAAABKAB0AAAABAAEAAABJAB4AAAAAAAAAAABJAB8AAAAAAAEAAABKAB4AAAABAAAAAABKAB8AAAABAAEAAABLAB4AAAAAAAAAAABLAB8AAAAAAAEAAABMAB4AAAABAAAAAABMAB8AAAABAAEAAABNAB4AAAAAAAAAAABNAB8AAAAAAAEAAABOAB4AAAABAAAAAABOAB8AAAABAAEAAABNACAAAAAAAAAAAABNACEAAAAAAAEAAABOACAAAAABAAAAAABOACEAAAABAAEAAABLACAAAAAAAAAAAABLACEAAAAAAAEAAABMACAAAAABAAAAAABMACEAAAABAAEAAABJACAAAAAAAAAAAABJACEAAAAAAAEAAABKACAAAAABAAAAAABKACEAAAABAAEAAABJACIAAAAAAAAAAABJACMAAAAAAAEAAABKACIAAAABAAAAAABKACMAAAABAAEAAABLACIAAAAAAAAAAABLACMAAAAAAAEAAABMACIAAAABAAAAAABMACMAAAABAAEAAABNACIAAAAAAAAAAABNACMAAAAAAAEAAABOACIAAAABAAAAAABOACMAAAABAAEAAABNACQAAAAAAAAAAABNACUAAAAAAAEAAABOACQAAAABAAAAAABOACUAAAABAAEAAABLACQAAAAAAAAAAABLACUAAAAAAAEAAABMACQAAAABAAAAAABMACUAAAABAAEAAABJACQAAAAAAAAAAABJACUAAAAAAAEAAABKACQAAAABAAAAAABKACUAAAABAAEAAABJACYAAAAAAAAAAABJACcAAAAAAAEAAABKACYAAAABAAAAAABKACcAAAABAAEAAABLACYAAAAAAAAAAABLACcAAAAAAAEAAABMACYAAAABAAAAAABMACcAAAABAAEAAABNACYAAAAAAAAAAABNACcAAAAAAAEAAABOACYAAAABAAAAAABOACcAAAABAAEAAABNACgAAAAAAAAAAABNACkAAAAAAAEAAABOACgAAAABAAAAAABOACkAAAABAAEAAABLACgAAAAAAAAAAABLACkAAAAAAAEAAABMACgAAAABAAAAAABMACkAAAABAAEAAABJACgAAAAAAAAAAABJACkAAAAAAAEAAABKACgAAAABAAAAAABKACkAAAABAAEAAABJABgAAAAAAAAAAABJABkAAAAAAAEAAABKABgAAAABAAAAAABKABkAAAABAAEAAABLABgAAAAAAAAAAABLABkAAAAAAAEAAABMABgAAAABAAAAAABMABkAAAABAAEAAABNABgAAAAAAAAAAABNABkAAAAAAAEAAABOABgAAAABAAAAAABOABkAAAABAAEAAABPABgAAAAAAAAAAABPABkAAAAAAAEAAABQABgAAAABAAAAAABQABkAAAABAAEAAABPABoAAAAAAAAAAABPABsAAAAAAAEAAABQABoAAAABAAAAAABQABsAAAABAAEAAABPABwAAAAAAAAAAABPAB0AAAAAAAEAAABQABwAAAABAAAAAABQAB0AAAABAAEAAABPAB4AAAAAAAAAAABPAB8AAAAAAAEAAABQAB4AAAABAAAAAABQAB8AAAABAAEAAABPACAAAAAAAAAAAABPACEAAAAAAAEAAABQACAAAAABAAAAAABQACEAAAABAAEAAABPACIAAAAAAAAAAABPACMAAAAAAAEAAABQACIAAAABAAAAAABQACMAAAABAAEAAABPACQAAAAAAAAAAABPACUAAAAAAAEAAABQACQAAAABAAAAAABQACUAAAABAAEAAABPACYAAAAAAAAAAABPACcAAAAAAAEAAABQACYAAAABAAAAAABQACcAAAABAAEAAABPACgAAAAAAAAAAABPACkAAAAAAAEAAABQACgAAAABAAAAAABQACkAAAABAAEAAABHABgAAAAAAAAAAABHABkAAAAAAAEAAABIABgAAAABAAAAAABIABkAAAABAAEAAABHABoAAAAAAAAAAABHABsAAAAAAAEAAABIABoAAAABAAAAAABIABsAAAABAAEAAABHABwAAAAAAAAAAABHAB0AAAAAAAEAAABIABwAAAABAAAAAABIAB0AAAABAAEAAABHAB4AAAAAAAAAAABHAB8AAAAAAAEAAABIAB4AAAABAAAAAABIAB8AAAABAAEAAABHACAAAAAAAAAAAABHACEAAAAAAAEAAABIACAAAAABAAAAAABIACEAAAABAAEAAABHACIAAAAAAAAAAABHACMAAAAAAAEAAABIACIAAAABAAAAAABIACMAAAABAAEAAABHACQAAAAAAAAAAABHACUAAAAAAAEAAABIACQAAAABAAAAAABIACUAAAABAAEAAABHACYAAAAAAAAAAABHACcAAAAAAAEAAABIACYAAAABAAAAAABIACcAAAABAAEAAABHACgAAAAAAAAAAABHACkAAAAAAAEAAABIACgAAAABAAAAAABIACkAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_mh6uc")
 collision_enabled = false
@@ -141,14 +132,14 @@ position = Vector2(1335, 577)
 _color_type = 6
 
 [node name="StaticLight" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
-position = Vector2(673, 720.00006)
+position = Vector2(689.00006, 723)
 scale = Vector2(5, 5)
 _base_value = 1
 _light_color = 1
 _size = 5.0
 
 [node name="StaticLight3" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
-position = Vector2(311, 727)
+position = Vector2(385, 749.00006)
 scale = Vector2(5, 5)
 _size = 5.0
 
@@ -243,42 +234,15 @@ position = Vector2(806, 542.00006)
 [node name="coin2" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_1wh7b")]
 position = Vector2(1114.0001, 542.00006)
 
-[node name="Display" type="Control" parent="." node_paths=PackedStringArray("_viewport")]
-custom_minimum_size = Vector2(1928, 1086)
+[node name="Display" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1928.0
-offset_bottom = 1086.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(-4, -3)
-script = ExtResource("14_y1faj")
-_viewport = NodePath("../SubViewportContainer/SubViewport")
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
-[node name="Subpixel Snapper" type="Sprite2D" parent="Display" node_paths=PackedStringArray("_main_viewport")]
+[node name="Game" type="Sprite2D" parent="Display"]
 texture_filter = 1
 texture = SubResource("ViewportTexture_ffd7h")
 centered = false
-script = ExtResource("15_rgq2g")
-_main_viewport = NodePath("../../SubViewportContainer/SubViewport")
-
-[node name="ScoreContainer" type="CanvasLayer" parent="Display"]
-
-[node name="Score" type="RichTextLabel" parent="Display/ScoreContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 938.0
-offset_right = -1610.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("14_bf67w")
-theme_override_font_sizes/normal_font_size = 30
-bbcode_enabled = true
-text = "SCORE: 0"
-fit_content = true
-vertical_alignment = 1
-visible_characters_behavior = 1
+metadata/_edit_lock_ = true

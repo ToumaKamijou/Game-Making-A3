@@ -1,3 +1,4 @@
 [gd_scene format=3 uid="uid://jh3eckfxgfcj"]
 
 [node name="Spikes" type="Area2D"]
+texture_filter = 1

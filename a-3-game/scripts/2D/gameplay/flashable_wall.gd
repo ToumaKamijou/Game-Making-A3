@@ -13,6 +13,7 @@ var player_lit := false
 var override := false
 var matched := false
 
+
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
 		_color_type = value
@@ -42,6 +43,7 @@ var lit = false:
 				set_collision_layer_value(1, true)
 				remove_from_group("Disappeared")
 
+
 func _ready() -> void:
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
@@ -63,6 +65,9 @@ func _physics_process(_delta: float) -> void:
 		
 	# Check whether laser color has changed. This is necessary to do here due to the disappearing behaviour.
 	elif collider and collider.is_in_group("Prisma") and collider._laser_instance and collider._laser_instance.laser_color_enum != laser_color:
+
+func _physics_process(_delta: float) -> void:
+	if blocked == true:
 		change_lit_status(false)
 	# Check if received laser still exists.
 	elif is_instance_valid(laser):
@@ -76,6 +81,7 @@ func _physics_process(_delta: float) -> void:
 	# Default state.
 	else:
 		change_lit_status(false)
+
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
