@@ -1,10 +1,10 @@
 @tool
 extends PointLight2D
 
-
 var _flash_color: int = 0
 
-@onready var _shapecast: ShapeCast2D = $ShapeCast2D
+@onready var _shapecast_body: ShapeCast2D = $ShapeCastBodies
+@onready var _shapecast_area: ShapeCast2D = $ShapeCastAreas
 
 # This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
 @export_range(0, 6, 1) var _base_value: int
@@ -27,16 +27,19 @@ var _flash_color: int = 0
 		scale = Vector2(value, value)
 
 var _collided_objects: Array[Object] = [] # Holds all the objects seen by the light
+var _collided_areas: Array[Area2D] = []
+
+var overriden = false
 
 
 func _physics_process(_delta: float) -> void:
 	# Check whether light color matches object. Communicate necessary information if so.
-	if _shapecast.is_colliding():
-		var collision_count = _shapecast.get_collision_count()
+	if _shapecast_body.is_colliding():
+		var collision_count = _shapecast_body.get_collision_count()
 		var current_collisions: Array[Object] = []
 		
 		for i in range(collision_count):
-			var collided = _shapecast.get_collider(i)
+			var collided = _shapecast_body.get_collider(i)
 			if collided == null:
 				continue
 			
@@ -64,10 +67,9 @@ func _physics_process(_delta: float) -> void:
 					continue
 				else:
 					color_match = true
+					collided.set_incoming_light_color(_light_color)
 			
 			if color_match:
-				if collided.is_in_group("Prisma"):
-					collided.set_incoming_light_color(_light_color)
 				collided.matched = true
 				current_collisions.append(collided)
 		
@@ -77,52 +79,86 @@ func _physics_process(_delta: float) -> void:
 				i.matched = false
 		
 		_collided_objects = current_collisions.duplicate()
+	
+	# Check whether static light is colliding with another light. Change its color and except self if so.
+	# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
+	if _shapecast_area.is_colliding():
+		var collision_count = _shapecast_area.get_collision_count()
+		var current_collisions: Array[Area2D] = []
+		
+		for i in range(collision_count):
+			var collided = _shapecast_area.get_collider(i)
+			if collided == null:
+				continue
+			
+			if collided.is_in_group("ColorLight") and overriden == false:
+				overriden = true
+				collided.get_parent()._flash_color = _light_color
+				current_collisions.append(collided)
+				
+		# This seems to be extremely slow. It needs to resolve on the next frame for the lights to feel natural. Since this isn't my method I'm not gonna mess with it too much.
+		# Still no idea why this happens btw
+		for i in _collided_areas:
+			if not current_collisions.has(i):
+				i.get_parent()._flash_color = 0
+				if i.is_in_group("ColorLight"):
+					overriden = false
+		
+		_collided_areas = current_collisions.duplicate()
 		
 	# Calculate color mixing. Not yet adapted to allow two static lights to mix.
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
 	if _flash_color != 0:
 		if _base_value == 0 or 4 or 5 or 6:
-			var tween = create_tween()
 			if _flash_color == 1:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.RED, .5)
 				_light_color = Global.LIGHT_COLOR.RED
 			if _flash_color == 2:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.LIME_GREEN, .5)
 				_light_color = Global.LIGHT_COLOR.GREEN
 			if _flash_color == 3:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
 				_light_color = Global.LIGHT_COLOR.BLUE
 		if _base_value == 1:
-			var tween = create_tween()
 			if _flash_color == 1:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.RED, .5)
 				_light_color = Global.LIGHT_COLOR.RED
 			if _flash_color == 2:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.YELLOW, .5)
 				_light_color = Global.LIGHT_COLOR.YELLOW
 			if _flash_color == 3:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.PURPLE, .5)
 				_light_color = Global.LIGHT_COLOR.PURPLE
 		elif _base_value == 2:
-			var tween = create_tween()
 			if _flash_color == 1:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.YELLOW, .5)
 				_light_color = Global.LIGHT_COLOR.YELLOW
 			if _flash_color == 2:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.LIME_GREEN, .5)
 				_light_color = Global.LIGHT_COLOR.GREEN
 			if _flash_color == 3:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.CYAN, .5)
 				_light_color = Global.LIGHT_COLOR.CYAN
 		elif _base_value == 3:
-			var tween = create_tween()
 			if _flash_color == 1:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.PURPLE, .5)
 				_light_color = Global.LIGHT_COLOR.PURPLE
 			if _flash_color == 2:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.CYAN, .5)
 				_light_color = Global.LIGHT_COLOR.CYAN
 			if _flash_color == 3:
+				var tween = create_tween()
 				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
 				_light_color = Global.LIGHT_COLOR.BLUE
 	else:

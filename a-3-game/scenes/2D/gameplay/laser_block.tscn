@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bshtrwutu635t"]
+[gd_scene load_steps=10 format=3 uid="uid://bshtrwutu635t"]
 
 [ext_resource type="Script" uid="uid://c00fmu5gm0cgi" path="res://scripts/2D/gameplay/laser_block.gd" id="1_w0qqi"]
 [ext_resource type="Texture2D" uid="uid://bnuvescriai02" path="res://assets/2D/sprites/arrow.png" id="2_ygl27"]
@@ -25,6 +25,14 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.90000004, 0.2)
 metadata/_snap_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibukl"]
+albedo_color = Color(3.7230333e-05, 3.723038e-05, 3.7230366e-05, 1)
+roughness = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_i5qfx"]
+material = SubResource("StandardMaterial3D_ibukl")
+size = Vector2(100, 0.3)
+
 [node name="LightSquare" type="StaticBody2D"]
 scale = Vector2(3.13, 3.13)
 disable_mode = 2
@@ -32,6 +40,7 @@ collision_layer = 3
 script = ExtResource("1_w0qqi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_kwod3")
 
 [node name="Mesh2D" type="MeshInstance2D" parent="."]
@@ -49,3 +58,8 @@ texture = ExtResource("2_ygl27")
 visible = false
 energy = 2.0
 texture = SubResource("GradientTexture2D_dunwg")
+
+[node name="Guideline" type="MeshInstance2D" parent="."]
+position = Vector2(0, 54.313095)
+rotation = 1.5707964
+mesh = SubResource("QuadMesh_i5qfx")

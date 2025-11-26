@@ -2,7 +2,7 @@ extends StaticBody2D
 
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
-# Most of these values are useless for the mirrors. However, leaving them declared as false prevents errors with the lasers (we would otherwise need to create a separate group for them).
+# Most of these values are useless for the mirrors. However, leaving them declared as false prevents errors with the lasers (we would otherwise need to create separate logic for them).
 var blocked := false
 var transferring := false
 var laser: Node2D
@@ -11,7 +11,6 @@ var override := false
 var matched := false
 
 @onready var laser_origin: Node2D = $LaserOrigin
-@onready var mesh: MeshInstance2D = $Mesh2D
 @onready var light: PointLight2D = $PointLight2D
 
 var _laser_instance: Node2D = null
@@ -32,11 +31,15 @@ const COLOR_MAP = {
 func _ready():
 	if not is_in_group("Prisma"):
 		add_to_group("Prisma")
+	if not is_in_group("Mirror"):
+		add_to_group("Mirror")
+	
+	$Guideline.visible = false
 
 func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 	_incoming_light_color = color
 
-	# Update laser color (this function is called every frame while the object is active).
+	# Update laser color if it already exists (this function is *not* called every frame while the object is active, not sure what the difference is).
 	if is_instance_valid(_laser_instance):
 		var final_laser_color: Color
 		final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
@@ -65,13 +68,16 @@ func change_lit_status(new_status: bool) -> void:
 	lit = new_status
 
 func _physics_process(_delta: float) -> void:
-	global_rotation += _delta
+	#rotation += _delta
+	# Keep rotation value between 0 and 360.
 	var angle: float
 	if is_instance_valid(laser):
 		angle = rad_to_deg(global_rotation - laser.global_rotation)
 		if angle < 0:
 			angle += 360
-		
+		elif angle > 360:
+			angle -= 360
+
 # Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if blocked == true:
 		change_lit_status(false)
@@ -81,3 +87,10 @@ func _physics_process(_delta: float) -> void:
 	# Default state.
 	else:
 		change_lit_status(false)
+
+# Just here for testing purposes.
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("rotate_test"):
+		rotation += deg_to_rad(90)
+		change_lit_status(false)
+		change_lit_status(true)

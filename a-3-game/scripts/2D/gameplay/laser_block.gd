@@ -39,7 +39,6 @@ const COLOR_MAP = {
 	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863, 0.8)
 }
 
-
 func _ready():
 	if COLOR_MAP.has(_color_type):
 		mesh.modulate = COLOR_MAP[_color_type]
@@ -47,12 +46,14 @@ func _ready():
 		#light.texture.gradient.set_color(0, mesh.modulate)
 	if not is_in_group("Prisma"):
 		add_to_group("Prisma")
+	
+	$Guideline.visible = false
 
 
 func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 	_incoming_light_color = color
 
-	# Update laser color (this function is called every frame while the object is active).
+	# Update laser color (this function is called every frame).
 	if is_instance_valid(_laser_instance):
 		var final_laser_color: Color
 		if _color_type == Global.LIGHT_COLOR.WHITE:
@@ -76,6 +77,9 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 		elif _color_type == Global.LIGHT_COLOR.BLUE and _incoming_light_color == Global.LIGHT_COLOR.GREEN:
 			final_laser_color = COLOR_MAP.get(6, Color.BLACK)
 			_laser_instance.set_laser_properties(6, final_laser_color)
+		elif _incoming_light_color != Global.LIGHT_COLOR.WHITE and _incoming_light_color == _laser_instance.laser_color_enum and _incoming_light_color != _color_type:
+			final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
+			_laser_instance.set_laser_properties(_incoming_light_color, final_laser_color)
 		else:
 			final_laser_color = COLOR_MAP.get(_color_type, Color.BLACK)
 			_laser_instance.set_laser_properties(_color_type, final_laser_color)

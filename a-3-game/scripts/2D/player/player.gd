@@ -88,10 +88,9 @@ func _physics_process(delta: float) -> void:
 				color_match = true
 			
 			if color_match:
-				if collided.is_in_group("Prisma"):
+				if collided.is_in_group("Prisma") and not collided.is_in_group("Mirror"):
 					if not collided.is_in_group("Yellow") and not collided.is_in_group("Purple") and not collided.is_in_group("Cyan") or flash_color == 0:
 						collided.set_incoming_light_color(flash_color)
-						
 					else:
 						continue
 				
@@ -106,7 +105,7 @@ func _physics_process(delta: float) -> void:
 	
 		_collided_objects = current_collisions.duplicate()
 	
-# Check whether flashlight is colliding with another light. Send signal if so.
+# Check whether flashlight is colliding with another light. Change its color if so.
 # This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
 	if _shapecast_area.is_colliding():
 		var collision_count = _shapecast_area.get_collision_count()
