@@ -33,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 	if raycast.is_colliding(): #and !raycast.get_collider().laser: ## This commented out snippet makes the lasers no longer update every frame (which is bad but here for my own sanity).
 		collider = raycast.get_collider()
 	# Check if laser is currently being blocked and communicate this if so.
-		if collider.has_method("change_lit_status"):
+		if collider and collider.has_method("change_lit_status"):
 			if visual.is_colliding() and collider != visual.get_collider():
 				if raycast.get_collision_point() != visual.get_collision_point():
 					collider.blocked = true
@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 				collider.blocked = false
 			
 		# Check whether target object is gone and skip it if so. Communicate necessary values for object to take over blocking/color handling.
-		if collider.is_in_group("Disappeared"):
+		if collider and collider.is_in_group("Disappeared"):
 			collider.laser_block = origin
 			collider.laser_color = laser_color_enum
 			raycast.add_exception(collider)
