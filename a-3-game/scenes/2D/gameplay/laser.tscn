@@ -1,19 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://depk3jtuyivvh"]
+[gd_scene load_steps=6 format=3 uid="uid://depk3jtuyivvh"]
 
 [ext_resource type="Script" uid="uid://dx8tnk84rqcg8" path="res://scripts/2D/gameplay/laser.gd" id="1_2twl1"]
+[ext_resource type="Shader" uid="uid://sjawrmadosru" path="res://shaders/vfx/laser.gdshader" id="2_wqsnv"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2twl1"]
-blend_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2twl1"]
+shader = ExtResource("2_wqsnv")
+shader_parameter/laser_color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.5
+
+[sub_resource type="Gradient" id="Gradient_wqsnv"]
+offsets = PackedFloat32Array(0.2, 0.5, 0.8)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nm8xu"]
+gradient = SubResource("Gradient_wqsnv")
 
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_2twl1")
 
 [node name="Line2D" type="Line2D" parent="."]
 z_index = 10
-material = SubResource("CanvasItemMaterial_2twl1")
+texture_filter = 1
+material = SubResource("ShaderMaterial_2twl1")
 points = PackedVector2Array(0, -1, 0, 42)
 width = 5.0
 default_color = Color(0.8534464, 0.0005975914, 0.85694593, 1)
+texture_mode = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="Line2D"]
+visible = false
+position = Vector2(0, 20.75)
+scale = Vector2(0.03125, 42.5)
+shadow_enabled = true
+texture = SubResource("GradientTexture1D_nm8xu")
 
 [node name="RayCastVisual" type="RayCast2D" parent="."]
 target_position = Vector2(0, 500)

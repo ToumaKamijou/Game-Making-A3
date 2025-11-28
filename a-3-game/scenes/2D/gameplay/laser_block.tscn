@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bshtrwutu635t"]
 
 [ext_resource type="Script" uid="uid://c00fmu5gm0cgi" path="res://scripts/2D/gameplay/laser_block.gd" id="1_w0qqi"]
-[ext_resource type="Texture2D" uid="uid://bnuvescriai02" path="res://assets/2D/sprites/arrow.png" id="2_ygl27"]
+[ext_resource type="Texture2D" uid="uid://d3qxwwprvm5wl" path="res://assets/2D/sprites/laser_blocks/LaserBlockOff.png" id="2_i5qfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kwod3"]
 
@@ -46,11 +46,10 @@ shape = SubResource("RectangleShape2D_kwod3")
 [node name="Mesh2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("QuadMesh_ygl27")
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-scale = Vector2(0.03, 0.03)
-texture = ExtResource("2_ygl27")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.56798005, 0.56798)
+texture = ExtResource("2_i5qfx")
 
 [node name="LaserOrigin" type="Node2D" parent="."]
 

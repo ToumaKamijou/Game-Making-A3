@@ -1,6 +1,7 @@
 @tool
 extends StaticBody2D
 
+
 @onready var raycast = $RayCast2D
 var laser_block: Node2D
 var collider: Node2D

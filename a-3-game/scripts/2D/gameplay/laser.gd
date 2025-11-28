@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var raycast: RayCast2D = $RayCastCollision
 @onready var visual: RayCast2D = $RayCastVisual
 @onready var line: Line2D = $Line2D
@@ -9,15 +10,29 @@ var origin: Node2D
 
 var _currently_lit_object: Object = null
 
+var base_point_dist : float
+var base_light_scale : Vector2
+
+
 func _ready() -> void:
 	# Fixes visual bug (by making it invisible)
 	visible = false
 	await get_tree().create_timer(0.05).timeout
 	visible = true
+	
+	base_point_dist = line.get_point_position(0).distance_to(line.get_point_position(1))
+	base_light_scale = line.get_child(0).scale
+
 
 func set_laser_properties(p_color_enum: Global.LIGHT_COLOR, p_visual_color: Color) -> void:
 	laser_color_enum = p_color_enum
 	line.default_color = p_visual_color
+	if line.material is ShaderMaterial:
+		if not line.material.resource_local_to_scene:
+			line.material = line.material.duplicate()
+			line.material.resource_local_to_scene = true
+		line.material.set_shader_parameter("laser_color", p_visual_color)
+
 
 func _physics_process(_delta: float) -> void:
 	# Handle visual
@@ -27,6 +42,9 @@ func _physics_process(_delta: float) -> void:
 	else:
 		cast_point = visual.target_position
 	line.set_point_position(1, cast_point)
+	var new_scale := base_light_scale.y * (line.get_point_position(0).distance_to(cast_point) / base_point_dist)
+	line.get_child(0).scale.y = new_scale
+	line.get_child(0).position.y = new_scale / 2.0
 	
 	# Handle activating other objects
 	var collider: Object = null
@@ -63,11 +81,10 @@ func _physics_process(_delta: float) -> void:
 				collider.override = false
 				collider.laser = self
 	
-	
 	_currently_lit_object = collider
+
 
 func _exit_tree() -> void:
 	if is_instance_valid(_currently_lit_object) and _currently_lit_object.is_in_group("Prisma"):
 		_currently_lit_object.transferring = false
 		_currently_lit_object.change_lit_status(false)
-		

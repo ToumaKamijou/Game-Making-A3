@@ -12,6 +12,7 @@ var matched := false
 @onready var laser_origin: Node2D = $LaserOrigin
 @onready var mesh: MeshInstance2D = $Mesh2D
 @onready var light: PointLight2D = $PointLight2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -36,8 +37,21 @@ const COLOR_MAP = {
 	Global.LIGHT_COLOR.BLUE: Color(0.25490198, 0.4117647, 0.88235295, 0.8),
 	Global.LIGHT_COLOR.YELLOW: Color(1, 1, 0, 0.8),
 	Global.LIGHT_COLOR.PURPLE: Color(0.4, 0.2, 0.6, 0.8),
-	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863, 0.8)
+	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863, 0.8),
 }
+
+const TEXTURE_MAP = {
+	WHITE = preload("res://assets/2D/sprites/laser_blocks/LaserBlockWhite.png"),
+	RED = preload("res://assets/2D/sprites/laser_blocks/LaserBlockRed.png"),
+	GREEN = preload("res://assets/2D/sprites/laser_blocks/LaserBlockGreen.png"),
+	BLUE = preload("res://assets/2D/sprites/laser_blocks/LaserBlockBlue.png"),
+	YELLOW = preload("res://assets/2D/sprites/laser_blocks/LaserBlockYellow.png"),
+	PURPLE = preload("res://assets/2D/sprites/laser_blocks/LaserBlockPurple.png"),
+	CYAN = preload("res://assets/2D/sprites/laser_blocks/LaserBlockCyan.png"),
+	# No laser active
+	BLACK = preload("res://assets/2D/sprites/laser_blocks/LaserBlockOff.png")
+}
+
 
 func _ready():
 	if COLOR_MAP.has(_color_type):
@@ -83,6 +97,8 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 		else:
 			final_laser_color = COLOR_MAP.get(_color_type, Color.BLACK)
 			_laser_instance.set_laser_properties(_color_type, final_laser_color)
+		_update_block_texture(_laser_instance.laser_color_enum)
+
 
 var lit = false:
 	set(value):
@@ -105,6 +121,19 @@ var lit = false:
 
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
+
+
+func _update_block_texture(color: Global.LIGHT_COLOR) -> void:
+	match color:
+		Global.LIGHT_COLOR.WHITE: sprite.texture = TEXTURE_MAP.WHITE
+		Global.LIGHT_COLOR.RED: sprite.texture = TEXTURE_MAP.RED
+		Global.LIGHT_COLOR.GREEN: sprite.texture = TEXTURE_MAP.GREEN
+		Global.LIGHT_COLOR.BLUE: sprite.texture = TEXTURE_MAP.BLUE
+		Global.LIGHT_COLOR.YELLOW: sprite.texture = TEXTURE_MAP.YELLOW
+		Global.LIGHT_COLOR.PURPLE: sprite.texture = TEXTURE_MAP.PURPLE
+		Global.LIGHT_COLOR.CYAN: sprite.texture = TEXTURE_MAP.CYAN
+		_: sprite.texture = TEXTURE_MAP.BLACK
+
 
 func _physics_process(_delta: float) -> void:
 # Check whether received laser is currently being blocked. Overriden by the player shining a matching light.

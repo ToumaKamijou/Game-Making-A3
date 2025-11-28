@@ -1,9 +1,11 @@
 extends Path2D
 class_name MovingPlatform
 
+
 @export var path_follow_2D : PathFollow2D
 @onready var center: AnimatableBody2D = $AnimatableBody2D
 var old: Vector2 = Vector2(0,0)
+
 
 func _ready() -> void:
 	move_tween()
