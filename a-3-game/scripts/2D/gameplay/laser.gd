@@ -58,7 +58,7 @@ func _physics_process(_delta: float) -> void:
 				collider.transferring = true
 				collider.laser = self
 				
-		if collider.is_in_group("Flashable"):
+		if collider and collider.is_in_group("Flashable"):
 			if collider._color_type == laser_color_enum:
 				collider.override = false
 				collider.laser = self
