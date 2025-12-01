@@ -16,7 +16,6 @@ var _collided_areas: Array[Area2D] = []
 var _collided_zones: Array[Area2D] = []
 
 @onready var _checkpoint_manager: Node2D = get_parent().get_node("CheckpointManager")
-@onready var _player: CharacterBody2D = self
 @onready var _area_check: ShapeCast2D = $AreaCheck
 var safe := false
 
@@ -48,7 +47,7 @@ var unlocked_colors: Dictionary = {
 
 
 func respawn():
-	_player.position = _checkpoint_manager.last_location
+	global_position = _checkpoint_manager.last_location
 
 
 func _physics_process(delta: float) -> void:

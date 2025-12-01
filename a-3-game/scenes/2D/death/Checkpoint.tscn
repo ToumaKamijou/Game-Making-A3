@@ -1,18 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfxd2d47uaq1q"]
+[gd_scene load_steps=5 format=3 uid="uid://bfxd2d47uaq1q"]
 
 [ext_resource type="Script" uid="uid://nsml3ec71qjh" path="res://scenes/2D/death/Checkpoint.gd" id="1_6rm0u"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sg52y"]
-size = Vector2(170, 377)
+[sub_resource type="Gradient" id="Gradient_rbkcw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vq8ws"]
+gradient = SubResource("Gradient_rbkcw")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.90000004, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_rbkcw"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.092947364), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Checkpoint" type="Area2D"]
 script = ExtResource("1_6rm0u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_sg52y")
-
 [node name="RespawnPoint" type="Marker2D" parent="."]
-position = Vector2(0, -127)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_vq8ws")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 64
+lifetime = 0.3
+preprocess = 1.0
+speed_scale = 0.1
+randomness = 0.5
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(0, 1)
+gravity = Vector2(0, -980)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+hue_variation_curve = SubResource("Curve_rbkcw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

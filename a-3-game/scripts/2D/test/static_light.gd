@@ -63,7 +63,7 @@ func _physics_process(_delta: float) -> void:
 					color_match = true
 			
 			if collided.is_in_group("Prisma"):
-				if collided.is_in_group("Yellow") or collided.is_in_group("Purple") or collided.is_in_group("Cyan") and _light_color != 0:
+				if _light_color != 0 and collided.is_in_group("Yellow") or _light_color != 0 and collided.is_in_group("Purple") or _light_color != 0 and collided.is_in_group("Cyan"):
 					continue
 				else:
 					color_match = true
@@ -82,30 +82,30 @@ func _physics_process(_delta: float) -> void:
 	
 	# Check whether static light is colliding with another light. Change its color and except self if so.
 	# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
-	if _shapecast_area.is_colliding():
-		var collision_count = _shapecast_area.get_collision_count()
-		var current_collisions: Array[Area2D] = []
-		
-		for i in range(collision_count):
-			var collided = _shapecast_area.get_collider(i)
-			if collided == null:
-				continue
-			
-			if collided.is_in_group("ColorLight") and overriden == false:
-				overriden = true
-				collided.get_parent()._flash_color = _light_color
-				current_collisions.append(collided)
-				
-		# This seems to be extremely slow. It needs to resolve on the next frame for the lights to feel natural. Since this isn't my method I'm not gonna mess with it too much.
-		# Still no idea why this happens btw
-		for i in _collided_areas:
-			if not current_collisions.has(i):
-				i.get_parent()._flash_color = 0
-				if i.is_in_group("ColorLight"):
-					overriden = false
-		
-		_collided_areas = current_collisions.duplicate()
-		
+	#if _shapecast_area.is_colliding():
+		#var collision_count = _shapecast_area.get_collision_count()
+		#var current_collisions: Array[Area2D] = []
+		#
+		#for i in range(collision_count):
+			#var collided = _shapecast_area.get_collider(i)
+			#if collided == null:
+				#continue
+			#
+			#if collided.is_in_group("ColorLight") and overriden == false:
+				#overriden = true
+				#collided.get_parent()._flash_color = _light_color
+				#current_collisions.append(collided)
+				#
+		## This seems to be extremely slow. It needs to resolve on the next frame for the lights to feel natural. Since this isn't my method I'm not gonna mess with it too much.
+		## Still no idea why this happens btw
+		#for i in _collided_areas:
+			#if not current_collisions.has(i):
+				#i.get_parent()._flash_color = 0
+				#if i.is_in_group("ColorLight"):
+					#overriden = false
+		#
+		#_collided_areas = current_collisions.duplicate()
+	
 	# Calculate color mixing. Not yet adapted to allow two static lights to mix.
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
 	if _flash_color != 0:

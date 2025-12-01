@@ -8,6 +8,7 @@
 size = Vector2(24, 100)
 
 [node name="FlashableWall" type="StaticBody2D" groups=["Flashable"]]
+z_index = 1
 collision_layer = 3
 script = ExtResource("1_4p3kp")
 
