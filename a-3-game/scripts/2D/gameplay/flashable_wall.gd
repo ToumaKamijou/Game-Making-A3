@@ -66,7 +66,7 @@ func _physics_process(_delta: float) -> void:
 	if raycast.is_colliding():
 		collider = raycast.get_collider()
 	# Check whether laser is currently being blocked. This is *not* calling the change_lit_status function because it should not be changing groups.
-	if is_in_group("Disappeared") and collider and collider != laser_block.get_parent():
+	if is_in_group("Disappeared") and collider and collider is not TileMapLayer:
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 1.0, 0.3)
 		await get_tree().create_timer(0.15).timeout

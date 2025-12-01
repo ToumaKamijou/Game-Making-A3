@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cxwyepp3mbvej"]
 
 [ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
-[ext_resource type="Texture2D" uid="uid://83d1iu8g1huu" path="res://assets/2D/sprites/test_player_sprite.png" id="1_1ail0"]
+[ext_resource type="Texture2D" uid="uid://dq7vn5ld3p5iu" path="res://assets/2D/sprites/player_sprite_a3-export.png" id="2_b2fbk"]
 [ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="3_qy10c"]
 [ext_resource type="Script" uid="uid://devgg4vw2owx5" path="res://scripts/UI/snapped_camera.gd" id="4_b2fbk"]
 
@@ -35,7 +35,7 @@ script = ExtResource("1_0nwcy")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture_filter = 1
-texture = ExtResource("1_1ail0")
+texture = ExtResource("2_b2fbk")
 
 [node name="Flashlight" type="PointLight2D" parent="Sprite2D"]
 texture_filter = 1

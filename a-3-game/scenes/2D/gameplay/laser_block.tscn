@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://bshtrwutu635t"]
 
 [ext_resource type="Script" uid="uid://c00fmu5gm0cgi" path="res://scripts/2D/gameplay/laser_block.gd" id="1_w0qqi"]
-[ext_resource type="Texture2D" uid="uid://bnuvescriai02" path="res://assets/2D/sprites/arrow.png" id="2_ygl27"]
+[ext_resource type="Texture2D" uid="uid://dx3lixihfr60t" path="res://assets/2D/sprites/laser_white.png" id="2_i5qfx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kwod3"]
-size = Vector2(50, 50)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_dunwg"]
+points = PackedVector2Array(-29, -26, -22, 16, 0, 43, 22, 17, 29, -24, 0, -42)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5qfx"]
 transparency = 1
@@ -41,21 +41,23 @@ linear_damp = 5.0
 script = ExtResource("1_w0qqi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_kwod3")
+shape = SubResource("ConvexPolygonShape2D_dunwg")
 
 [node name="Mesh2D" type="MeshInstance2D" parent="."]
+visible = false
 mesh = SubResource("QuadMesh_ygl27")
 
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_ygl27")
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("2_i5qfx")
 
 [node name="LaserOrigin" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 2.0
+scale = Vector2(0.46875, 0.46875)
 texture = SubResource("GradientTexture2D_dunwg")
 
 [node name="Guideline" type="MeshInstance2D" parent="."]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnuvescriai02"
-path="res://.godot/imported/arrow.png-4cadff020c73048d6fe5f788b777e912.ctex"
+uid="uid://dq7vn5ld3p5iu"
+path="res://.godot/imported/player_sprite_a3-export.png-042edaa3a2c33f6f30b15dcdb6194c72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D/sprites/arrow.png"
-dest_files=["res://.godot/imported/arrow.png-4cadff020c73048d6fe5f788b777e912.ctex"]
+source_file="res://assets/2D/sprites/player_sprite_a3-export.png"
+dest_files=["res://.godot/imported/player_sprite_a3-export.png-042edaa3a2c33f6f30b15dcdb6194c72.ctex"]
 
 [params]
 
