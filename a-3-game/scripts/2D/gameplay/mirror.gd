@@ -89,10 +89,3 @@ func _physics_process(_delta: float) -> void:
 	# Default state.
 	else:
 		change_lit_status(false)
-
-# Just here for testing purposes.
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("rotate_test"):
-		rotation += deg_to_rad(90)
-		change_lit_status(false)
-		change_lit_status(true)

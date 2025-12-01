@@ -122,15 +122,14 @@ func _physics_process(delta: float) -> void:
 			if collided == null:
 				continue
 			
-			if collided.is_in_group("ColorLight"):
+			if collided.is_in_group("ColorLight"): # and collided.get_owner().overriden == false:
 				collided.get_owner()._flash_color = flash_color
 				current_collisions.append(collided)
 				
-		# This seems to be extremely slow. It needs to resolve on the next frame for the lights to feel natural. Since this isn't my method I'm not gonna mess with it too much.
-		# Still no idea why this happens btw
-		for i in _collided_areas:
-			if not current_collisions.has(i):
-				i.get_parent()._flash_color = 0
+		# Should be obsolete now.
+		#for i in _collided_areas:
+			#if not current_collisions.has(i):
+				#i.get_owner()._flash_color = 0
 		
 		_collided_areas = current_collisions.duplicate()
 		

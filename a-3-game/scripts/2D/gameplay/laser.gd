@@ -47,21 +47,23 @@ func _physics_process(_delta: float) -> void:
 			raycast.add_exception(collider)
 			raycast.force_raycast_update()
 			collider = raycast.get_collider()
-
-		if collider and collider.is_in_group("Prisma"):
-			if collider.is_in_group("Yellow") and laser_color_enum != 0 or collider.is_in_group("Purple") and laser_color_enum != 0 or collider.is_in_group("Cyan") and laser_color_enum != 0:
-				pass
-			else:
-				# Activate the new object and communicate necessary information.
-				collider.set_incoming_light_color(laser_color_enum)
-				collider.override = false
-				collider.transferring = true
-				collider.laser = self
-				
-		if collider and collider.is_in_group("Flashable"):
-			if collider._color_type == laser_color_enum:
-				collider.override = false
-				collider.laser = self
+		
+		# Necessary to check again here because of the forced raycast update above.
+		if collider:
+			if collider.is_in_group("Prisma"):
+				if collider.is_in_group("Yellow") and laser_color_enum != 0 or collider.is_in_group("Purple") and laser_color_enum != 0 or collider.is_in_group("Cyan") and laser_color_enum != 0:
+					pass
+				else:
+					# Activate the new object and communicate necessary information.
+					collider.set_incoming_light_color(laser_color_enum)
+					collider.override = false
+					collider.transferring = true
+					collider.laser = self
+					
+			if collider.is_in_group("Flashable"):
+				if collider._color_type == laser_color_enum:
+					collider.override = false
+					collider.laser = self
 	
 	_currently_lit_object = collider
 

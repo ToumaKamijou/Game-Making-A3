@@ -8,13 +8,13 @@ top_radius = 2.5
 bottom_radius = 2.5
 height = 2.5
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1m7g"]
+radius = 55.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2lioa"]
 radius = 55.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ixjep"]
-radius = 55.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_a1m7g"]
 radius = 55.0
 
 [node name="StaticLight" type="Node2D"]
@@ -30,23 +30,23 @@ rotation = 3.1415927
 scale = Vector2(0.375, 0.488)
 texture = ExtResource("2_a1m7g")
 
-[node name="ShapeCastBodies" type="ShapeCast2D" parent="PointLight2D"]
-position = Vector2(0, 4.5)
-shape = SubResource("CircleShape2D_2lioa")
-target_position = Vector2(0, 0)
-collision_mask = 3
-
-[node name="ShapeCastAreas" type="ShapeCast2D" parent="PointLight2D"]
-position = Vector2(0, 4.5)
-shape = SubResource("CircleShape2D_ixjep")
-target_position = Vector2(0, 5)
-collision_mask = 3
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="Area2D" type="Area2D" parent="PointLight2D" groups=["ColorLight"]]
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
 position = Vector2(-8.738824e-07, 6.9230766)
 shape = SubResource("CircleShape2D_a1m7g")
+
+[node name="ShapeCastBodies" type="ShapeCast2D" parent="PointLight2D/Area2D"]
+position = Vector2(0, 4.5)
+shape = SubResource("CircleShape2D_2lioa")
+target_position = Vector2(0, 0)
+collision_mask = 3
+
+[node name="ShapeCastAreas" type="ShapeCast2D" parent="PointLight2D/Area2D"]
+position = Vector2(0, 4.5)
+shape = SubResource("CircleShape2D_ixjep")
+target_position = Vector2(0, 5)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false

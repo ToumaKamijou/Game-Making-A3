@@ -4,8 +4,8 @@ extends Node2D
 var _flash_color: int = 0
 
 @onready var light: PointLight2D = $PointLight2D
-@onready var _shapecast_body: ShapeCast2D = $PointLight2D/ShapeCastBodies
-@onready var _shapecast_area: ShapeCast2D = $PointLight2D/ShapeCastAreas
+@onready var _shapecast_body: ShapeCast2D = $PointLight2D/Area2D/ShapeCastBodies
+@onready var _shapecast_area: ShapeCast2D = $PointLight2D/Area2D/ShapeCastAreas
 
 # This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
 @export_range(0, 6, 1) var _base_value: int
@@ -28,9 +28,6 @@ var _flash_color: int = 0
 		scale = Vector2(value, value)
 
 var _collided_objects: Array[Object] = [] # Holds all the objects seen by the light
-var _collided_areas: Array[Area2D] = []
-
-var overriden = false
 
 
 func _physics_process(_delta: float) -> void:
@@ -81,31 +78,18 @@ func _physics_process(_delta: float) -> void:
 		
 		_collided_objects = current_collisions.duplicate()
 	
-	# Check whether static light is colliding with another light. Change its color and except self if so.
-	# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
-	#if _shapecast_area.is_colliding():
-		#var collision_count = _shapecast_area.get_collision_count()
-		#var current_collisions: Array[Area2D] = []
-		#
-		#for i in range(collision_count):
-			#var collided = _shapecast_area.get_collider(i)
-			#if collided == null:
-				#continue
-			#
-			#if collided.is_in_group("ColorLight") and overriden == false:
-				#overriden = true
-				#collided.get_parent()._flash_color = _light_color
-				#current_collisions.append(collided)
-				#
-		## This seems to be extremely slow. It needs to resolve on the next frame for the lights to feel natural. Since this isn't my method I'm not gonna mess with it too much.
-		## Still no idea why this happens btw
-		#for i in _collided_areas:
-			#if not current_collisions.has(i):
-				#i.get_parent()._flash_color = 0
-				#if i.is_in_group("ColorLight"):
-					#overriden = false
-		#
-		#_collided_areas = current_collisions.duplicate()
+	# Check whether static light is colliding with another light. Change color if so.
+	if _shapecast_area.is_colliding():
+		var collision_count = _shapecast_area.get_collision_count()
+		var current_collisions: Array[Area2D] = []
+		
+		for i in range(collision_count):
+			var collided = _shapecast_area.get_collider(i)
+			
+			if collided and collided.is_in_group("ColorLight"):
+				collided.get_owner()._flash_color = _light_color
+				_flash_color = collided.get_owner()._light_color
+				current_collisions.append(collided)
 	
 	# Calculate color mixing. Not yet adapted to allow two static lights to mix.
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
@@ -113,59 +97,62 @@ func _physics_process(_delta: float) -> void:
 		if _base_value == 0 or 4 or 5 or 6:
 			if _flash_color == 1:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.RED, .5)
+				tween.tween_property(light, "color", Color.RED, .5)
 				_light_color = Global.LIGHT_COLOR.RED
 			if _flash_color == 2:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.LIME_GREEN, .5)
+				tween.tween_property(light, "color", Color.LIME_GREEN, .5)
 				_light_color = Global.LIGHT_COLOR.GREEN
 			if _flash_color == 3:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
+				tween.tween_property(light, "color", Color.ROYAL_BLUE, .5)
 				_light_color = Global.LIGHT_COLOR.BLUE
 		if _base_value == 1:
 			if _flash_color == 1:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.RED, .5)
+				tween.tween_property(light, "color", Color.RED, .5)
 				_light_color = Global.LIGHT_COLOR.RED
 			if _flash_color == 2:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.YELLOW, .5)
+				tween.tween_property(light, "color", Color.YELLOW, .5)
 				_light_color = Global.LIGHT_COLOR.YELLOW
 			if _flash_color == 3:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.PURPLE, .5)
+				tween.tween_property(light, "color", Color.PURPLE, .5)
 				_light_color = Global.LIGHT_COLOR.PURPLE
 		elif _base_value == 2:
 			if _flash_color == 1:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.YELLOW, .5)
+				tween.tween_property(light, "color", Color.YELLOW, .5)
 				_light_color = Global.LIGHT_COLOR.YELLOW
 			if _flash_color == 2:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.LIME_GREEN, .5)
+				tween.tween_property(light, "color", Color.LIME_GREEN, .5)
 				_light_color = Global.LIGHT_COLOR.GREEN
 			if _flash_color == 3:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.CYAN, .5)
+				tween.tween_property(light, "color", Color.CYAN, .5)
 				_light_color = Global.LIGHT_COLOR.CYAN
 		elif _base_value == 3:
 			if _flash_color == 1:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.PURPLE, .5)
+				tween.tween_property(light, "color", Color.PURPLE, .5)
 				_light_color = Global.LIGHT_COLOR.PURPLE
 			if _flash_color == 2:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.CYAN, .5)
+				tween.tween_property(light, "color", Color.CYAN, .5)
 				_light_color = Global.LIGHT_COLOR.CYAN
 			if _flash_color == 3:
 				var tween = create_tween()
-				tween.tween_property(self, "color", Color.ROYAL_BLUE, .5)
+				tween.tween_property(light, "color", Color.ROYAL_BLUE, .5)
 				_light_color = Global.LIGHT_COLOR.BLUE
 	else:
 		# This tween needs to call the base value as a color. It seems silly to create an entirely new dictionary here just for that, so someone else can figure out a better method.
 		#var tween = create_tween()
-		#tween.tween_property(self, "color", _base_value as Global.LIGHT_COLOR, 1)
+		#tween.tween_property(light, "color", _base_value as Global.LIGHT_COLOR, 1)
 		@warning_ignore_start("int_as_enum_without_cast")
 		_light_color = _base_value
 		@warning_ignore_restore("int_as_enum_without_cast")
+	
+	# Forces the value to update every frame.
+	_flash_color = 0
