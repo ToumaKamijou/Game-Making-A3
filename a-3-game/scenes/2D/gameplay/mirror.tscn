@@ -38,7 +38,7 @@ roughness = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_4we4y"]
 material = SubResource("StandardMaterial3D_a28n0")
-size = Vector2(100, 1)
+size = Vector2(300, 1)
 
 [node name="Mirror" type="RigidBody2D"]
 disable_mode = 2
@@ -70,5 +70,5 @@ energy = 2.0
 texture = SubResource("GradientTexture2D_ibukl")
 
 [node name="Guideline" type="MeshInstance2D" parent="."]
-position = Vector2(-50.15974, 0)
+position = Vector2(-150, 0)
 mesh = SubResource("QuadMesh_4we4y")

@@ -19,6 +19,8 @@ metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dunwg"]
 gradient = SubResource("Gradient_i5qfx")
+width = 32
+height = 32
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.90000004, 0.2)
@@ -30,7 +32,7 @@ roughness = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_i5qfx"]
 material = SubResource("StandardMaterial3D_ibukl")
-size = Vector2(100, 1)
+size = Vector2(300, 1)
 
 [node name="LightSquare" type="RigidBody2D" groups=["Pushable"]]
 disable_mode = 2
@@ -59,6 +61,6 @@ energy = 2.0
 texture = SubResource("GradientTexture2D_dunwg")
 
 [node name="Guideline" type="MeshInstance2D" parent="."]
-position = Vector2(0, 54.313095)
+position = Vector2(0, 150)
 rotation = 1.5707964
 mesh = SubResource("QuadMesh_i5qfx")

@@ -22,6 +22,7 @@ var safe := false
 var score: int = 0
 @onready var _score_text: RichTextLabel = $"../../../Display/ScoreContainer/Score"
 
+var checkpoint: Area2D
 
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):

@@ -21,7 +21,9 @@ _data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.092947364), 0.0, 0.0, 0, 
 point_count = 2
 
 [node name="Checkpoint" type="Area2D"]
+collision_layer = 4
 script = ExtResource("1_6rm0u")
+metadata/_edit_group_ = true
 
 [node name="RespawnPoint" type="Marker2D" parent="."]
 
