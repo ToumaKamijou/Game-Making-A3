@@ -64,6 +64,12 @@ func _physics_process(delta: float) -> void:
 	# Rotate sprite.
 	_sprite.rotation = lerp_angle(_sprite.rotation, get_global_mouse_position().angle_to_point(position) + PI / 2, delta * 10)
 	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collided = collision.get_collider()
+		if collided.is_in_group("Pushable"):
+			collided.apply_force(velocity)
+	
 	move_and_slide()
 	
 	# Check whether flashlight color matches objects within it. Communicate necessary information if so.

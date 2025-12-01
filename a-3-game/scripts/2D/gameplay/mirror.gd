@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends RigidBody2D
 
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
@@ -33,6 +33,8 @@ func _ready():
 		add_to_group("Prisma")
 	if not is_in_group("Mirror"):
 		add_to_group("Mirror")
+	if not is_in_group("Pushable"):
+		add_to_group("Pushable")
 	
 	$Guideline.visible = false
 

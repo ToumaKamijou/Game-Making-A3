@@ -30,6 +30,18 @@ window/stretch/mode="viewport"
 [global_group]
 
 Snap=""
+Pushable=""
+Moving=""
+Blue=""
+Cyan=""
+Green=""
+Purple=""
+Red=""
+Yellow=""
+Hazard=""
+Flashable=""
+ColorLight=""
+Mover=""
 
 [input]
 
