@@ -13,6 +13,18 @@ var player_lit := false
 var override := false
 var matched := false
 
+@onready var mesh: MeshInstance2D = $MeshInstance2D
+
+const COLOR_MAP = {
+	# Colors are at .8 transparency purely for visual elegance. This is also where the lasers derive their colors from.
+	Global.LIGHT_COLOR.WHITE: Color(1, 1, 1),
+	Global.LIGHT_COLOR.RED: Color(1, 0, 0),
+	Global.LIGHT_COLOR.GREEN: Color(0.19607843, 0.8039216, 0.19607843),
+	Global.LIGHT_COLOR.BLUE: Color(0.25490198, 0.4117647, 0.88235295),
+	Global.LIGHT_COLOR.YELLOW: Color(1, 1, 0),
+	Global.LIGHT_COLOR.PURPLE: Color(0.4, 0.2, 0.6),
+	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863)
+}
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -45,6 +57,8 @@ var lit = false:
 
 
 func _ready() -> void:
+	if COLOR_MAP.has(_color_type):
+		mesh.modulate = COLOR_MAP[_color_type]
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
 
@@ -65,8 +79,8 @@ func _physics_process(_delta: float) -> void:
 	# Check whether laser color has changed. This is necessary to do here due to the disappearing behaviour.
 	elif collider and collider.is_in_group("Prisma") and collider._laser_instance and collider._laser_instance.laser_color_enum != laser_color:
 		change_lit_status(false)
-	# Check if received laser still exists.
-	elif is_instance_valid(laser):
+	# Check if received laser still exists and matches colors.
+	elif is_instance_valid(laser):# and laser.laser_color_enum == laser_color:
 		change_lit_status(true)
 	# Check if player is interacting and a static light is not overriding this.
 	elif player_lit == true and override == false:
@@ -77,6 +91,10 @@ func _physics_process(_delta: float) -> void:
 	# Default state.
 	else:
 		change_lit_status(false)
+	
+	# Update stored laser color for checking color match.
+	#if laser:
+		#laser_color = laser.laser_color_enum
 
 
 func change_lit_status(new_status: bool) -> void:

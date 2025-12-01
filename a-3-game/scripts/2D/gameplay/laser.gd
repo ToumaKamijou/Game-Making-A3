@@ -49,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 			collider = raycast.get_collider()
 
 		if collider and collider.is_in_group("Prisma"):
-			if collider.is_in_group("Yellow") or collider.is_in_group("Purple") or collider.is_in_group("Cyan") and laser_color_enum != 0:
+			if collider.is_in_group("Yellow") and laser_color_enum != 0 or collider.is_in_group("Purple") and laser_color_enum != 0 or collider.is_in_group("Cyan") and laser_color_enum != 0:
 				pass
 			else:
 				# Activate the new object and communicate necessary information.
@@ -58,11 +58,10 @@ func _physics_process(_delta: float) -> void:
 				collider.transferring = true
 				collider.laser = self
 				
-		if collider.is_in_group("Flashable"):
+		if collider and collider.is_in_group("Flashable"):
 			if collider._color_type == laser_color_enum:
 				collider.override = false
 				collider.laser = self
-	
 	
 	_currently_lit_object = collider
 
