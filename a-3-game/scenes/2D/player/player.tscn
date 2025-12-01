@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/UI/snapped_camera.gd" id="4_b2fbk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy10c"]
-radius = 60.0
+radius = 55.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b2fbk"]
 radius = 55.0
@@ -40,9 +40,9 @@ texture = ExtResource("2_b2fbk")
 
 [node name="Flashlight" type="PointLight2D" parent="Sprite2D"]
 texture_filter = 1
-position = Vector2(0.6155081, 93.5961)
+position = Vector2(0, 90)
 rotation = 3.1415927
-scale = Vector2(1.0016404, 1.2857141)
+scale = Vector2(1, 1.283)
 texture = ExtResource("3_qy10c")
 
 [node name="ShapeCastBodies" type="ShapeCast2D" parent="Sprite2D/Flashlight"]

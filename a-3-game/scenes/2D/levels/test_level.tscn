@@ -535,7 +535,6 @@ tile_set = SubResource("TileSet_o7h0g")
 [node name="Fog" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
 position = Vector2(-1, 0)
 script = ExtResource("3_l8slq")
-_color = Color(0.11119687, 0.11119684, 0.11119688, 1)
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ho7r7")]
 position = Vector2(361, 91)
@@ -577,6 +576,7 @@ _color_type = 6
 
 [node name="StaticLight" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
 position = Vector2(210.00012, 1007.99994)
+rotation = -2.998476
 scale = Vector2(5, 5)
 _base_value = 1
 _light_color = 1

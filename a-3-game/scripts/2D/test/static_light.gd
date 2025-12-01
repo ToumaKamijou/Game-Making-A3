@@ -1,10 +1,11 @@
 @tool
-extends PointLight2D
+extends Node2D
 
 var _flash_color: int = 0
 
-@onready var _shapecast_body: ShapeCast2D = $ShapeCastBodies
-@onready var _shapecast_area: ShapeCast2D = $ShapeCastAreas
+@onready var light: PointLight2D = $PointLight2D
+@onready var _shapecast_body: ShapeCast2D = $PointLight2D/ShapeCastBodies
+@onready var _shapecast_area: ShapeCast2D = $PointLight2D/ShapeCastAreas
 
 # This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
 @export_range(0, 6, 1) var _base_value: int
@@ -13,7 +14,7 @@ var _flash_color: int = 0
 	set(value):
 		_light_color = value
 		if not Engine.is_editor_hint():
-			color = Global.change_flash_color(_light_color)
+			$PointLight2D.color = Global.change_flash_color(_light_color)
 			var previous_group := get_groups()
 			for i in previous_group:
 				remove_from_group(i)

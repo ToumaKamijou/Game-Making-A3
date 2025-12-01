@@ -123,7 +123,7 @@ func _physics_process(delta: float) -> void:
 				continue
 			
 			if collided.is_in_group("ColorLight"):
-				collided.get_parent()._flash_color = flash_color
+				collided.get_owner()._flash_color = flash_color
 				current_collisions.append(collided)
 				
 		# This seems to be extremely slow. It needs to resolve on the next frame for the lights to feel natural. Since this isn't my method I'm not gonna mess with it too much.
