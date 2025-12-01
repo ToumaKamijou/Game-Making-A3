@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwaybla8sbbyb"
+path="res://.godot/imported/A3 bg music 1.mp3-b5891b590b5b48484786f2b4943fbf2b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/A3 bg music 1.mp3"
+dest_files=["res://.godot/imported/A3 bg music 1.mp3-b5891b590b5b48484786f2b4943fbf2b.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

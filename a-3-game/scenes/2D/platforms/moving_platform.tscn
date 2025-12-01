@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlt1kbk32vxm2"]
 
 [ext_resource type="Script" uid="uid://dvv4u3ckxbosg" path="res://scenes/2D/platforms/moving_platform.gd" id="1_kvs2h"]
-[ext_resource type="Texture2D" uid="uid://eug213ewvx34" path="res://assets/2D/sprites/tilemaps/Platform.png" id="1_ncti2"]
+[ext_resource type="Texture2D" uid="uid://lc5ownnc4jcw" path="res://assets/2D/sprites/tilemaps/moving_platform.png" id="1_ncti2"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvs2h"]
 resource_local_to_scene = true
@@ -28,6 +28,7 @@ remote_path = NodePath("../../AnimatableBody2D")
 rotation = -1.5707964
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+scale = Vector2(2, 2)
 texture = ExtResource("1_ncti2")
 
 [node name="MovingPlatformArea" type="Area2D" parent="AnimatableBody2D" groups=["Mover"]]
