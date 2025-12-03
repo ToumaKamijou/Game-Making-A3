@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://depk3jtuyivvh"]
+[gd_scene load_steps=7 format=3 uid="uid://depk3jtuyivvh"]
 
 [ext_resource type="Script" uid="uid://dx8tnk84rqcg8" path="res://scripts/2D/gameplay/laser.gd" id="1_2twl1"]
 
@@ -14,6 +14,15 @@ metadata/_snap_enabled = true
 gradient = SubResource("Gradient_2twl1")
 fill_from = Vector2(1, 1)
 
+[sub_resource type="Gradient" id="Gradient_laser"]
+offsets = PackedFloat32Array(0.29333332, 0.5, 0.70666665)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_laser"]
+gradient = SubResource("Gradient_laser")
+width = 128
+height = 512
+
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_2twl1")
 
@@ -22,7 +31,6 @@ z_index = 10
 material = SubResource("CanvasItemMaterial_2twl1")
 points = PackedVector2Array(0, -1, 0, 42)
 width = 15.0
-default_color = Color(0.8534464, 0.0005975914, 0.85694593, 1)
 texture = SubResource("GradientTexture2D_wqsnv")
 texture_mode = 2
 
@@ -32,3 +40,9 @@ target_position = Vector2(0, 5000)
 [node name="RayCastCollision" type="RayCast2D" parent="."]
 target_position = Vector2(0, 5000)
 collision_mask = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.345, 0.345)
+energy = 0.69
+texture = SubResource("GradientTexture2D_laser")
+offset = Vector2(0, 256)

@@ -3,6 +3,7 @@ extends Node2D
 @onready var raycast: RayCast2D = $RayCastCollision
 @onready var visual: RayCast2D = $RayCastVisual
 @onready var line: Line2D = $Line2D
+@onready var light: PointLight2D = $PointLight2D
 
 var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 var origin: Node2D
@@ -18,6 +19,7 @@ func _ready() -> void:
 func set_laser_properties(p_color_enum: Global.LIGHT_COLOR, p_visual_color: Color) -> void:
 	laser_color_enum = p_color_enum
 	line.default_color = p_visual_color
+	light.color = Color.WHITE
 
 func _physics_process(_delta: float) -> void:
 	# Handle visual
@@ -27,6 +29,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		cast_point = visual.target_position
 	line.set_point_position(1, cast_point)
+	light.scale.y = cast_point.length() / 512.0
 	
 	# Handle activating other objects
 	var collider: Object = null
