@@ -20,7 +20,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_laser"]
 gradient = SubResource("Gradient_laser")
-width = 128
+width = 256
 height = 512
 
 [node name="Laser" type="Node2D"]
