@@ -35,6 +35,8 @@ func _ready():
 		add_to_group("Mirror")
 	if not is_in_group("Pushable"):
 		add_to_group("Pushable")
+	if not is_in_group("Rotatable"):
+		add_to_group("Rotatable")
 	
 	$Guideline.visible = false
 
