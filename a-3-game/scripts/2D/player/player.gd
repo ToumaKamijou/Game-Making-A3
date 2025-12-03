@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-
+@onready var _object_check: ShapeCast2D = $ObjectCheck
 @onready var _shapecast_body: ShapeCast2D = $Sprite2D/Flashlight/ShapeCastBodies
 @onready var _shapecast_area: ShapeCast2D = $Sprite2D/Flashlight/ShapeCastAreas
 
@@ -139,7 +139,7 @@ func _physics_process(delta: float) -> void:
 			if collided == null:
 				continue
 			
-			if collided.is_in_group("ColorLight"): # and collided.get_owner().overriden == false:
+			if collided.is_in_group("ColorLight"):
 				collided.get_owner()._flash_color = flash_color
 				current_collisions.append(collided)
 				
@@ -175,22 +175,21 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# Why is this an elif?
 	if event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
 	
-	if event.is_action_pressed("show_flashlight"): # Using F key as interact
+	if event.is_action_pressed("interact"): # Using F key as interact
 		if held_object:
 			held_object = null
 		else:
 			# Try to grab an object
-			if _shapecast_body.is_colliding():
-				var count = _shapecast_body.get_collision_count()
+			if _object_check.is_colliding():
+				var count = _object_check.get_collision_count()
 				var closest_obj: RigidBody2D = null
 				var closest_dist: float = INF
 				
 				for i in range(count):
-					var collider = _shapecast_body.get_collider(i)
+					var collider = _object_check.get_collider(i)
 					if collider is RigidBody2D and collider.is_in_group("Pushable"):
 						var dist = global_position.distance_to(collider.global_position)
 						if dist < closest_dist:
