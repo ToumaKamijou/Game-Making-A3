@@ -20,15 +20,19 @@ extends Node2D
 @export_range(-300, 300, 0.5, "or_less", "or_greater") var _button_position_y: float
 
 @export_range(0, 360, 45) var _button_rotation: int
+
+@export var _button_enabled := true
 @warning_ignore_restore("unused_private_class_variable")
 
 
 func _ready() -> void:
 	_light._base_value = _base_value
-
+	if not _button_enabled:
+		_button.queue_free()
 
 # These go here so that the tool script actually works. No reason not to put them in the ready function on final export, though I doubt performance will really matter anyway.
 func _physics_process(_delta: float) -> void:
-	_button.position = Vector2(_button_position_x, _button_position_y)
-	_button.rotation = deg_to_rad(_button_rotation)
+	if _button:
+		_button.position = Vector2(_button_position_x, _button_position_y)
+		_button.rotation = deg_to_rad(_button_rotation)
 	_light.scale = Vector2(_size, _size)
