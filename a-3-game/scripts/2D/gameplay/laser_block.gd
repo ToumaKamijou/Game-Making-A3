@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
 var blocked := false
@@ -9,9 +10,12 @@ var player_lit := false
 var override := false
 var matched := false
 
+var base_color_type : Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
+
 @onready var laser_origin: Node2D = $LaserOrigin
 @onready var mesh: MeshInstance2D = $Mesh2D
 @onready var light: PointLight2D = $PointLight2D
+@onready var sprite: Sprite2D = $Node2D/Sprite2D
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -39,7 +43,19 @@ const COLOR_MAP = {
 	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863, 0.8)
 }
 
+const TEXTURE_MAP = {
+	WHITE = preload("res://assets/2D/sprites/laser_white.png"),
+	RED = preload("res://assets/2D/sprites/laser_red.png"),
+	GREEN = preload("res://assets/2D/sprites/laser_green.png"),
+	BLUE = preload("res://assets/2D/sprites/laser_blue.png"),
+	YELLOW = preload("res://assets/2D/sprites/laser_yellow.png"),
+	PURPLE = preload("res://assets/2D/sprites/laser_purple.png"),
+	CYAN = preload("res://assets/2D/sprites/laser_cyan.png"),
+}
+
+
 func _ready():
+	base_color_type = _color_type
 	if COLOR_MAP.has(_color_type):
 		mesh.modulate = COLOR_MAP[_color_type]
 		# Change color of the light. Doesn't work as it should.
@@ -54,7 +70,7 @@ func _ready():
 
 func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 	_incoming_light_color = color
-
+	
 	# Update laser color (this function is called every frame).
 	if is_instance_valid(_laser_instance):
 		var final_laser_color: Color
@@ -85,6 +101,8 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 		else:
 			final_laser_color = COLOR_MAP.get(_color_type, Color.BLACK)
 			_laser_instance.set_laser_properties(_color_type, final_laser_color)
+		_update_block_texture(_laser_instance.laser_color_enum)
+
 
 var lit = false:
 	set(value):
@@ -105,8 +123,23 @@ var lit = false:
 				_laser_instance = null
 
 
+func _update_block_texture(color: Global.LIGHT_COLOR) -> void:
+	if base_color_type == Global.LIGHT_COLOR.WHITE:
+		return
+	match color:
+		Global.LIGHT_COLOR.WHITE: sprite.texture = TEXTURE_MAP.WHITE
+		Global.LIGHT_COLOR.RED: sprite.texture = TEXTURE_MAP.RED
+		Global.LIGHT_COLOR.GREEN: sprite.texture = TEXTURE_MAP.GREEN
+		Global.LIGHT_COLOR.BLUE: sprite.texture = TEXTURE_MAP.BLUE
+		Global.LIGHT_COLOR.YELLOW: sprite.texture = TEXTURE_MAP.YELLOW
+		Global.LIGHT_COLOR.PURPLE: sprite.texture = TEXTURE_MAP.PURPLE
+		Global.LIGHT_COLOR.CYAN: sprite.texture = TEXTURE_MAP.CYAN
+		_: sprite.texture = TEXTURE_MAP.BLACK
+
+
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
+
 
 func _physics_process(_delta: float) -> void:
 # Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
@@ -124,4 +157,3 @@ func _physics_process(_delta: float) -> void:
 	# Default state.
 	else:
 		change_lit_status(false)
-	
