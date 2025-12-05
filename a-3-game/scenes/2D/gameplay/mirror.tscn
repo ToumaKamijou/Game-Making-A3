@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b7tbu28c0oin8"]
 
-[ext_resource type="Script" path="res://scripts/2D/gameplay/mirror.gd" id="1_ibukl"]
+[ext_resource type="Script" uid="uid://db1xgethq65cs" path="res://scripts/2D/gameplay/mirror.gd" id="1_ibukl"]
 [ext_resource type="Texture2D" uid="uid://db0y577pfhm17" path="res://assets/2D/sprites/mirror.png" id="2_ibukl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ibukl"]
@@ -68,6 +68,8 @@ mesh = SubResource("QuadMesh_a28n0")
 position = Vector2(2, 0)
 scale = Vector2(0.99999994, 1.8749999)
 enabled = false
+range_z_min = 0
+range_z_max = 1
 texture = SubResource("GradientTexture2D_ibukl")
 
 [node name="Guideline" type="MeshInstance2D" parent="."]

@@ -74,6 +74,8 @@ script = ExtResource("4_b2fbk")
 [node name="Player Light" type="PointLight2D" parent="."]
 texture_filter = 1
 energy = 0.5
+range_z_min = 0
+range_z_max = 1
 texture = SubResource("GradientTexture2D_qy10c")
 
 [node name="AreaCheck" type="ShapeCast2D" parent="."]

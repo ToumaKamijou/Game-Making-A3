@@ -61,6 +61,8 @@ texture = ExtResource("2_i5qfx")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.46875, 0.46875)
 enabled = false
+range_z_min = 0
+range_z_max = 1
 texture = SubResource("GradientTexture2D_dunwg")
 
 [node name="Guideline" type="MeshInstance2D" parent="."]

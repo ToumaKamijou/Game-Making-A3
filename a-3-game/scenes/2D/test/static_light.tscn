@@ -43,6 +43,8 @@ texture_filter = 1
 position = Vector2(0, 32)
 rotation = -3.1415925
 scale = Vector2(0.375, 0.488)
+range_z_min = 0
+range_z_max = 1
 texture = ExtResource("2_a1m7g")
 
 [node name="Area2D" type="Area2D" parent="StaticLight/PointLight2D" groups=["ColorLight"]]
