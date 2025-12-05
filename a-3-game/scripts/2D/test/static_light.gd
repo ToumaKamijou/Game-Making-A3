@@ -1,5 +1,4 @@
-@tool
-extends Node2D
+extends StaticBody2D
 
 var _flash_color: int = 0
 
@@ -7,10 +6,12 @@ var _flash_color: int = 0
 @onready var _shapecast_body: ShapeCast2D = $PointLight2D/Area2D/ShapeCastBodies
 @onready var _shapecast_area: ShapeCast2D = $PointLight2D/Area2D/ShapeCastAreas
 
-# This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
-@export_range(0, 6, 1) var _base_value: int
+@onready var parent: Node2D = get_parent()
 
-@export var _light_color: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
+# This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
+var _base_value: int
+
+var _light_color: Global.LIGHT_COLOR:
 	set(value):
 		_light_color = value
 		if not Engine.is_editor_hint():
@@ -22,7 +23,7 @@ var _flash_color: int = 0
 			if new_group != "":
 				add_to_group(new_group)
 
-@export_range(1.0, 5.0, 0.1) var _size: float = 1.0:
+var _size: float:
 	set(value):
 		_size = value
 		scale = Vector2(value, value)
@@ -31,10 +32,11 @@ var _collided_objects: Array[Object] = [] # Holds all the objects seen by the li
 
 
 func _physics_process(_delta: float) -> void:
+	var current_collisions_objects: Array[Object]
 	# Check whether light color matches object. Communicate necessary information if so.
 	if _shapecast_body.is_colliding():
 		var collision_count = _shapecast_body.get_collision_count()
-		var current_collisions: Array[Object] = []
+		current_collisions_objects = []
 		
 		for i in range(collision_count):
 			var collided = _shapecast_body.get_collider(i)
@@ -69,19 +71,20 @@ func _physics_process(_delta: float) -> void:
 			
 			if color_match:
 				collided.matched = true
-				current_collisions.append(collided)
+				current_collisions_objects.append(collided)
+	
+	for i in _collided_objects:
+		if not current_collisions_objects.has(i):
+			i.override = false
+			i.matched = false
 		
-		for i in _collided_objects:
-			if not current_collisions.has(i):
-				i.override = false
-				i.matched = false
-		
-		_collided_objects = current_collisions.duplicate()
+	_collided_objects = current_collisions_objects.duplicate()
 	
 	# Check whether static light is colliding with another light. Change color if so.
+	var current_collisions_areas: Array[Area2D]
 	if _shapecast_area.is_colliding():
 		var collision_count = _shapecast_area.get_collision_count()
-		var current_collisions: Array[Area2D] = []
+		current_collisions_areas = []
 		
 		for i in range(collision_count):
 			var collided = _shapecast_area.get_collider(i)
@@ -89,7 +92,7 @@ func _physics_process(_delta: float) -> void:
 			if collided and collided.is_in_group("ColorLight"):
 				collided.get_owner()._flash_color = _light_color
 				_flash_color = collided.get_owner()._light_color
-				current_collisions.append(collided)
+				current_collisions_areas.append(collided)
 	
 	# Calculate color mixing. Not yet adapted to allow two static lights to mix.
 	# There's probably a math solution for this, as well as a more elegant loop. This works too.
@@ -150,9 +153,14 @@ func _physics_process(_delta: float) -> void:
 		# This tween needs to call the base value as a color. It seems silly to create an entirely new dictionary here just for that, so someone else can figure out a better method.
 		#var tween = create_tween()
 		#tween.tween_property(light, "color", _base_value as Global.LIGHT_COLOR, 1)
-		@warning_ignore_start("int_as_enum_without_cast")
+		@warning_ignore("int_as_enum_without_cast")
 		_light_color = _base_value
-		@warning_ignore_restore("int_as_enum_without_cast")
 	
 	# Forces the value to update every frame.
 	_flash_color = 0
+	
+	# Clamp rotation
+	if rotation < 0:
+		rotation += 360
+	elif rotation > 360:
+		rotation -= 360

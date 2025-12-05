@@ -65,9 +65,9 @@ mesh = SubResource("QuadMesh_a28n0")
 [node name="LaserOrigin" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(2, 0)
 scale = Vector2(0.99999994, 1.8749999)
+enabled = false
 texture = SubResource("GradientTexture2D_ibukl")
 
 [node name="Guideline" type="MeshInstance2D" parent="."]

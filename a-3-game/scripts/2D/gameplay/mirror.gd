@@ -50,7 +50,7 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 var lit = false:
 	set(value):
 		if value:
-			light.visible = true
+			light.enabled = true
 			# Create laser.
 			if not is_instance_valid(_laser_instance):
 				_laser_instance = LASER_SCENE.instantiate()
@@ -60,7 +60,7 @@ var lit = false:
 				_laser_instance.global_rotation = laser_origin.global_rotation + deg_to_rad(90)
 				_laser_instance.origin = laser_origin
 		else:
-			light.visible = false
+			light.enabled = false
 			if is_instance_valid(_laser_instance):
 				_laser_instance.queue_free()
 				_laser_instance = null
