@@ -10,8 +10,6 @@ extends Node2D
 # This here is a very blunt, probably temporary solution to a problem I couldn't manage to solve. For some reason the code breaks whenever I try to call the other input's value
 @export_range(0, 6, 1) var _base_value: int
 
-@export var _light_color: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
-
 @export_range(1.0, 10.0, 0.1) var _size: float = 5.0
 
 @export_range(0, 360, 45) var _rotation_value: int = 90
@@ -25,7 +23,6 @@ extends Node2D
 
 func _ready() -> void:
 	_light._base_value = _base_value
-	_light._light_color = _light_color
 
 # These go here so that the tool script actually works. No reason not to put them in the ready function on final export, though I doubt performance will really matter anyway.
 func _physics_process(_delta: float) -> void:

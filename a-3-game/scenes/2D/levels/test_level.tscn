@@ -501,7 +501,7 @@ position = Vector2(-1, 0)
 script = ExtResource("3_l8slq")
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ho7r7")]
-position = Vector2(825, 139)
+position = Vector2(1559, 275)
 _walk_speed = 200.0
 
 [node name="ColorTesting" type="Node2D" parent="SubViewportContainer/SubViewport"]
@@ -540,6 +540,7 @@ _color_type = 6
 
 [node name="StaticLight2" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
 position = Vector2(1743, 281)
+_base_value = 1
 
 [node name="StaticLight" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("6_dxe1e")]
 position = Vector2(210.00012, 1007.99994)
