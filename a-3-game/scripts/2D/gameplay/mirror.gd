@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+
 const LASER_SCENE = preload("res://scenes/2D/gameplay/laser.tscn")
 
 # Most of these values are useless for the mirrors. However, leaving them declared as false prevents errors with the lasers (we would otherwise need to create separate logic for them).
@@ -28,25 +29,6 @@ const COLOR_MAP = {
 	Global.LIGHT_COLOR.CYAN: Color(0.2509804, 0.8784314, 0.8156863, 0.8)
 }
 
-func _ready():
-	if not is_in_group("Prisma"):
-		add_to_group("Prisma")
-	if not is_in_group("Mirror"):
-		add_to_group("Mirror")
-	if not is_in_group("Pushable"):
-		add_to_group("Pushable")
-	
-	$Guideline.visible = false
-
-func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
-	_incoming_light_color = color
-
-	# Update laser color if it already exists (this function is *not* called every frame while the object is active, not sure what the difference is).
-	if is_instance_valid(_laser_instance):
-		var final_laser_color: Color
-		final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
-		_laser_instance.set_laser_properties(_incoming_light_color, final_laser_color)
-
 var lit = false:
 	set(value):
 		if value:
@@ -66,8 +48,30 @@ var lit = false:
 				_laser_instance = null
 
 
+func _ready():
+	if not is_in_group("Prisma"):
+		add_to_group("Prisma")
+	if not is_in_group("Mirror"):
+		add_to_group("Mirror")
+	if not is_in_group("Pushable"):
+		add_to_group("Pushable")
+	
+	$Guideline.visible = false
+
+
+func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
+	_incoming_light_color = color
+
+	# Update laser color if it already exists (this function is *not* called every frame while the object is active, not sure what the difference is).
+	if is_instance_valid(_laser_instance):
+		var final_laser_color: Color
+		final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
+		_laser_instance.set_laser_properties(_incoming_light_color, final_laser_color)
+
+
 func change_lit_status(new_status: bool) -> void:
 	lit = new_status
+
 
 func _physics_process(_delta: float) -> void:
 	#rotation += _delta
@@ -79,8 +83,8 @@ func _physics_process(_delta: float) -> void:
 			angle += 360
 		elif angle > 360:
 			angle -= 360
-
-# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
+	
+	# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if blocked == true:
 		change_lit_status(false)
 	# Check whether it is currently transferring a laser.

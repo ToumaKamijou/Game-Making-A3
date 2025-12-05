@@ -1,6 +1,7 @@
 @tool
 extends Node2D
 
+
 @onready var _light = $StaticLight
 @onready var _button = $Button
 
@@ -21,8 +22,10 @@ extends Node2D
 @export_range(0, 360, 45) var _button_rotation: int
 @warning_ignore_restore("unused_private_class_variable")
 
+
 func _ready() -> void:
 	_light._base_value = _base_value
+
 
 # These go here so that the tool script actually works. No reason not to put them in the ready function on final export, though I doubt performance will really matter anyway.
 func _physics_process(_delta: float) -> void:

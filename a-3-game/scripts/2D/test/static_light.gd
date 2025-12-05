@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+
 var _flash_color: int = 0
 
 @onready var light: PointLight2D = $PointLight2D

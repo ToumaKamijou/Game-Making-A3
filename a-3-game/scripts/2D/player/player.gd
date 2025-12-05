@@ -36,7 +36,6 @@ var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 		flash_color = new_value as Global.LIGHT_COLOR
 		_flashlight.color = Global.change_flash_color(flash_color)
 
-
 var unlocked_colors: Dictionary = {
 	Global.LIGHT_COLOR.RED: true,
 	Global.LIGHT_COLOR.GREEN: true,
@@ -113,8 +112,8 @@ func _physics_process(delta: float) -> void:
 	
 	_collided_objects = current_collisions_bodies.duplicate()
 	
-# Check whether flashlight is colliding with another light. Change its color if so.
-# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
+	# Check whether flashlight is colliding with another light. Change its color if so.
+	# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
 	var current_collisions_areas: Array[Area2D]
 	if _shapecast_area.is_colliding():
 		var collision_count = _shapecast_area.get_collision_count()
@@ -170,6 +169,7 @@ func _input(event: InputEvent) -> void:
 	# Why is this an elif?
 	elif event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
+
 
 # Tracks collectibles. That this is a score on a text label right now is purely placeholder; easily adaptable to track by different methods such as lighting up an object or some such.
 func add_score(score_amount):

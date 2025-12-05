@@ -1,6 +1,7 @@
 @tool
 extends StaticBody2D
 
+
 @onready var raycast = $RayCast2D
 var laser_block: Node2D
 var collider: Node2D
@@ -61,6 +62,7 @@ func _ready() -> void:
 		mesh.modulate = COLOR_MAP[_color_type]
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
+
 
 func _physics_process(_delta: float) -> void:
 	if raycast.is_colliding():

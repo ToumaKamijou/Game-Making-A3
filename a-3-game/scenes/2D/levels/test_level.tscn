@@ -868,3 +868,4 @@ visible_characters_behavior = 1
 
 [node name="Background Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_c5ced")
+autoplay = true
