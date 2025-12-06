@@ -515,7 +515,6 @@ rotate_90_degrees = true
 [node name="Fog" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
 position = Vector2(-1, 0)
 script = ExtResource("3_l8slq")
-_color = Color(0.24115604, 0.24115604, 0.24115601, 1)
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ho7r7")]
 position = Vector2(396, 69)

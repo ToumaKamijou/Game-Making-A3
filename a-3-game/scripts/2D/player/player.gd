@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			velocity = projected_movement * _walk_speed
 			held_object.linear_velocity = velocity
 		else:
-			velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
+			velocity = Vector2.ZERO
 			held_object.linear_velocity = velocity
 		
 		# Handle rotation of held object
