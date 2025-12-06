@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxwyepp3mbvej"]
+[gd_scene load_steps=12 format=3 uid="uid://cxwyepp3mbvej"]
 
 [ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
 [ext_resource type="Texture2D" uid="uid://dq7vn5ld3p5iu" path="res://assets/2D/sprites/player_sprite_a3-export.png" id="2_b2fbk"]
@@ -26,6 +26,9 @@ fill_to = Vector2(0.90000004, 0.1)
 metadata/_snap_enabled = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03o3s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_suo7p"]
+radius = 20.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 32
@@ -83,3 +86,8 @@ shape = SubResource("CircleShape2D_03o3s")
 target_position = Vector2(0, 0)
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="ObjectCheck" type="ShapeCast2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_suo7p")
+target_position = Vector2(0, 0)

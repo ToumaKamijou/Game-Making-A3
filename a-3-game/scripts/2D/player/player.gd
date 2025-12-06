@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-
+@onready var _object_check: ShapeCast2D = $ObjectCheck
 @onready var _shapecast_body: ShapeCast2D = $Sprite2D/Flashlight/ShapeCastBodies
 @onready var _shapecast_area: ShapeCast2D = $Sprite2D/Flashlight/ShapeCastAreas
 
@@ -47,8 +47,13 @@ var unlocked_colors: Dictionary = {
 }
 
 
+var held_object: RigidBody2D = null
+var push_axis: Vector2 = Vector2.ZERO
+
 func respawn():
 	global_position = _checkpoint_manager.last_location
+	if held_object:
+		held_object = null
 
 
 func _physics_process(delta: float) -> void:
@@ -56,7 +61,24 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var movement_dir := input_dir.normalized()
 	
-	if movement_dir:
+	if held_object:
+		# Constrain movement to the push axis
+		var projected_movement = movement_dir.project(push_axis)
+		if projected_movement:
+			velocity = projected_movement * _walk_speed
+			held_object.linear_velocity = velocity
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
+			held_object.linear_velocity = velocity
+		
+		# Handle rotation
+		if held_object.is_in_group("Rotatable"):
+			if Input.is_action_just_pressed("rotate_left"):
+				held_object.rotation += deg_to_rad(-45)
+			elif Input.is_action_just_pressed("rotate_right"):
+				held_object.rotation += deg_to_rad(45)
+				
+	elif movement_dir:
 		velocity = movement_dir * _walk_speed
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
@@ -64,11 +86,7 @@ func _physics_process(delta: float) -> void:
 	# Rotate sprite.
 	_sprite.rotation = lerp_angle(_sprite.rotation, get_global_mouse_position().angle_to_point(position) + PI / 2, delta * 10)
 	
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collided = collision.get_collider()
-		if collided.is_in_group("Pushable"):
-			collided.apply_force(velocity)
+	# Removed collision pushing loop
 	
 	move_and_slide()
 	
@@ -125,8 +143,13 @@ func _physics_process(delta: float) -> void:
 				continue
 			
 			if collided.is_in_group("ColorLight"):
-				collided.get_parent().get_parent()._flash_color = flash_color
-				current_collisions_areas.append(collided)
+				collided.get_owner()._flash_color = flash_color
+				current_collisions.append(collided)
+				
+		# Should be obsolete now.
+		#for i in _collided_areas:
+			#if not current_collisions.has(i):
+				#i.get_owner()._flash_color = 0
 		
 	_collided_areas = current_collisions_areas.duplicate()
 		
@@ -166,9 +189,35 @@ func _input(event: InputEvent) -> void:
 		if light_control:
 			light_control._light.rotate(deg_to_rad(light_control._rotation_value))
 	
-	# Why is this an elif?
-	elif event.is_action_pressed("change_flash_color"):
+	if event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
+	
+	if event.is_action_pressed("interact"): # Using F key as interact
+		if held_object:
+			held_object = null
+		else:
+			# Try to grab an object
+			if _object_check.is_colliding():
+				var count = _object_check.get_collision_count()
+				var closest_obj: RigidBody2D = null
+				var closest_dist: float = INF
+				
+				for i in range(count):
+					var collider = _object_check.get_collider(i)
+					if collider is RigidBody2D and collider.is_in_group("Pushable"):
+						var dist = global_position.distance_to(collider.global_position)
+						if dist < closest_dist:
+							closest_dist = dist
+							closest_obj = collider
+				
+				if closest_obj:
+					held_object = closest_obj
+					# Determine axis
+					var diff = closest_obj.global_position - global_position
+					if abs(diff.x) > abs(diff.y):
+						push_axis = Vector2(1, 0)
+					else:
+						push_axis = Vector2(0, 1)
 
 
 # Tracks collectibles. That this is a score on a text label right now is purely placeholder; easily adaptable to track by different methods such as lighting up an object or some such.
