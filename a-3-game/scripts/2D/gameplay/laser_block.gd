@@ -9,13 +9,21 @@ var laser: Node2D
 var player_lit := false
 var override := false
 var matched := false
+var just_lit := false
 
 var base_color_type : Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
-@onready var laser_origin: Node2D = $LaserOrigin
+var laser_origin: Node2D
+
+@onready var raycast: RayCast2D = $RayCast2D
+@onready var _laser_origin: Node2D = $LaserOrigin
 @onready var mesh: MeshInstance2D = $Mesh2D
 @onready var light: PointLight2D = $PointLight2D
 @onready var sprite: Sprite2D = $Node2D/Sprite2D
+
+@onready var particles: CPUParticles2D = $CPUParticles2D
+
+@export_enum("Vertical Movement:1", "Horizontal Movement:2") var movement_axis = 1
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -58,14 +66,10 @@ func _ready():
 	base_color_type = _color_type
 	if COLOR_MAP.has(_color_type):
 		mesh.modulate = COLOR_MAP[_color_type]
-		# Change color of the light. Doesn't work as it should.
-		#light.texture.gradient.set_color(0, mesh.modulate)
 	if not is_in_group("Prisma"):
 		add_to_group("Prisma")
 	if not is_in_group("Pushable"):
 		add_to_group("Pushable")
-	if not is_in_group("Rotatable"):
-		add_to_group("Rotatable")
 	
 	$Guideline.visible = false
 
@@ -110,15 +114,18 @@ var lit = false:
 	set(value):
 		if value:
 			light.enabled = true
+			if laser_origin and just_lit == true:
+					raycast.target_position = laser_origin.global_position - global_position
 			# Create laser.
 			if not is_instance_valid(_laser_instance):
 				_laser_instance = LASER_SCENE.instantiate()
 				add_child(_laser_instance)
 
-				_laser_instance.global_position = laser_origin.global_position
-				_laser_instance.global_rotation = laser_origin.global_rotation
+				_laser_instance.global_position = _laser_origin.global_position
+				_laser_instance.global_rotation = _laser_origin.global_rotation
 		else:
 			light.enabled = false
+			just_lit = false
 			if is_instance_valid(_laser_instance):
 				_laser_instance.queue_free()
 				_laser_instance = null
@@ -143,11 +150,13 @@ func change_lit_status(new_status: bool) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
+	# Raycast target position is rotation-dependent. This fixes that.
+	raycast.rotation = -rotation
+# 	Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if player_lit == false and blocked == true:
 		change_lit_status(false)
-	# Check whether it is currently transferring a laser.
-	elif transferring == true and is_instance_valid(laser):
+	# Check whether it is currently transferring a lasera nd it has not moved.
+	elif transferring == true and is_instance_valid(laser) and raycast.is_colliding() and raycast.get_collider() == laser_origin:
 		change_lit_status(true)
 	# Check whether player is interacting and a static light is not overriding this.
 	elif player_lit == true and override == false:

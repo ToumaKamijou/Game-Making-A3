@@ -48,3 +48,4 @@ scale_amount_max = 2.0
 hue_variation_curve = SubResource("Curve_rbkcw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

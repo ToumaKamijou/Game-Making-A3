@@ -52,6 +52,7 @@ mesh = SubResource("QuadMesh_ygl27")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+z_index = 1
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("2_i5qfx")
@@ -69,3 +70,22 @@ texture = SubResource("GradientTexture2D_dunwg")
 position = Vector2(0, 150)
 rotation = 1.5707964
 mesh = SubResource("QuadMesh_i5qfx")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.3
+preprocess = 1.0
+speed_scale = 0.1
+randomness = 0.5
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(0, 1)
+gravity = Vector2(0, -980)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0

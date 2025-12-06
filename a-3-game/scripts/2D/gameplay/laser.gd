@@ -36,10 +36,11 @@ func _physics_process(_delta: float) -> void:
 	
 	# Handle activating other objects
 	var collider: Object = null
-	if raycast.is_colliding(): #and !raycast.get_collider().laser: ## This commented out snippet makes the lasers no longer update every frame (which is bad but here for my own sanity).
+	if raycast.is_colliding():
 		collider = raycast.get_collider()
-	# Check if laser is currently being blocked and communicate this if so.
+		# Check if laser is currently being blocked and communicate this if so.
 		if collider.has_method("change_lit_status"):
+			collider.laser_origin = get_parent()
 			if visual.is_colliding() and collider != visual.get_collider():
 				if raycast.get_collision_point() != visual.get_collision_point():
 					collider.blocked = true
@@ -49,7 +50,6 @@ func _physics_process(_delta: float) -> void:
 		# Communicate necessary information to flashable walls to handle blocking/color switching.
 		if collider.is_in_group("Flashable"):
 			collider.laser_color = laser_color_enum
-			collider.laser_origin = get_parent()
 			# Check whether target object is gone and skip it if so.
 			if collider.is_in_group("Disappeared"):
 				raycast.add_exception(collider)
@@ -63,6 +63,7 @@ func _physics_process(_delta: float) -> void:
 					pass
 				else:
 					# Activate the new object and communicate necessary information.
+					collider.change_lit_status(true)
 					collider.set_incoming_light_color(laser_color_enum)
 					collider.override = false
 					collider.transferring = true
@@ -70,6 +71,7 @@ func _physics_process(_delta: float) -> void:
 					
 			if collider.is_in_group("Flashable"):
 				if collider._color_type == laser_color_enum:
+					collider.change_lit_status(true)
 					collider.override = false
 					collider.laser = self
 	

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbp1386a3bu16"]
+
+[ext_resource type="Texture2D" uid="uid://bgi2caci3fe2t" path="res://assets/2D/sprites/skid lines.png" id="1_uhy21"]
+[ext_resource type="Script" uid="uid://c1el5rviv8pvr" path="res://scenes/2D/levels/skid_lines.gd" id="2_3wxej"]
+
+[node name="SkidLines" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_uhy21")
+script = ExtResource("2_3wxej")

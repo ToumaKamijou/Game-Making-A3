@@ -14,6 +14,7 @@ var laser_color: int
 var player_lit := false
 var override := false
 var matched := false
+var just_lit := false
 
 @onready var mesh: MeshInstance2D = $MeshInstance2D
 
@@ -46,9 +47,11 @@ var lit = false:
 				tween.tween_property(self, "modulate:a", 0.0, 0.3)
 				set_collision_layer_value(1, false)
 				add_to_group("Disappeared")
-				if laser_origin:
+				if laser_origin and just_lit == false:
 					raycast.target_position = laser_origin.global_position - global_position
+					just_lit = true
 			else:
+				just_lit = false
 				var tween = create_tween()
 				tween.tween_property(self, "modulate:a", 1.0, 0.3)
 				# Waiting creates issues with the lasers. --> It looks like it most likely doesn't anymore, but I did not test this extensively.
@@ -65,12 +68,13 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# Laser target position is rotation-dependent. This fixes that.
+	# Raycast target position is rotation-dependent. This fixes that.
 	raycast.rotation = -rotation
 	if raycast.is_colliding():
 		collider = raycast.get_collider()
 	# Check whether laser is currently being blocked. This is *not* calling the change_lit_status function because it should not be changing groups.
 	if laser_origin and is_in_group("Disappeared") and collider and collider != laser_origin and collider is not TileMapLayer:
+		just_lit = false
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 1.0, 0.3)
 		await get_tree().create_timer(0.15).timeout

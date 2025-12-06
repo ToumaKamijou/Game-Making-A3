@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
 [ext_resource type="Texture2D" uid="uid://dq7vn5ld3p5iu" path="res://assets/2D/sprites/player_sprite_a3-export.png" id="2_b2fbk"]
 [ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="3_qy10c"]
-[ext_resource type="Script" uid="uid://devgg4vw2owx5" path="res://scripts/UI/snapped_camera.gd" id="4_b2fbk"]
+[ext_resource type="Script" path="res://scripts/UI/snapped_camera.gd" id="4_b2fbk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy10c"]
 radius = 55.0
@@ -11,8 +11,8 @@ radius = 55.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_b2fbk"]
 radius = 55.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5mbw8"]
-radius = 12.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_suo7p"]
+radius = 20.0
 
 [sub_resource type="Gradient" id="Gradient_0nwcy"]
 offsets = PackedFloat32Array(0.39333335, 0.72333336)
@@ -27,8 +27,8 @@ metadata/_snap_enabled = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_03o3s"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_suo7p"]
-radius = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_5mbw8"]
+radius = 12.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 32
@@ -64,8 +64,10 @@ collision_mask = 3
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_5mbw8")
+[node name="ObjectCheck" type="ShapeCast2D" parent="Sprite2D"]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_suo7p")
+target_position = Vector2(0, 0)
 
 [node name="Player Camera" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
@@ -87,7 +89,5 @@ target_position = Vector2(0, 0)
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="ObjectCheck" type="ShapeCast2D" parent="."]
-position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_suo7p")
-target_position = Vector2(0, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5mbw8")

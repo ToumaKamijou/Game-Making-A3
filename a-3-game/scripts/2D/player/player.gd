@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var _object_check: ShapeCast2D = $ObjectCheck
+@onready var _object_check: ShapeCast2D = $Sprite2D/ObjectCheck
 @onready var _shapecast_body: ShapeCast2D = $Sprite2D/Flashlight/ShapeCastBodies
 @onready var _shapecast_area: ShapeCast2D = $Sprite2D/Flashlight/ShapeCastAreas
 
@@ -51,7 +51,7 @@ var held_object: RigidBody2D = null
 var push_axis: Vector2 = Vector2.ZERO
 
 func respawn():
-	global_position = _checkpoint_manager.last_location
+	global_position = _checkpoint_manager.last_location.global_position
 	if held_object:
 		held_object = null
 
@@ -71,12 +71,14 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, _deceleration * delta)
 			held_object.linear_velocity = velocity
 		
-		# Handle rotation
+		# Handle rotation of held object
 		if held_object.is_in_group("Rotatable"):
 			if Input.is_action_just_pressed("rotate_left"):
 				held_object.rotation += deg_to_rad(-45)
+				held_object.change_lit_status(false)
 			elif Input.is_action_just_pressed("rotate_right"):
 				held_object.rotation += deg_to_rad(45)
+				held_object.change_lit_status(false)
 				
 	elif movement_dir:
 		velocity = movement_dir * _walk_speed
@@ -85,8 +87,6 @@ func _physics_process(delta: float) -> void:
 	
 	# Rotate sprite.
 	_sprite.rotation = lerp_angle(_sprite.rotation, get_global_mouse_position().angle_to_point(position) + PI / 2, delta * 10)
-	
-	# Removed collision pushing loop
 	
 	move_and_slide()
 	
@@ -144,12 +144,8 @@ func _physics_process(delta: float) -> void:
 			
 			if collided.is_in_group("ColorLight"):
 				collided.get_owner()._flash_color = flash_color
-				current_collisions.append(collided)
+				current_collisions_areas.append(collided)
 				
-		# Should be obsolete now.
-		#for i in _collided_areas:
-			#if not current_collisions.has(i):
-				#i.get_owner()._flash_color = 0
 		
 	_collided_areas = current_collisions_areas.duplicate()
 		
@@ -184,19 +180,21 @@ func _physics_process(delta: float) -> void:
 	_collided_zones = current_collisions_zones.duplicate()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("show_flashlight"):
-		if light_control:
-			light_control._light.rotate(deg_to_rad(light_control._rotation_value))
-	
+func _input(event: InputEvent) -> void:	
 	if event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
 	
 	if event.is_action_pressed("interact"): # Using F key as interact
+		# Rotate static lights via button
+		if light_control:
+			light_control._light.rotate(deg_to_rad(light_control._rotation_value))
+		
+		# Release held object if it exists
 		if held_object:
+			held_object.particles.emitting = false
 			held_object = null
 		else:
-			# Try to grab an object
+			# Grab closest object
 			if _object_check.is_colliding():
 				var count = _object_check.get_collision_count()
 				var closest_obj: RigidBody2D = null
@@ -212,12 +210,12 @@ func _input(event: InputEvent) -> void:
 				
 				if closest_obj:
 					held_object = closest_obj
-					# Determine axis
-					var diff = closest_obj.global_position - global_position
-					if abs(diff.x) > abs(diff.y):
-						push_axis = Vector2(1, 0)
-					else:
+					held_object.particles.emitting = true
+					# Determine movement axis
+					if held_object.movement_axis == 1:
 						push_axis = Vector2(0, 1)
+					else:
+						push_axis = Vector2(1, 0)
 
 
 # Tracks collectibles. That this is a score on a text label right now is purely placeholder; easily adaptable to track by different methods such as lighting up an object or some such.
