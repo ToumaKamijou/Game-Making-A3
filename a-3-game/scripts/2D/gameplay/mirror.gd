@@ -40,7 +40,6 @@ var lit = false:
 
 				_laser_instance.global_position = laser_origin.global_position
 				_laser_instance.global_rotation = laser_origin.global_rotation + deg_to_rad(90)
-				_laser_instance.origin = laser_origin
 		else:
 			light.enabled = false
 			if is_instance_valid(_laser_instance):

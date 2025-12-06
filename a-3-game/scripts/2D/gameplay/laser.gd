@@ -7,7 +7,6 @@ extends Node2D
 @onready var light_line: Line2D = $Line2D/LightLine2D
 
 var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
-var origin: Node2D
 
 var _currently_lit_object: Object = null
 
@@ -46,14 +45,16 @@ func _physics_process(_delta: float) -> void:
 					collider.blocked = true
 			else:
 				collider.blocked = false
-			
-		# Check whether target object is gone and skip it if so. Communicate necessary values for object to take over blocking/color handling.
-		if collider.is_in_group("Disappeared"):
-			collider.laser_block = origin
+		
+		# Communicate necessary information to flashable walls to handle blocking/color switching.
+		if collider.is_in_group("Flashable"):
 			collider.laser_color = laser_color_enum
-			raycast.add_exception(collider)
-			raycast.force_raycast_update()
-			collider = raycast.get_collider()
+			collider.laser_origin = get_parent()
+			# Check whether target object is gone and skip it if so.
+			if collider.is_in_group("Disappeared"):
+				raycast.add_exception(collider)
+				raycast.force_raycast_update()
+				collider = raycast.get_collider()
 		
 		# Necessary to check again here because of the forced raycast update above.
 		if collider:

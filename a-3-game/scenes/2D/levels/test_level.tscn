@@ -495,7 +495,7 @@ position = Vector2(-1, 0)
 script = ExtResource("3_l8slq")
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ho7r7")]
-position = Vector2(1559, 275)
+position = Vector2(396, 74)
 _walk_speed = 200.0
 
 [node name="ColorTesting" type="Node2D" parent="SubViewportContainer/SubViewport"]
@@ -567,7 +567,6 @@ z_index = 0
 position = Vector2(401, 832)
 rotation = 1.5707964
 scale = Vector2(1, 0.88)
-_color_type = 4
 
 [node name="purple2" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("2_1wh7b")]
 z_index = 0
@@ -592,7 +591,6 @@ _color_type = 5
 z_index = 0
 position = Vector2(1201, 454.00006)
 rotation = -1.5550884
-_color_type = 4
 
 [node name="cyan2" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("2_1wh7b")]
 z_index = 0
@@ -635,7 +633,7 @@ _color_type = 5
 position = Vector2(144, 384)
 rotation = -1.5707964
 scale = Vector2(1, 0.84000003)
-_color_type = 4
+_color_type = 2
 
 [node name="Laserblocks" type="Node2D" parent="SubViewportContainer/SubViewport"]
 
@@ -659,7 +657,7 @@ rotation = 4.712389
 _color_type = 6
 
 [node name="LightSquare6" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
-position = Vector2(389, 460)
+position = Vector2(372.99997, 453)
 _color_type = 1
 
 [node name="LightSquare7" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
@@ -723,7 +721,7 @@ position = Vector2(400.99997, 593)
 rotation = 4.708881
 
 [node name="Mirror8" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("8_hxop3")]
-position = Vector2(128, 935)
+position = Vector2(69, 933)
 rotation = 1.5707964
 
 [node name="Mirror9" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("8_hxop3")]
@@ -752,7 +750,7 @@ _color_type = 6
 
 [node name="LightSquare5" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("9_bf67w")]
 position = Vector2(274, 70)
-_color_type = 1
+_color_type = 2
 
 [node name="Mirror2" parent="SubViewportContainer/SubViewport/Laserblocks" instance=ExtResource("8_hxop3")]
 position = Vector2(128, 72.00003)
