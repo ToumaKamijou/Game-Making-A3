@@ -1,12 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvarbtspidjhf"]
+[gd_scene load_steps=12 format=3 uid="uid://dvarbtspidjhf"]
 
 [ext_resource type="Script" uid="uid://c3w3trvcrpnf" path="res://scripts/2D/test/static_light.gd" id="1_ftl5n"]
+[ext_resource type="Script" uid="uid://cwb7axfjl4w5s" path="res://scenes/2D/test/static_light_control.gd" id="1_ixjep"]
 [ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="2_a1m7g"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_a1m7g"]
-top_radius = 2.5
-bottom_radius = 2.5
-height = 2.5
+[ext_resource type="Texture2D" uid="uid://ctyxutqsguy68" path="res://assets/2D/sprites/button.png" id="4_ixjep"]
+[ext_resource type="Texture2D" uid="uid://uptpuxxes8qd" path="res://assets/2D/sprites/lamp.png" id="4_xeyjh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a1m7g"]
 radius = 55.0
@@ -17,36 +15,76 @@ radius = 55.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ixjep"]
 radius = 55.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2lioa"]
+size = Vector2(17, 12)
+
+[sub_resource type="Gradient" id="Gradient_rbkcw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2lioa"]
+gradient = SubResource("Gradient_rbkcw")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.90000004, 0.2)
+metadata/_snap_enabled = true
+
 [node name="StaticLight" type="Node2D"]
+script = ExtResource("1_ixjep")
+
+[node name="StaticLight" type="StaticBody2D" parent="."]
+scale = Vector2(5, 5)
 script = ExtResource("1_ftl5n")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-mesh = SubResource("CylinderMesh_a1m7g")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="StaticLight"]
 texture_filter = 1
 position = Vector2(0, 32)
-rotation = 3.1415927
+rotation = -3.1415925
 scale = Vector2(0.375, 0.488)
+range_z_min = 0
+range_z_max = 1
 texture = ExtResource("2_a1m7g")
 
-[node name="Area2D" type="Area2D" parent="PointLight2D" groups=["ColorLight"]]
+[node name="Area2D" type="Area2D" parent="StaticLight/PointLight2D" groups=["ColorLight"]]
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticLight/PointLight2D/Area2D"]
 position = Vector2(-8.738824e-07, 6.9230766)
 shape = SubResource("CircleShape2D_a1m7g")
 
-[node name="ShapeCastBodies" type="ShapeCast2D" parent="PointLight2D/Area2D"]
+[node name="ShapeCastBodies" type="ShapeCast2D" parent="StaticLight/PointLight2D/Area2D"]
 position = Vector2(0, 4.5)
 shape = SubResource("CircleShape2D_2lioa")
 target_position = Vector2(0, 0)
 collision_mask = 3
 
-[node name="ShapeCastAreas" type="ShapeCast2D" parent="PointLight2D/Area2D"]
+[node name="ShapeCastAreas" type="ShapeCast2D" parent="StaticLight/PointLight2D/Area2D"]
 position = Vector2(0, 4.5)
 shape = SubResource("CircleShape2D_ixjep")
 target_position = Vector2(0, 5)
 collision_mask = 3
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticLight"]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_xeyjh")
+
+[node name="Button" type="Area2D" parent="." groups=["Button"]]
+scale = Vector2(2, 2)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Button"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_2lioa")
+
+[node name="PointLight2D" type="PointLight2D" parent="Button"]
+enabled = false
+texture = SubResource("GradientTexture2D_2lioa")
+
+[node name="Sprite2D" type="Sprite2D" parent="Button"]
+texture_filter = 1
+texture = ExtResource("4_ixjep")

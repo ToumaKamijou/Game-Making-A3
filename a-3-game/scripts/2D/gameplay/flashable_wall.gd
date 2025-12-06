@@ -1,12 +1,14 @@
-@tool
 extends StaticBody2D
 
+
 @onready var raycast = $RayCast2D
-var laser_block: Node2D
+var laser_origin: Node2D
 var collider: Node2D
 
-var laser: Node2D = null
+# Obsolete, but prevents invalid assignments.
 var blocked := false
+
+var laser: Node2D = null
 var laser_color: int
 
 var player_lit := false
@@ -44,9 +46,8 @@ var lit = false:
 				tween.tween_property(self, "modulate:a", 0.0, 0.3)
 				set_collision_layer_value(1, false)
 				add_to_group("Disappeared")
-				# Cast raycast back at laser origin to check for blockages
-				if laser_block:
-					raycast.target_position = laser_block.global_position - global_position
+				if laser_origin:
+					raycast.target_position = laser_origin.global_position - global_position
 			else:
 				var tween = create_tween()
 				tween.tween_property(self, "modulate:a", 1.0, 0.3)
@@ -62,25 +63,24 @@ func _ready() -> void:
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
 
+
 func _physics_process(_delta: float) -> void:
+	# Laser target position is rotation-dependent. This fixes that.
+	raycast.rotation = -rotation
 	if raycast.is_colliding():
 		collider = raycast.get_collider()
 	# Check whether laser is currently being blocked. This is *not* calling the change_lit_status function because it should not be changing groups.
-	if laser_block and is_in_group("Disappeared") and collider and collider != laser_block.get_parent() and collider is not TileMapLayer:
+	if laser_origin and is_in_group("Disappeared") and collider and collider != laser_origin and collider is not TileMapLayer:
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 1.0, 0.3)
 		await get_tree().create_timer(0.15).timeout
 		set_collision_layer_value(1, true)
 		
-	# Check whether laser is telling the block it is being blocked. 99% this is now obsolete, but I did not bother testing. Reactivate if problems occur.
-	#elif player_lit == false and blocked == true:
-		#change_lit_status(false)
-		
 	# Check whether laser color has changed. This is necessary to do here due to the disappearing behaviour.
 	elif collider and collider.is_in_group("Prisma") and collider._laser_instance and collider._laser_instance.laser_color_enum != laser_color:
 		change_lit_status(false)
 	# Check if received laser still exists and matches colors.
-	elif is_instance_valid(laser):# and laser.laser_color_enum == laser_color:
+	elif is_instance_valid(laser):
 		change_lit_status(true)
 	# Check if player is interacting and a static light is not overriding this.
 	elif player_lit == true and override == false:
@@ -91,10 +91,6 @@ func _physics_process(_delta: float) -> void:
 	# Default state.
 	else:
 		change_lit_status(false)
-	
-	# Update stored laser color for checking color match.
-	#if laser:
-		#laser_color = laser.laser_color_enum
 
 
 func change_lit_status(new_status: bool) -> void:

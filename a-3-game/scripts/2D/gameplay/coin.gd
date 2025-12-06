@@ -1,5 +1,6 @@
 extends Area2D
 
+
 # Values adjustable in inspector per separate instance. Change here to adjust defaults.
 @export var _score_amount: int = 1
 @export var _bob_height: float = 15.0

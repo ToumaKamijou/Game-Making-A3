@@ -23,6 +23,7 @@ var score: int = 0
 @onready var _score_text: RichTextLabel = $"../../../Display/ScoreContainer/Score"
 
 var checkpoint: Area2D
+var light_control: Node2D
 
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):
@@ -34,7 +35,6 @@ var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 		
 		flash_color = new_value as Global.LIGHT_COLOR
 		_flashlight.color = Global.change_flash_color(flash_color)
-
 
 var unlocked_colors: Dictionary = {
 	Global.LIGHT_COLOR.RED: true,
@@ -91,9 +91,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	# Check whether flashlight color matches objects within it. Communicate necessary information if so.
+	var  current_collisions_bodies: Array[Object]
 	if _shapecast_body.is_colliding():
 		var collision_count = _shapecast_body.get_collision_count()
-		var current_collisions: Array[Object] = []
+		current_collisions_bodies = []
 		
 		for i in range(collision_count):
 			var collided = _shapecast_body.get_collider(i)
@@ -119,21 +120,22 @@ func _physics_process(delta: float) -> void:
 						continue
 				
 				collided.player_lit = true
-				current_collisions.append(collided)
+				current_collisions_bodies.append(collided)
 		
-		for i in _collided_objects:
-			# Disable object if it is no longer being detected by the flashlight.
-			if not current_collisions.has(i):
-				if i.has_method("change_lit_status"):
-					i.player_lit = false
+	for i in _collided_objects:
+		# Disable object if it is no longer being detected by the flashlight.
+		if not current_collisions_bodies.has(i):
+			if i.has_method("change_lit_status"):
+				i.player_lit = false
 	
-		_collided_objects = current_collisions.duplicate()
+	_collided_objects = current_collisions_bodies.duplicate()
 	
-# Check whether flashlight is colliding with another light. Change its color if so.
-# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
+	# Check whether flashlight is colliding with another light. Change its color if so.
+	# This can be integrated into the above script quite easily, combining both shapecasts into one object as well. Separating them was just much easier for figuring out a good method.
+	var current_collisions_areas: Array[Area2D]
 	if _shapecast_area.is_colliding():
 		var collision_count = _shapecast_area.get_collision_count()
-		var current_collisions: Array[Area2D] = []
+		current_collisions_areas = []
 		
 		for i in range(collision_count):
 			var collided = _shapecast_area.get_collider(i)
@@ -149,33 +151,44 @@ func _physics_process(delta: float) -> void:
 			#if not current_collisions.has(i):
 				#i.get_owner()._flash_color = 0
 		
-		_collided_areas = current_collisions.duplicate()
+	_collided_areas = current_collisions_areas.duplicate()
 		
 	# Sort out moving platforms and deathzones. Shapecast is necessary so that invulnerability can be properly checked.
+	var current_collisions_zones: Array[Area2D]
 	if _area_check.is_colliding():
 		var collision_count = _area_check.get_collision_count()
 
-		var current_collisions: Array[Area2D] = []
+		current_collisions_zones = []
 		for i in collision_count:
 			var collided = _area_check.get_collider(i)
 			if collided.is_in_group("Mover"):
 				if not collided.is_in_group("Hazard"):
 					safe = true
 				global_position.y += collided.get_owner().center.global_position.y - collided.get_owner().old.y
-			if collided.is_in_group("Hazard") and safe == false:
+			elif collided.is_in_group("Hazard") and safe == false:
 				respawn()
+			elif collided.is_in_group("Button"):
+				light_control = collided.get_owner()
+				light_control._button_light.enabled = true
 				
-			current_collisions.append(collided)
+			current_collisions_zones.append(collided)
 				
-		for i in _collided_zones:
-			if not current_collisions.has(i):
-				if i.is_in_group("Mover"):
-					safe = false
+	for i in _collided_zones:
+		if not current_collisions_zones.has(i):
+			if i.is_in_group("Mover"):
+				safe = false
+			if i.is_in_group("Button"):
+				light_control._button_light.enabled = false
+				light_control = null
 	
-		_collided_zones = current_collisions.duplicate()
+	_collided_zones = current_collisions_zones.duplicate()
 
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("show_flashlight"):
+		if light_control:
+			light_control._light.rotate(deg_to_rad(light_control._rotation_value))
+	
 	if event.is_action_pressed("change_flash_color"):
 		flash_color = ((int(flash_color) + 1) % Global.LIGHT_COLOR.size()) as Global.LIGHT_COLOR
 	
@@ -205,6 +218,7 @@ func _input(event: InputEvent) -> void:
 						push_axis = Vector2(1, 0)
 					else:
 						push_axis = Vector2(0, 1)
+
 
 # Tracks collectibles. That this is a score on a text label right now is purely placeholder; easily adaptable to track by different methods such as lighting up an object or some such.
 func add_score(score_amount):

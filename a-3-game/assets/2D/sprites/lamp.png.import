@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db0y577pfhm17"
-path="res://.godot/imported/mirror.png-6475887c8cf8d96cc6d73227d6d5ab7b.ctex"
+uid="uid://uptpuxxes8qd"
+path="res://.godot/imported/lamp.png-94c41d3c98b45dba70fcad3d0a86ec7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D/sprites/tilemaps/mirror.png"
-dest_files=["res://.godot/imported/mirror.png-6475887c8cf8d96cc6d73227d6d5ab7b.ctex"]
+source_file="res://assets/2D/sprites/lamp.png"
+dest_files=["res://.godot/imported/lamp.png-94c41d3c98b45dba70fcad3d0a86ec7f.ctex"]
 
 [params]
 

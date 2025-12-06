@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lc5ownnc4jcw"
-path="res://.godot/imported/moving_platform.png-4d7a8ff16f10be5c87d8b232aa8b55bc.ctex"
+uid="uid://dmlwcjmar0ngo"
+path="res://.godot/imported/laser_cyan.png-6c16f82c25b63c16952413ed9ce79390.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D/sprites/tilemaps/moving_platform.png"
-dest_files=["res://.godot/imported/moving_platform.png-4d7a8ff16f10be5c87d8b232aa8b55bc.ctex"]
+source_file="res://assets/2D/sprites/laser_cyan.png"
+dest_files=["res://.godot/imported/laser_cyan.png-6c16f82c25b63c16952413ed9ce79390.ctex"]
 
 [params]
 
