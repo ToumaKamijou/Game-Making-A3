@@ -73,9 +73,10 @@ func _physics_process(delta: float) -> void:
 		
 		# Handle rotation
 		if held_object.is_in_group("Rotatable"):
-			var rotation_dir = Input.get_axis("rotate_left", "rotate_right")
-			if rotation_dir:
-				held_object.rotation += rotation_dir * 2.0 * delta
+			if Input.is_action_just_pressed("rotate_left"):
+				held_object.rotation += deg_to_rad(-45)
+			elif Input.is_action_just_pressed("rotate_right"):
+				held_object.rotation += deg_to_rad(45)
 				
 	elif movement_dir:
 		velocity = movement_dir * _walk_speed
