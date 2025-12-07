@@ -7,7 +7,6 @@ class_name MovingPlatform
 var old: Vector2 = Vector2(0,0)
 
 func _ready() -> void:
-	curve.clear_points()
 	curve.add_point(distance_to_end/2)
 	move_tween()
 
