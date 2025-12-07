@@ -1,17 +1,16 @@
-[gd_scene load_steps=23 format=4 uid="uid://dlca44sk0rbvp"]
+[gd_scene load_steps=22 format=4 uid="uid://dlca44sk0rbvp"]
 
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/test_level.gd" id="1_4uo0j"]
-[ext_resource type="Shader" path="res://shaders/pixel_art_upscale.gdshader" id="1_mhym6"]
+[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_4uo0j"]
+[ext_resource type="Shader" uid="uid://dn51qad71h4f3" path="res://shaders/pixel_art_upscale.gdshader" id="1_mhym6"]
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="3_4uo0j"]
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_uty7l"]
-[ext_resource type="Texture2D" uid="uid://0hvdloxpdptp" path="res://assets/2D/sprites/tilemaps/Wall.png" id="5_4uo0j"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="6_vxl6d"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="7_eski5"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/test/static_light.tscn" id="10_vxl6d"]
 [ext_resource type="PackedScene" uid="uid://b7tbu28c0oin8" path="res://scenes/2D/gameplay/mirror.tscn" id="11_15c7i"]
-[ext_resource type="Script" path="res://scenes/2D/levels/checkpoint_manager.gd" id="13_eski5"]
-[ext_resource type="Script" path="res://scripts/UI/main_display.gd" id="17_pdf00"]
-[ext_resource type="Script" path="res://scripts/UI/subpixel_snapper.gd" id="18_a6gra"]
+[ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="13_eski5"]
+[ext_resource type="Script" uid="uid://chfyxg1fadd5e" path="res://scripts/UI/main_display.gd" id="17_pdf00"]
+[ext_resource type="Script" uid="uid://bx765gtmglxap" path="res://scripts/UI/subpixel_snapper.gd" id="18_a6gra"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="19_dwqlq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vigiv"]
@@ -155,7 +154,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_c5ced")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o7h0g"]
-texture = ExtResource("5_4uo0j")
 0:0/0 = 0
 1:0/0 = 0
 0:1/0 = 0
@@ -399,16 +397,12 @@ position = Vector2(408.99994, 860.99994)
 rotation = 2.578428
 scale = Vector2(5, 5)
 _base_value = 2
-_light_color = 2
-_size = 5.0
 
 [node name="StaticLight4" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("10_vxl6d")]
 position = Vector2(153.00003, 887)
 rotation = 2.578428
 scale = Vector2(5, 5)
 _base_value = 1
-_light_color = 1
-_size = 5.0
 
 [node name="Laserblocks" type="Node2D" parent="SubViewportContainer/SubViewport"]
 

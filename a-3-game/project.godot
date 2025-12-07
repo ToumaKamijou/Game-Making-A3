@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="A3 Game"
-run/main_scene="uid://bi0pdsb6pnncu"
+run/main_scene="uid://hiao3yuwokbs"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

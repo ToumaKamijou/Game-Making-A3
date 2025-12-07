@@ -15,16 +15,12 @@ var _collided_objects: Array[Object] = [] # Holds all the objects seen by the fl
 var _collided_areas: Array[Area2D] = []
 var _collided_zones: Array[Area2D] = []
 
-@onready var _checkpoint_manager: Node2D = get_parent().get_node("CheckpointManager")
+@onready var _checkpoint_manager: Node2D = get_parent().get_parent().get_node("CheckpointManager")
 @onready var _area_check: ShapeCast2D = $AreaCheck
 var safe := false
 
 var score: int = 0
-<<<<<<< Updated upstream
-@onready var _score_text: RichTextLabel = get_owner().get_node("Display/ScoreContainer/Score")
-=======
 @onready var _score_text: RichTextLabel = $"../../Display/ScoreContainer/Score"
->>>>>>> Stashed changes
 
 var checkpoint: Area2D
 var light_control: Node2D
