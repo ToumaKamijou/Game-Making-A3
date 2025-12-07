@@ -34,7 +34,7 @@ roughness = 0.0
 material = SubResource("StandardMaterial3D_ibukl")
 size = Vector2(300, 1)
 
-[node name="LightSquare" type="RigidBody2D" groups=["Pushable"]]
+[node name="LightSquare" type="RigidBody2D"]
 disable_mode = 2
 collision_layer = 3
 gravity_scale = 0.0
