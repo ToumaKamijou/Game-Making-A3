@@ -20,7 +20,7 @@ var _collided_zones: Array[Area2D] = []
 var safe := false
 
 var score: int = 0
-@onready var _score_text: RichTextLabel = $"../../../Display/ScoreContainer/Score"
+@onready var _score_text: RichTextLabel = get_owner().get_node("Display/ScoreContainer/Score")
 
 var checkpoint: Area2D
 var light_control: Node2D
