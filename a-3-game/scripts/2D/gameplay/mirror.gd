@@ -50,10 +50,8 @@ var lit = false:
 
 				_laser_instance.global_position = _laser_origin.global_position
 				if laser_origin:
-					if laser_origin.global_rotation_degrees >= 90 or laser_origin.global_rotation_degrees <= -90:
-						_laser_instance.global_rotation = global_rotation * 2 - deg_to_rad(90)
-					else:
-						_laser_instance.global_rotation = laser_origin.global_rotation + global_rotation + deg_to_rad(90)
+					_laser_instance.global_rotation = laser.global_rotation - (laser.global_rotation - global_rotation) * 2
+
 		else:
 			light.enabled = false
 			just_lit = false
