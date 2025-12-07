@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://db0y577pfhm17" path="res://assets/2D/sprites/mirror.png" id="2_ibukl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ibukl"]
-size = Vector2(4, 45)
+size = Vector2(9, 45)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ygl27"]
 blend_mode = 1
@@ -51,6 +51,7 @@ linear_damp = 5.0
 script = ExtResource("1_ibukl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 0)
 shape = SubResource("RectangleShape2D_ibukl")
 
 [node name="Mesh2D" type="MeshInstance2D" parent="."]

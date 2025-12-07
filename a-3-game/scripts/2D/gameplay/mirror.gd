@@ -49,7 +49,10 @@ var lit = false:
 				add_child(_laser_instance)
 
 				_laser_instance.global_position = _laser_origin.global_position
-				_laser_instance.global_rotation = _laser_origin.global_rotation + deg_to_rad(45)
+				if _laser_origin.global_rotation_degrees >= 90 or _laser_origin.global_rotation_degrees <= -90:
+					_laser_instance.global_rotation = _laser_origin.global_rotation + global_rotation - deg_to_rad(90)
+				else:
+					_laser_instance.global_rotation = _laser_origin.global_rotation + global_rotation + deg_to_rad(90)
 		else:
 			light.enabled = false
 			just_lit = false
@@ -94,12 +97,11 @@ func _physics_process(_delta: float) -> void:
 			angle += 360
 		elif angle > 360:
 			angle -= 360
-	
 	# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if blocked == true:
 		change_lit_status(false)
 	# Check whether it is currently transferring a laser and it has not moved.
-	elif is_instance_valid(laser) and angle < 180 and raycast.is_colliding() and raycast.get_collider() == laser_origin:
+	elif is_instance_valid(laser) and angle < 170 and raycast.is_colliding() and raycast.get_collider() == laser_origin:
 		change_lit_status(true)
 	# Default state.
 	else:
