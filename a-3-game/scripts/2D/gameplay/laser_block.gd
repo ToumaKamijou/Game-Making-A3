@@ -68,8 +68,6 @@ func _ready():
 		mesh.modulate = COLOR_MAP[_color_type]
 	if not is_in_group("Prisma"):
 		add_to_group("Prisma")
-	if not is_in_group("Pushable"):
-		add_to_group("Pushable")
 	
 	$Guideline.visible = false
 
