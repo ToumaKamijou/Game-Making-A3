@@ -2,10 +2,13 @@ extends Path2D
 class_name MovingPlatform
 
 @export var path_follow_2D : PathFollow2D
+@export var distance_to_end: Vector2
 @onready var center: AnimatableBody2D = $AnimatableBody2D
 var old: Vector2 = Vector2(0,0)
 
 func _ready() -> void:
+	curve.clear_points()
+	curve.add_point(distance_to_end/2)
 	move_tween()
 
 func move_tween():
