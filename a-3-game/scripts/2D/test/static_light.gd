@@ -91,8 +91,8 @@ func _physics_process(_delta: float) -> void:
 			var collided = _shapecast_area.get_collider(i)
 			
 			if collided and collided.is_in_group("ColorLight"):
-				collided.get_owner()._flash_color = _light_color
-				_flash_color = collided.get_owner()._light_color
+				collided.get_owner()._light._flash_color = _light_color
+				_flash_color = collided.get_owner()._light._light_color
 				current_collisions_areas.append(collided)
 	
 	# Calculate color mixing. Not yet adapted to allow two static lights to mix.
