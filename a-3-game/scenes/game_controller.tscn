@@ -1,15 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxqi3mxskv8vn"]
+[gd_scene load_steps=11 format=3 uid="uid://beicvrs5be67n"]
 
+[ext_resource type="Script" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
-[ext_resource type="PackedScene" uid="uid://ofk4xtdx50fc" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
+[ext_resource type="PackedScene" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
-[ext_resource type="PackedScene" uid="uid://bi0pdsb6pnncu" path="res://scenes/2D/levels/static_lights_level.tscn" id="4_burlk"]
+[ext_resource type="PackedScene" path="res://scenes/2D/levels/static_lights_level.tscn" id="4_burlk"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="6_e85df"]
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
-[ext_resource type="PackedScene" uid="uid://3i8w6mru3gy1" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
+[ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
+[ext_resource type="PackedScene" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
 
 [node name="GameController" type="Node2D"]
+script = ExtResource("1_d6ul8")
 
 [node name="ViewportMover" type="Node2D" parent="."]
 
@@ -31,6 +34,18 @@ metadata/_edit_lock_ = true
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
+
+[node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(257, -207)
+
+[node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(1038, 317)
+
+[node name="Checkpoint3" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-1116, 293)
+
+[node name="Checkpoint4" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(453, 813)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0

@@ -1,16 +1,14 @@
-[gd_scene load_steps=22 format=4 uid="uid://bi0pdsb6pnncu"]
+[gd_scene load_steps=20 format=4 uid="uid://3sqr1jld0bm4"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="2_tcl4n"]
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_ra5g8"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/gameplay/static_light.tscn" id="4_tcl4n"]
 [ext_resource type="PackedScene" uid="uid://bshtrwutu635t" path="res://scenes/2D/gameplay/laser_block.tscn" id="5_orfcb"]
-[ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="6_qyar1"]
 [ext_resource type="PackedScene" uid="uid://dbp1386a3bu16" path="res://scenes/2D/levels/skid_lines.tscn" id="7_kqmhw"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="8_kqmhw"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="8_ra5g8"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="9_2171q"]
 [ext_resource type="PackedScene" uid="uid://b7tbu28c0oin8" path="res://scenes/2D/gameplay/mirror.tscn" id="9_e4t6w"]
-[ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="11_wwl4g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tcl4n"]
 texture = ExtResource("2_tcl4n")
@@ -849,13 +847,13 @@ parent = NodePath("../../LasersContainer/LightSquare6")
 rotate_90_degrees = true
 
 [node name="SkidLines4" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("7_kqmhw")]
-position = Vector2(855, -157)
+position = Vector2(855, -234)
 rotation = 1.5707964
 parent = NodePath("../../MirrorsContainer/Mirror9")
 rotate_90_degrees = true
 
 [node name="SkidLines5" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("7_kqmhw")]
-position = Vector2(738.99994, -481.00006)
+position = Vector2(237, -493.00003)
 rotation = 1.5707964
 parent = NodePath("../../MirrorsContainer/Mirror13")
 rotate_90_degrees = true
@@ -889,18 +887,3 @@ position = Vector2(545, 1065)
 position = Vector2(160, -207)
 curve = SubResource("Curve2D_wwl4g")
 distance_to_end = Vector2(-380, 0)
-
-[node name="CheckpointManager" type="Node2D" parent="."]
-script = ExtResource("6_qyar1")
-
-[node name="Checkpoint" parent="CheckpointManager" instance=ExtResource("11_wwl4g")]
-position = Vector2(257, -207)
-
-[node name="Checkpoint2" parent="CheckpointManager" instance=ExtResource("11_wwl4g")]
-position = Vector2(1038, 317)
-
-[node name="Checkpoint3" parent="CheckpointManager" instance=ExtResource("11_wwl4g")]
-position = Vector2(-1116, 293)
-
-[node name="Checkpoint4" parent="CheckpointManager" instance=ExtResource("11_wwl4g")]
-position = Vector2(453, 813)
