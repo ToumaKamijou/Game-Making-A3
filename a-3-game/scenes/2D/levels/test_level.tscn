@@ -1,14 +1,14 @@
 [gd_scene load_steps=42 format=4 uid="uid://cb375mffsapay"]
 
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
-[ext_resource type="Script" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
+[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="2_1wh7b"]
 [ext_resource type="Shader" uid="uid://dn51qad71h4f3" path="res://shaders/pixel_art_upscale.gdshader" id="2_rgq2g"]
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="3_djaln"]
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_hxop3"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="4_1wh7b"]
-[ext_resource type="PackedScene" path="res://scenes/2D/levels/skid_lines.tscn" id="5_djaln"]
+[ext_resource type="PackedScene" uid="uid://dbp1386a3bu16" path="res://scenes/2D/levels/skid_lines.tscn" id="5_djaln"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/test/static_light.tscn" id="6_dxe1e"]
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_3g276"]
 [ext_resource type="PackedScene" uid="uid://b7tbu28c0oin8" path="res://scenes/2D/gameplay/mirror.tscn" id="8_hxop3"]
@@ -513,6 +513,8 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
+
+[node name="TileMapControl" type="Node2D" parent="SubViewportContainer/SubViewport"]
 
 [node name="Fog" type="CanvasModulate" parent="SubViewportContainer/SubViewport"]
 position = Vector2(-1, 0)
