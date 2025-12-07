@@ -158,11 +158,12 @@ func _physics_process(delta: float) -> void:
 		for i in collision_count:
 			var collided = _area_check.get_collider(i)
 			if collided.is_in_group("Mover"):
+				print("check")
 				if not collided.is_in_group("Hazard"):
 					safe = true
-				global_position.y += collided.get_owner().center.global_position.y - collided.get_owner().old.y
-			elif collided.is_in_group("Hazard") and safe == false:
-				respawn()
+				global_position += collided.get_owner().center.global_position - collided.get_owner().old
+			#elif collided.is_in_group("Hazard") and safe == false:
+				#respawn()
 			elif collided.is_in_group("Button"):
 				light_control = collided.get_owner()
 				light_control._button_light.enabled = true

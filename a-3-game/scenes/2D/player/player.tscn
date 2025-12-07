@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5ewkam1b3qv7" path="res://scripts/2D/player/player.gd" id="1_0nwcy"]
 [ext_resource type="Texture2D" uid="uid://dq7vn5ld3p5iu" path="res://assets/2D/sprites/player_sprite_a3-export.png" id="2_b2fbk"]
 [ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="3_qy10c"]
-[ext_resource type="Script" path="res://scripts/UI/snapped_camera.gd" id="4_b2fbk"]
+[ext_resource type="Script" uid="uid://devgg4vw2owx5" path="res://scripts/UI/snapped_camera.gd" id="4_b2fbk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy10c"]
 radius = 55.0
@@ -86,6 +86,7 @@ texture = SubResource("GradientTexture2D_qy10c")
 [node name="AreaCheck" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_03o3s")
 target_position = Vector2(0, 0)
+collision_mask = 5
 collide_with_areas = true
 collide_with_bodies = false
 
