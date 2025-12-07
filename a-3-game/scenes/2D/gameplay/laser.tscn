@@ -39,11 +39,22 @@ default_color = Color(0.8534464, 0.0005975914, 0.85694593, 1)
 texture = SubResource("GradientTexture2D_wqsnv")
 texture_mode = 2
 
-[node name="LightLine2D" type="Line2D" parent="Line2D"]
+[node name="ColorLine2D" type="Line2D" parent="Line2D"]
 z_index = 10
 material = SubResource("CanvasItemMaterial_wqsnv")
+scale = Vector2(0.93333334, 1)
 points = PackedVector2Array(0, -1, 0, 42)
 width = 15.0
+texture = SubResource("GradientTexture2D_nm8xu")
+texture_mode = 2
+
+[node name="LightLine2D" type="Line2D" parent="Line2D"]
+z_index = 9
+material = SubResource("CanvasItemMaterial_wqsnv")
+scale = Vector2(3.2000003, 1)
+points = PackedVector2Array(0, -1, 0, 42)
+width = 15.0
+default_color = Color(0.7058863, 0.70588684, 0.70588654, 1)
 texture = SubResource("GradientTexture2D_nm8xu")
 texture_mode = 2
 
