@@ -41,7 +41,7 @@ roughness = 0.0
 material = SubResource("StandardMaterial3D_a28n0")
 size = Vector2(300, 1)
 
-[node name="Mirror" type="RigidBody2D"]
+[node name="Mirror" type="RigidBody2D" groups=["Mirror"]]
 disable_mode = 2
 collision_layer = 3
 mass = 0.5

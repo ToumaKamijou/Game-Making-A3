@@ -33,6 +33,6 @@ func _ready() -> void:
 # These go here so that the tool script actually works. No reason not to put them in the ready function on final export, though I doubt performance will really matter anyway.
 func _physics_process(_delta: float) -> void:
 	if _button:
-		_button.position = Vector2(_button_position_x, _button_position_y)
 		_button.rotation = deg_to_rad(_button_rotation)
+		_button.global_position = _light.global_position + Vector2(_button_position_x, _button_position_y)
 	_light.scale = Vector2(_size, _size)

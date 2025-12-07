@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://hiao3yuwokbs"]
+[gd_scene load_steps=8 format=3 uid="uid://bxqi3mxskv8vn"]
 
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_h843c"]
+[ext_resource type="Script" path="res://scripts/UI/test_level.gd" id="1_h843c"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
-[ext_resource type="PackedScene" uid="uid://cmuxoa3qkwvxv" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
+[ext_resource type="PackedScene" uid="uid://ofk4xtdx50fc" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="6_e85df"]
