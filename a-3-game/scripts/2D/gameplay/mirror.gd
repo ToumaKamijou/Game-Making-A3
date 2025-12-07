@@ -49,7 +49,7 @@ var lit = false:
 				add_child(_laser_instance)
 
 				_laser_instance.global_position = _laser_origin.global_position
-				_laser_instance.global_rotation = _laser_origin.global_rotation + deg_to_rad(90)
+				_laser_instance.global_rotation = _laser_origin.global_rotation + deg_to_rad(45)
 		else:
 			light.enabled = false
 			just_lit = false
