@@ -49,10 +49,10 @@ var lit = false:
 				add_child(_laser_instance)
 
 				_laser_instance.global_position = _laser_origin.global_position
-				if _laser_origin.global_rotation_degrees >= 90 or _laser_origin.global_rotation_degrees <= -90:
-					_laser_instance.global_rotation = _laser_origin.global_rotation + global_rotation - deg_to_rad(90)
+				if laser_origin.global_rotation_degrees >= 90 or laser_origin.global_rotation_degrees <= -90:
+					_laser_instance.global_rotation = global_rotation * 2 + deg_to_rad(90)
 				else:
-					_laser_instance.global_rotation = _laser_origin.global_rotation + global_rotation + deg_to_rad(90)
+					_laser_instance.global_rotation = laser_origin.global_rotation + global_rotation + deg_to_rad(90)
 		else:
 			light.enabled = false
 			just_lit = false
