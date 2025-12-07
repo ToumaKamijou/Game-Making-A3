@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfxd2d47uaq1q"]
+[gd_scene load_steps=6 format=3 uid="uid://bfxd2d47uaq1q"]
 
 [ext_resource type="Script" uid="uid://nsml3ec71qjh" path="res://scenes/2D/death/Checkpoint.gd" id="1_6rm0u"]
 
@@ -19,6 +19,9 @@ metadata/_snap_enabled = true
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.092947364), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbkcw"]
+size = Vector2(200, 200)
 
 [node name="Checkpoint" type="Area2D"]
 collision_layer = 4
@@ -48,6 +51,9 @@ initial_velocity_max = 50.0
 scale_amount_min = 2.0
 scale_amount_max = 2.0
 hue_variation_curve = SubResource("Curve_rbkcw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rbkcw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

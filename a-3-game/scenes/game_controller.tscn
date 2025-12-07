@@ -1,28 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxqi3mxskv8vn"]
+[gd_scene load_steps=9 format=3 uid="uid://bxqi3mxskv8vn"]
 
-[ext_resource type="Script" path="res://scripts/UI/test_level.gd" id="1_h843c"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
 [ext_resource type="PackedScene" uid="uid://ofk4xtdx50fc" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
+[ext_resource type="PackedScene" uid="uid://bi0pdsb6pnncu" path="res://scenes/2D/levels/static_lights_level.tscn" id="4_burlk"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="6_e85df"]
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
+[ext_resource type="PackedScene" uid="uid://3i8w6mru3gy1" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
 
 [node name="GameController" type="Node2D"]
-script = ExtResource("1_h843c")
 
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(-1005, -558)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
 
 [node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
+metadata/_edit_lock_ = true
+
+[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
+position = Vector2(-2059, -827)
+
+[node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
+position = Vector2(924, 85)
+metadata/_edit_lock_ = true
+
+[node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
+script = ExtResource("7_burlk")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
@@ -32,7 +45,6 @@ render_target_update_mode = 4
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_vq0e2")
-autoplay = true
 
 [node name="Display" type="Control" parent="."]
 layout_mode = 3
@@ -52,6 +64,3 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "SCORE: 0"
 visible_characters_behavior = 1
-
-[node name="CheckpointManager" type="Node2D" parent="."]
-script = ExtResource("7_burlk")

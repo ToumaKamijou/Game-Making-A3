@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dvarbtspidjhf"]
 
 [ext_resource type="Script" uid="uid://c3w3trvcrpnf" path="res://scripts/2D/test/static_light.gd" id="1_ftl5n"]
-[ext_resource type="Script" path="res://scenes/2D/test/static_light_control.gd" id="1_ixjep"]
+[ext_resource type="Script" uid="uid://cwb7axfjl4w5s" path="res://scenes/2D/gameplay/static_light_control.gd" id="1_ixjep"]
 [ext_resource type="Texture2D" uid="uid://d38c7olbh0oxx" path="res://assets/2D/textures/flaslight_tex.png" id="2_a1m7g"]
 [ext_resource type="Texture2D" uid="uid://ctyxutqsguy68" path="res://assets/2D/sprites/button.png" id="4_ixjep"]
 [ext_resource type="Texture2D" uid="uid://uptpuxxes8qd" path="res://assets/2D/sprites/lamp.png" id="4_xeyjh"]
@@ -34,6 +34,7 @@ metadata/_snap_enabled = true
 [node name="StaticLight" type="Node2D"]
 z_index = 1
 script = ExtResource("1_ixjep")
+_rotation_value = 90
 
 [node name="StaticLight" type="StaticBody2D" parent="."]
 scale = Vector2(5, 5)

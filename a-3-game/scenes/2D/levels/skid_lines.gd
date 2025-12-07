@@ -10,5 +10,5 @@ func _ready() -> void:
 		parent.add_to_group("Pushable")
 	if rotate_90_degrees:
 		rotation = deg_to_rad(90)
-		if not parent.is_in_group("Mirror"):
-			global_position -= Vector2(0, 15)
+		#if not parent.is_in_group("Mirror"):
+			#global_position -= Vector2(0, 15)

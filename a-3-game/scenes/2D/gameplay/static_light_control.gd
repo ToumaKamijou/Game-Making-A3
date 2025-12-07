@@ -13,7 +13,7 @@ extends Node2D
 
 @export_range(1.0, 10.0, 0.1) var _size: float = 5.0
 
-@export_range(0, 360, 45) var _rotation_value: int = 90
+@export_range(0, 360, 45) var _rotation_value: int = 45
 
 # They don't let me put a Vector2 in a range... It can't snap values otherwise, which makes it tortuous to drag.
 @export_range(-300, 300, 0.5, "or_less", "or_greater") var _button_position_x: float
