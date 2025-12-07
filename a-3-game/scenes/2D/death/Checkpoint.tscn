@@ -28,6 +28,8 @@ metadata/_edit_group_ = true
 [node name="RespawnPoint" type="Marker2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+range_z_min = 0
+range_z_max = 1
 texture = SubResource("GradientTexture2D_vq8ws")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
