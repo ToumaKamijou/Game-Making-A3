@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://3i8w6mru3gy1"]
+[gd_scene load_steps=24 format=4 uid="uid://c7cj176uek2m6"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="2_h1ni6"]
 [ext_resource type="Texture2D" uid="uid://bgi2caci3fe2t" path="res://assets/2D/sprites/skid lines.png" id="3_h1ni6"]
@@ -287,6 +287,10 @@ size = Vector2(180, 121)
 
 [sub_resource type="Curve2D" id="Curve2D_x65ku"]
 resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+}
+point_count = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_wjkqg"]
 font_size = 38
@@ -613,7 +617,7 @@ position = Vector2(2337, 344)
 [node name="MovingPlatform" parent="." instance=ExtResource("13_janlf")]
 position = Vector2(50, 1465)
 curve = SubResource("Curve2D_x65ku")
-distance_to_end = Vector2(800, 0)
+distance_to_end = Vector2(800, 0.01)
 
 [node name="Screenshot20251207185114" type="Sprite2D" parent="."]
 position = Vector2(1489, 1652)

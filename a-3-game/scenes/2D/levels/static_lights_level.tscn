@@ -345,7 +345,7 @@ metadata/_snap_enabled = true
 [sub_resource type="Curve2D" id="Curve2D_wwl4g"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
 }
 point_count = 2
 
@@ -886,4 +886,4 @@ position = Vector2(545, 1065)
 [node name="MovingPlatform" parent="PlatformContainer" instance=ExtResource("9_2171q")]
 position = Vector2(160, -207)
 curve = SubResource("Curve2D_wwl4g")
-distance_to_end = Vector2(-380, 0)
+distance_to_end = Vector2(-380, 0.01)
