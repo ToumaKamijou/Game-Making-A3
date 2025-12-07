@@ -6,6 +6,8 @@ extends Sprite2D
 
 func _ready() -> void:
 	global_position = parent.global_position
+	if not parent.is_in_group("Pushable"):
+		parent.add_to_group("Pushable")
 	if rotate_90_degrees:
 		rotation = deg_to_rad(90)
 		if not parent.is_in_group("Mirror"):
