@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ho7r7"]
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/test_level.gd" id="1_kpcvt"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="2_1wh7b"]
-[ext_resource type="Shader" uid="uid://dn51qad71h4f3" path="res://shaders/pixel_art_upscale.gdshader" id="2_rgq2g"]
+[ext_resource type="Shader" path="res://shaders/pixel_art_upscale.gdshader" id="2_rgq2g"]
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="3_djaln"]
 [ext_resource type="Texture2D" uid="uid://clv4eps6nhr45" path="res://assets/2D/sprites/tilemaps/Spikes.png" id="3_hxop3"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="3_l8slq"]
@@ -16,8 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="9_lm303"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="10_l6063"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="14_bf67w"]
-[ext_resource type="Script" uid="uid://chfyxg1fadd5e" path="res://scripts/UI/main_display.gd" id="14_y1faj"]
-[ext_resource type="Script" uid="uid://bx765gtmglxap" path="res://scripts/UI/subpixel_snapper.gd" id="15_rgq2g"]
+[ext_resource type="Script" path="res://scripts/UI/main_display.gd" id="14_y1faj"]
+[ext_resource type="Script" path="res://scripts/UI/subpixel_snapper.gd" id="15_rgq2g"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="20_c5ced"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djaln"]
@@ -479,7 +479,6 @@ tile_set = SubResource("TileSet_vigiv")
 [node name="SkidLines" type="Node2D" parent="TileMapLayers"]
 
 [node name="SkidLines" parent="TileMapLayers/SkidLines" node_paths=PackedStringArray("parent") instance=ExtResource("5_djaln")]
-visible = false
 position = Vector2(277, 60)
 rotation = 1.5707964
 parent = NodePath("../../../SubViewportContainer/SubViewport/Laserblocks/LightSquare5")
@@ -537,7 +536,7 @@ position = Vector2(1530, 686.99994)
 _color_type = 3
 
 [node name="green" parent="SubViewportContainer/SubViewport/ColorTesting" instance=ExtResource("2_1wh7b")]
-position = Vector2(623.25, 379.99997)
+position = Vector2(620.99994, 386)
 rotation = -1.579523
 _color_type = 2
 

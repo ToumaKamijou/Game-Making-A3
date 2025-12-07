@@ -43,7 +43,7 @@ texture = ExtResource("2_b2fbk")
 
 [node name="Flashlight" type="PointLight2D" parent="Sprite2D"]
 texture_filter = 1
-position = Vector2(-7, 95)
+position = Vector2(9.094947e-13, 93)
 rotation = 3.1415927
 scale = Vector2(1, 1.283)
 range_z_min = 0
@@ -51,7 +51,7 @@ range_z_max = 1
 texture = ExtResource("3_qy10c")
 
 [node name="ShapeCastBodies" type="ShapeCast2D" parent="Sprite2D/Flashlight"]
-position = Vector2(0, 4.5)
+position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_qy10c")
 target_position = Vector2(0, 0)
 collision_mask = 3
