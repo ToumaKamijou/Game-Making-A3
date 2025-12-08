@@ -446,6 +446,7 @@ z_index = 0
 position = Vector2(471, 249)
 _button_position_x = -2.5
 _button_position_y = -23.5
+_button_enabled = false
 
 [node name="StaticLight2" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -453,6 +454,7 @@ position = Vector2(1313, 344)
 rotation = 3.1415925
 _button_position_x = -2.5
 _button_position_y = -23.5
+_button_enabled = false
 
 [node name="StaticLight3" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -465,12 +467,14 @@ z_index = 0
 position = Vector2(118, 394)
 _button_position_x = -2.5
 _button_position_y = -23.5
+_button_enabled = false
 
 [node name="StaticLight5" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
 position = Vector2(720, 374)
 _button_position_x = -2.5
 _button_position_y = -23.5
+_button_enabled = false
 
 [node name="StaticLight6" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -478,6 +482,7 @@ position = Vector2(-10.999992, 1690.9999)
 rotation = -1.5550884
 _button_position_x = -20.0
 _button_position_y = -2.5
+_button_enabled = false
 
 [node name="StaticLight7" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -485,6 +490,7 @@ position = Vector2(-7.999998, 2041.9998)
 rotation = -1.5550884
 _button_position_x = -20.0
 _button_position_y = -2.5
+_button_enabled = false
 
 [node name="StaticLight8" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -492,18 +498,21 @@ position = Vector2(896, 1846)
 rotation = -4.712389
 _button_position_x = 21.0
 _button_position_y = -2.5
+_button_enabled = false
 
 [node name="StaticLight9" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
 position = Vector2(1506, 1058)
 _button_position_x = 21.0
 _button_position_y = -2.5
+_button_enabled = false
 
 [node name="StaticLight10" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
 position = Vector2(1448, 1056)
 _button_position_x = 21.0
 _button_position_y = -2.5
+_button_enabled = false
 
 [node name="StaticLight11" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -511,6 +520,7 @@ position = Vector2(381, 295)
 rotation = 1.5707964
 _button_position_x = 21.0
 _button_position_y = -12.0
+_button_enabled = false
 
 [node name="Laserblocks" type="Node2D" parent="."]
 
@@ -736,7 +746,7 @@ parent = NodePath("../../MirrorsContainer/MirrorHor3")
 rotate_90_degrees = true
 
 [node name="SkidLinesHor4" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
-position = Vector2(924, 60)
+position = Vector2(923, 59)
 rotation = 1.5707964
 parent = NodePath("../../MirrorsContainer/MirrorHor10")
 rotate_90_degrees = true
@@ -753,7 +763,6 @@ parent = NodePath("../../MirrorsContainer/MirrorVer6")
 position = Vector2(1457, 648)
 rotation = 1.5707964
 parent = NodePath("../../MirrorsContainer/MirrorHor5")
-rotate_90_degrees = true
 
 [node name="SkidLinesVer4" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
 position = Vector2(1312, 39)
