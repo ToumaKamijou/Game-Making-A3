@@ -18,11 +18,24 @@ script = ExtResource("1_d6ul8")
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(1095, -3385)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
 
 [node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
+
+[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
+position = Vector2(2600, -3016)
+rotation = 3.1415927
+
+[node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
+position = Vector2(416, -3120)
+rotation = -3.1415927
+
+[node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
+position = Vector2(4160, -3380)
+rotation = 3.1415927
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
