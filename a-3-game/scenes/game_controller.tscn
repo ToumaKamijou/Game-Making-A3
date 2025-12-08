@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -7,9 +7,13 @@
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://3sqr1jld0bm4" path="res://scenes/2D/levels/static_lights_level.tscn" id="4_burlk"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="6_e85df"]
+[ext_resource type="PackedScene" uid="uid://bqgcl7o5n8lih" path="res://scenes/2D/levels/color_levels.tscn" id="7_1awvl"]
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtg6w"]
+size = Vector2(180, 121)
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
@@ -17,36 +21,63 @@ script = ExtResource("1_d6ul8")
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(1872, 710)
+position = Vector2(43, -3298)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
 
 [node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
-metadata/_edit_lock_ = true
 
 [node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
-position = Vector2(-2059, -827)
+position = Vector2(2600, -3016)
+rotation = -3.1415927
 
 [node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
-position = Vector2(924, 85)
-metadata/_edit_lock_ = true
+position = Vector2(-1194, -5304)
+
+[node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
+position = Vector2(4160, -3380)
+rotation = 3.1415927
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
-visible = false
 script = ExtResource("7_burlk")
 
 [node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(257, -207)
+position = Vector2(2118, -3817)
+rotation = -1.5707964
 
 [node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(1038, 317)
+position = Vector2(3698, -3293)
+rotation = -1.5707964
 
 [node name="Checkpoint3" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-1116, 293)
+position = Vector2(1719, -3317)
+rotation = -1.5707964
 
 [node name="Checkpoint4" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(453, 813)
+position = Vector2(3233, -2797)
+rotation = -1.5707964
+
+[node name="Checkpoint1" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-762, -3952)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint1"]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_qtg6w")
+
+[node name="Checkpoint5" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-110, -3293)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint5"]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_qtg6w")
+
+[node name="Checkpoint6" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-91, -4148)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint6"]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_qtg6w")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -61,6 +92,7 @@ render_target_update_mode = 4
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_vq0e2")
+autoplay = true
 
 [node name="Display" type="Control" parent="."]
 layout_mode = 3
