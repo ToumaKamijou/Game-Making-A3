@@ -430,6 +430,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
+[node name="RichTextLabel9" type="RichTextLabel" parent="TextContainer"]
+texture_filter = 1
+offset_left = 624.0
+offset_top = -3379.0
+offset_right = 1288.0
+offset_bottom = -3188.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_4svj6")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "Congrats you've made it!
+Now go forth, explore and puzzle.
+Once you have collected 10 coins the magic door above will open"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
 [node name="StaticLightsContainer" type="Node2D" parent="."]
 
 [node name="StaticLight" parent="StaticLightsContainer" instance=ExtResource("3_k18t6")]
