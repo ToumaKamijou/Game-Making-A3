@@ -59,7 +59,7 @@ position = Vector2(3233, -2797)
 rotation = -1.5707964
 
 [node name="Checkpoint1" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-762, -3952)
+position = Vector2(-408, -3947)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint1"]
 position = Vector2(1, 5)
