@@ -370,8 +370,8 @@ scale = Vector2(0.7, 0.4)
 shape = SubResource("RectangleShape2D_djaln")
 
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="TileMapLayers/SpikesTileMapLayer/Area2D"]
-position = Vector2(1385, 3573)
-scale = Vector2(0.7, 0.3)
+position = Vector2(1387, 3593)
+scale = Vector2(0.7, 0.25)
 shape = SubResource("RectangleShape2D_djaln")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="TileMapLayers/SpikesTileMapLayer/Area2D"]
@@ -494,6 +494,7 @@ _button_position_y = -2.5
 _button_enabled = false
 
 [node name="StaticLight8" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
+visible = false
 z_index = 0
 position = Vector2(896, 1846)
 rotation = -4.712389
@@ -836,20 +837,20 @@ parent = NodePath("../../Laserblocks/Laser7")
 
 [node name="Wall" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(386, 105)
-scale = Vector2(0.6, 2)
+position = Vector2(389, 105)
+scale = Vector2(1, 2)
 _color_type = 1
 
 [node name="Wall2" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(866, 104)
-scale = Vector2(0.6, 2)
+position = Vector2(859, 105)
+scale = Vector2(1, 2)
 _color_type = 3
 
 [node name="Wall3" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(1379, 104)
-scale = Vector2(0.6, 2)
+position = Vector2(1378, 103)
+scale = Vector2(1, 2)
 _color_type = 3
 
 [node name="Wall4" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
@@ -868,8 +869,8 @@ _color_type = 6
 
 [node name="Wall7" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(1150, 951)
-scale = Vector2(1, 2)
+position = Vector2(1169, 962.00006)
+scale = Vector2(1, 1.5)
 _color_type = 6
 
 [node name="Wall8" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
@@ -892,33 +893,32 @@ _color_type = 2
 
 [node name="Wall10" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(597, 1649)
+position = Vector2(594, 1639)
 rotation = 1.5707964
-scale = Vector2(1, 1.6)
 _color_type = 1
 
 [node name="Wall12" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(178, 1871)
+position = Vector2(182, 1873)
 _color_type = 3
 
 [node name="Wall13" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(909, 2029)
-scale = Vector2(0.6, 2)
+position = Vector2(909, 2028)
+scale = Vector2(1, 2)
 _color_type = 1
 
 [node name="Wall5" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(1425, 104)
-scale = Vector2(0.6, 2)
+position = Vector2(1430, 103)
+scale = Vector2(1, 2)
 _color_type = 2
 
 [node name="Wall14" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
-position = Vector2(1508, 797)
+position = Vector2(1507, 807)
 rotation = 1.5707964
-scale = Vector2(0.6, 2)
+scale = Vector2(1, 2)
 _color_type = 6
 
 [node name="Wall15" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
@@ -946,42 +946,42 @@ _color_type = 3
 z_index = 0
 position = Vector2(1481, 1416.0002)
 rotation = 1.5707964
-scale = Vector2(0.6, 3)
+scale = Vector2(0.6, 2.5)
 _color_type = 4
 
 [node name="Wall19" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
 position = Vector2(1482, 1450.0002)
 rotation = 1.5707964
-scale = Vector2(0.6, 3)
+scale = Vector2(0.6, 2.5)
 _color_type = 5
 
 [node name="Wall20" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
 position = Vector2(1481, 1577)
 rotation = 1.5707964
-scale = Vector2(0.6, 3)
+scale = Vector2(0.6, 2.5)
 _color_type = 5
 
 [node name="Wall21" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
 position = Vector2(1482, 1611)
 rotation = 1.5707964
-scale = Vector2(0.6, 3)
+scale = Vector2(0.6, 2.5)
 _color_type = 6
 
 [node name="Wall22" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
 position = Vector2(1481, 1729)
 rotation = 1.5707964
-scale = Vector2(0.6, 3)
+scale = Vector2(0.6, 2.5)
 _color_type = 4
 
 [node name="Wall23" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
 z_index = 0
 position = Vector2(1482, 1763)
 rotation = 1.5707964
-scale = Vector2(0.6, 3)
+scale = Vector2(0.6, 2.5)
 _color_type = 6
 
 [node name="SkidLinesVer8" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
