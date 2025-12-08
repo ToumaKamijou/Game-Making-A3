@@ -461,6 +461,7 @@ z_index = 0
 position = Vector2(1287, 393)
 _button_position_x = -2.5
 _button_position_y = -23.5
+_button_enabled = false
 
 [node name="StaticLight4" parent="StaticLightsContainer" instance=ExtResource("8_d64pt")]
 z_index = 0
@@ -828,7 +829,7 @@ parent = NodePath("../../Laserblocks/Laser14")
 rotate_90_degrees = true
 
 [node name="SkidLinesVer11" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
-position = Vector2(825, 1697)
+position = Vector2(822, 1718)
 parent = NodePath("../../Laserblocks/Laser7")
 
 [node name="WallsContainer" type="Node2D" parent="."]
