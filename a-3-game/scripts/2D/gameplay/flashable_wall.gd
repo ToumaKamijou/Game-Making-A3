@@ -49,6 +49,10 @@ var lit = false:
 				if laser_origin and just_lit == false:
 					raycast.target_position = laser_origin.global_position - raycast.global_position
 					just_lit = true
+				#comment this out is laser work fine again
+				#for now delete the walls
+				await tween.finished
+				queue_free()
 			else:
 				just_lit = false
 				var tween = create_tween()

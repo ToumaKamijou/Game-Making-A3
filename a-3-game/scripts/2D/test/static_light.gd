@@ -75,7 +75,7 @@ func _physics_process(_delta: float) -> void:
 				current_collisions_objects.append(collided)
 	
 	for i in _collided_objects:
-		if not current_collisions_objects.has(i):
+		if i and not current_collisions_objects.has(i):
 			i.override = false
 			i.matched = false
 		

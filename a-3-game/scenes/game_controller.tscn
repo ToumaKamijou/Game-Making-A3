@@ -11,9 +11,7 @@
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtg6w"]
-size = Vector2(180, 121)
+[ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
@@ -21,66 +19,51 @@ script = ExtResource("1_d6ul8")
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(3569, -2989)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
 
 [node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
-
-[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
-position = Vector2(2723, -3199)
+metadata/_edit_lock_ = true
 
 [node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
-position = Vector2(416, -3120)
-rotation = -3.1415927
+position = Vector2(1768, -4472)
+metadata/_edit_lock_ = true
 
 [node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
-position = Vector2(4160, -3380)
-rotation = 3.1415927
+position = Vector2(208, -3172)
+metadata/_edit_lock_ = true
+
+[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
+position = Vector2(-2600, -3588)
+metadata/_edit_lock_ = true
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
 
 [node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(2118, -3817)
-rotation = -1.5707964
+position = Vector2(960, -3122)
 
 [node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(3698, -3293)
-rotation = -1.5707964
+position = Vector2(2883, -3293)
 
 [node name="Checkpoint3" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(1719, -3317)
-rotation = -1.5707964
+position = Vector2(2883, -2461)
 
 [node name="Checkpoint4" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(3233, -2797)
-rotation = -1.5707964
-
-[node name="Checkpoint1" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-408, -3947)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint1"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_qtg6w")
+position = Vector2(2571, -3164)
 
 [node name="Checkpoint5" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-706, -4277)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint5"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_qtg6w")
+position = Vector2(1724, -4333)
 
 [node name="Checkpoint6" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-7, -4483)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint6"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_qtg6w")
+position = Vector2(-1485, -3342)
 
 [node name="Checkpoint7" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(960, -3122)
+position = Vector2(-2358, -3798)
+
+[node name="Checkpoint8" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-3239, -3794)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -115,3 +98,6 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "SCORE: 0"
 visible_characters_behavior = 1
+
+[node name="Coin" parent="." instance=ExtResource("12_kredl")]
+position = Vector2(-256, 74)
