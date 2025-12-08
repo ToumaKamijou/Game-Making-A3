@@ -592,12 +592,12 @@ rotation = 1.5707964
 scale = Vector2(1, 1.5599878)
 _color_type = 4
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="FinalWall" type="StaticBody2D" parent="."]
 position = Vector2(963, -3541)
 script = ExtResource("8_rh50b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalWall"]
 shape = SubResource("RectangleShape2D_qemij")
 
-[node name="FinalWall" type="MeshInstance2D" parent="StaticBody2D"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="FinalWall"]
 mesh = SubResource("BoxMesh_qemij")
