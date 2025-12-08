@@ -157,7 +157,7 @@ func _physics_process(delta: float) -> void:
 		current_collisions_zones = []
 		for i in collision_count:
 			var collided = _area_check.get_collider(i)
-			if collided.is_in_group("Mover"):
+			if collided and collided.is_in_group("Mover"):
 				if not collided.is_in_group("Hazard"):
 					safe = true
 				global_position += collided.get_owner().center.global_position - collided.get_owner().old
