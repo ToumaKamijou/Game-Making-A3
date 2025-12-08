@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxqi3mxskv8vn"]
+[gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
 [ext_resource type="PackedScene" uid="uid://3sqr1jld0bm4" path="res://scenes/2D/levels/static_lights_level.tscn" id="4_burlk"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="6_e85df"]
-[ext_resource type="PackedScene" uid="uid://cwmkhlxa64n6x" path="res://scenes/2D/levels/color_levels.tscn" id="7_1awvl"]
+[ext_resource type="PackedScene" uid="uid://bqgcl7o5n8lih" path="res://scenes/2D/levels/color_levels.tscn" id="7_1awvl"]
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
@@ -36,7 +36,8 @@ rotation = -3.1415927
 position = Vector2(-1194, -5304)
 
 [node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
-position = Vector2(-891, -1501)
+position = Vector2(4160, -3380)
+rotation = 3.1415927
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
