@@ -41,8 +41,8 @@ var lit = false:
 		if value:
 			light.enabled = true
 			if laser_origin and just_lit == false:
-					raycast.target_position = laser_origin.global_position - global_position
-					just_lit = true
+				raycast.target_position = laser_origin.global_position - global_position
+				just_lit = true
 			# Create laser.
 			if not is_instance_valid(_laser_instance):
 				_laser_instance = LASER_SCENE.instantiate()
