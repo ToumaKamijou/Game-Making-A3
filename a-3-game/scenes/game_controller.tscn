@@ -19,6 +19,7 @@ script = ExtResource("1_d6ul8")
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(725, -3331)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
@@ -43,6 +44,27 @@ script = ExtResource("7_burlk")
 
 [node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(960, -3122)
+
+[node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(2883, -3293)
+
+[node name="Checkpoint3" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(2883, -2461)
+
+[node name="Checkpoint4" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(2571, -3164)
+
+[node name="Checkpoint5" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(1724, -4333)
+
+[node name="Checkpoint6" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-1485, -3342)
+
+[node name="Checkpoint7" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-2358, -3798)
+
+[node name="Checkpoint8" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-3239, -3794)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0

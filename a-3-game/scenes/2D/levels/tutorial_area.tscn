@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://nyscdpe5o7jn"]
+[gd_scene load_steps=19 format=4 uid="uid://nyscdpe5o7jn"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="1_hiwdb"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="2_4svj6"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dbp1386a3bu16" path="res://scenes/2D/levels/skid_lines.tscn" id="6_joxsv"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="7_qemij"]
 [ext_resource type="Script" uid="uid://ckvqv5mlwlo4y" path="res://scripts/2D/gameplay/final_wall.gd" id="8_rh50b"]
+[ext_resource type="Texture2D" uid="uid://buj08bvsrfyg0" path="res://assets/2D/sprites/chalice_sprite.png" id="9_7017s"]
+[ext_resource type="Script" uid="uid://dftsurvbesg14" path="res://scripts/2D/gameplay/chalice.gd" id="10_rsara"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4svj6"]
 texture = ExtResource("1_hiwdb")
@@ -454,6 +456,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters_behavior = 1
 
+[node name="RichTextLabel10" type="RichTextLabel" parent="TextContainer"]
+texture_filter = 1
+offset_left = 624.0
+offset_top = -3928.0
+offset_right = 1288.0
+offset_bottom = -3737.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_4svj6")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "WOW you made it!
+Thank you for playing our game.
+
+We hope you enjoyed it :)"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+
 [node name="StaticLightsContainer" type="Node2D" parent="."]
 
 [node name="StaticLight" parent="StaticLightsContainer" instance=ExtResource("3_k18t6")]
@@ -601,3 +621,10 @@ shape = SubResource("RectangleShape2D_qemij")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="FinalWall"]
 mesh = SubResource("BoxMesh_qemij")
+
+[node name="Chalice" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(962, -3700)
+scale = Vector2(2, 2)
+texture = ExtResource("9_7017s")
+script = ExtResource("10_rsara")
