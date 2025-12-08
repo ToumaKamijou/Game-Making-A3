@@ -51,7 +51,7 @@ var held_object: RigidBody2D = null
 var push_axis: Vector2 = Vector2.ZERO
 
 func respawn():
-	global_position = _checkpoint_manager.last_location.global_position
+	global_position = _checkpoint_manager.last_location.global_position if _checkpoint_manager.last_location else Vector2(0.0, 0.0)
 	if held_object:
 		held_object = null
 
