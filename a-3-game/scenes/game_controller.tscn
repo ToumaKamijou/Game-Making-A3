@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=12 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -12,76 +12,32 @@
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtg6w"]
-size = Vector2(180, 121)
-
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
 
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(43, -3298)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
 
 [node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
 
-[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
-position = Vector2(2600, -3016)
-rotation = -3.1415927
-
-[node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
-position = Vector2(416, -3120)
-rotation = -3.1415927
-
-[node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
-position = Vector2(4160, -3380)
-rotation = 3.1415927
-
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
 
 [node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(2118, -3817)
-rotation = -1.5707964
-
-[node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(3698, -3293)
-rotation = -1.5707964
-
-[node name="Checkpoint3" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(1719, -3317)
-rotation = -1.5707964
-
-[node name="Checkpoint4" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(3233, -2797)
-rotation = -1.5707964
-
-[node name="Checkpoint1" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-408, -3947)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint1"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_qtg6w")
-
-[node name="Checkpoint5" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-706, -4277)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint5"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_qtg6w")
-
-[node name="Checkpoint6" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-7, -4483)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ViewportMover/CheckpointManager/Checkpoint6"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_qtg6w")
-
-[node name="Checkpoint7" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(960, -3122)
+
+[node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
+position = Vector2(1768, -4472)
+
+[node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
+position = Vector2(-2233, -3119)
+
+[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
+position = Vector2(-673, -3483)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
