@@ -19,7 +19,7 @@ var _collided_zones: Array[Area2D] = []
 @onready var _area_check: ShapeCast2D = $AreaCheck
 var safe := false
 
-var score: int = 9
+var score: int = 0
 @onready var _score_text: RichTextLabel = $"../../Display/ScoreContainer/Score"
 
 var checkpoint: Area2D

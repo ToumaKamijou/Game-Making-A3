@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
+[ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
@@ -72,3 +73,6 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "SCORE: 0"
 visible_characters_behavior = 1
+
+[node name="Coin" parent="." instance=ExtResource("12_kredl")]
+position = Vector2(-256, 74)
