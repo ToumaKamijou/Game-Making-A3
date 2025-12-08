@@ -1,7 +1,5 @@
-@tool
 extends StaticBody2D
 
-@export var _scale := Vector2(1,1)
 @onready var raycast = $RayCast2D
 var laser_origin: Node2D
 var collider: Node2D
@@ -18,7 +16,6 @@ var matched := false
 var just_lit := false
 
 @onready var mesh: MeshInstance2D = $MeshInstance2D
-@onready var collision: CollisionShape2D = $CollisionShape2D
 
 const COLOR_MAP = {
 	# Colors are at .8 transparency purely for visual elegance. This is also where the lasers derive their colors from.
@@ -63,12 +60,15 @@ var lit = false:
 
 
 func _ready() -> void:
+	raycast.global_scale = Vector2(1,1)
+	raycast.scale = Vector2(1,1)
+	raycast.global_rotation = 0
+	raycast.rotation = 0
 	if COLOR_MAP.has(_color_type):
 		mesh.modulate = COLOR_MAP[_color_type]
 	if not is_in_group("Flashable"):
 		add_to_group("Flashable")
-	mesh.scale = _scale
-	collision.scale = _scale
+	
 
 
 func _physics_process(_delta: float) -> void:
