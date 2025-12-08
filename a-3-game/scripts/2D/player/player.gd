@@ -125,7 +125,7 @@ func _physics_process(delta: float) -> void:
 	for i in _collided_objects:
 		# Disable object if it is no longer being detected by the flashlight.
 		if not current_collisions_bodies.has(i):
-			if i.has_method("change_lit_status"):
+			if i and i.has_method("change_lit_status"):
 				i.player_lit = false
 	
 	_collided_objects = current_collisions_bodies.duplicate()

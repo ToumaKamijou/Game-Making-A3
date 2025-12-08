@@ -41,7 +41,7 @@ func _physics_process(_delta: float) -> void:
 	if raycast.is_colliding():
 		collider = raycast.get_collider()
 		# Check if laser is currently being blocked and communicate this if so.
-		if collider.has_method("change_lit_status"):
+		if collider and collider.has_method("change_lit_status"):
 			collider.laser_origin = get_parent()
 			if visual.is_colliding() and collider != visual.get_collider():
 				if raycast.get_collision_point() != visual.get_collision_point():
@@ -50,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 				collider.blocked = false
 		
 		# Communicate necessary information to flashable walls to handle blocking/color switching.
-		if collider.is_in_group("Flashable"):
+		if collider and collider.is_in_group("Flashable"):
 			collider.laser_color = laser_color_enum
 			# Check whether target object is gone and skip it if so.
 			if collider.is_in_group("Disappeared"):
