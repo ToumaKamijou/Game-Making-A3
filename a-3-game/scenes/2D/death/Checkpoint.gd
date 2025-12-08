@@ -10,7 +10,7 @@ var active := false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		if checkpoint_manager.last_location != _respawn and checkpoint_manager.last_location != body:
+		if checkpoint_manager.last_location != _respawn and checkpoint_manager.last_location != body and checkpoint_manager.last_location:
 			checkpoint_manager.last_location.get_parent().active = false
 		checkpoint_manager.last_location = _respawn
 		active = true
