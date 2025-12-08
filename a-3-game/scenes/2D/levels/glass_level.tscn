@@ -589,6 +589,11 @@ _color_type = 4
 position = Vector2(1547, 1154)
 _color_type = 6
 
+[node name="Laser14" parent="Laserblocks" instance=ExtResource("9_lnvjn")]
+position = Vector2(1113, 280)
+movement_axis = 2
+_color_type = 2
+
 [node name="MirrorsContainer" type="Node2D" parent="."]
 
 [node name="MirrorVer1" parent="MirrorsContainer" instance=ExtResource("10_iamxw")]
@@ -808,6 +813,16 @@ rotate_90_degrees = true
 position = Vector2(1306, 482)
 parent = NodePath("../../Laserblocks/Laser4")
 
+[node name="SkidLinesHor11" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
+position = Vector2(1113, 278)
+rotation = 1.5707964
+parent = NodePath("../../Laserblocks/Laser14")
+rotate_90_degrees = true
+
+[node name="SkidLinesVer11" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
+position = Vector2(830, 1709)
+parent = NodePath("../../Laserblocks/Laser7")
+
 [node name="WallsContainer" type="Node2D" parent="."]
 
 [node name="Wall" parent="WallsContainer" instance=ExtResource("7_fvvmu")]
@@ -959,3 +974,7 @@ position = Vector2(1482, 1763)
 rotation = 1.5707964
 scale = Vector2(0.6, 3)
 _color_type = 6
+
+[node name="SkidLinesVer8" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("12_u1dyt")]
+position = Vector2(54, 1608)
+parent = NodePath("../Laserblocks/Laser6")
