@@ -142,7 +142,7 @@ func _physics_process(delta: float) -> void:
 			if collided == null:
 				continue
 			
-			if collided.is_in_group("ColorLight"):
+			if collided.is_in_group("ColorLight") and collided.get_owner()._light.override == false:
 				collided.get_owner()._light._flash_color = flash_color
 				current_collisions_areas.append(collided)
 				
