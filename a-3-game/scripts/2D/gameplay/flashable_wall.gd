@@ -46,13 +46,10 @@ var lit = false:
 				tween.tween_property(self, "modulate:a", 0.0, 0.3)
 				set_collision_layer_value(1, false)
 				add_to_group("Disappeared")
-				if laser_origin and just_lit == false:
-					raycast.target_position = laser_origin.global_position - raycast.global_position
+				if laser and laser_origin and just_lit == false:
+					raycast.position = to_local(laser.raycast.get_collision_point())
+					raycast.target_position = to_local(laser_origin.global_position) - raycast.position
 					just_lit = true
-				#comment this out is laser work fine again
-				#for now delete the walls
-				await tween.finished
-				queue_free()
 			else:
 				just_lit = false
 				var tween = create_tween()
@@ -64,10 +61,6 @@ var lit = false:
 
 
 func _ready() -> void:
-	raycast.global_scale = Vector2(1,1)
-	raycast.scale = Vector2(1,1)
-	raycast.global_rotation = 0
-	raycast.rotation = 0
 	if COLOR_MAP.has(_color_type):
 		mesh.modulate = COLOR_MAP[_color_type]
 	if not is_in_group("Flashable"):
@@ -76,12 +69,10 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# Raycast target position is rotation-dependent. This fixes that.
-	raycast.rotation = -rotation
 	if raycast.is_colliding():
 		collider = raycast.get_collider()
 	# Check whether laser is currently being blocked. This is *not* calling the change_lit_status function because it should not be changing groups.
-	if laser_origin and is_in_group("Disappeared") and collider and collider != laser_origin and collider is not TileMapLayer and player_lit == false and override == false:
+	if laser and laser_origin and is_in_group("Disappeared") and collider and collider != laser_origin and collider is not TileMapLayer and player_lit == false and override == false:
 		just_lit = false
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 1.0, 0.3)

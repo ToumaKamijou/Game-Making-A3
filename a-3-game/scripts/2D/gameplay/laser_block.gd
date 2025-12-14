@@ -24,6 +24,7 @@ var laser_origin: Node2D
 @onready var particles: CPUParticles2D = $CPUParticles2D
 
 @export_enum("Vertical Movement:1", "Horizontal Movement:2") var movement_axis = 1
+@onready var _position = global_position
 
 @export var _color_type: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE:
 	set(value):
@@ -112,9 +113,9 @@ var lit = false:
 	set(value):
 		if value:
 			light.enabled = true
-			if laser_origin and just_lit == false:
-					raycast.target_position = laser_origin.global_position - global_position
-					just_lit = true
+			if laser and laser_origin and just_lit == false:
+				raycast.target_position = to_local(laser_origin.global_position) - raycast.position
+				just_lit = true
 			# Create laser.
 			if not is_instance_valid(_laser_instance):
 				_laser_instance = LASER_SCENE.instantiate()
@@ -149,8 +150,10 @@ func change_lit_status(new_status: bool) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# Raycast target position is rotation-dependent. This fixes that.
-	raycast.rotation = -rotation
+	if _position.x != global_position.x and movement_axis == 1:
+		global_position.x = _position.x
+	if  _position.y != global_position.y and movement_axis == 2:
+		global_position.y = _position.y
 # 	Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
 	if player_lit == false and blocked == true:
 		change_lit_status(false)

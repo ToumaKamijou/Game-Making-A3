@@ -38,5 +38,7 @@ func _collect_coin() -> void:
 		_audio.play()
 		_collected = true
 		
+		# queue_free() crashes due to the player areacheck shapecast. score amount change here is a safeguard, should not affect anything.
 		await tween.finished
-		queue_free()
+		visible = false
+		_score_amount = 0

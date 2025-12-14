@@ -813,12 +813,12 @@ _color_type = 6
 
 [node name="Mirror" parent="MirrorsContainer" instance=ExtResource("9_e4t6w")]
 position = Vector2(182.99998, 286.99997)
-rotation = 1.7453293
+rotation = 1.9722221
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="Mirror4" parent="MirrorsContainer" instance=ExtResource("9_e4t6w")]
 position = Vector2(78.83, 285)
-rotation = 1.3962634
+rotation = 1.1693707
 
 [node name="Mirror3" parent="MirrorsContainer" instance=ExtResource("9_e4t6w")]
 position = Vector2(128, 229)

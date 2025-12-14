@@ -24,6 +24,7 @@ var _laser_instance: Node2D = null
 var _incoming_light_color: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
 @export_enum("Vertical Movement:1", "Horizontal Movement:2") var movement_axis = 1
+@onready var _position = global_position
 
 const COLOR_MAP = {
 	# Colors are at .8 transparency purely for visual elegance. This is also where the lasers derive their colors from.
@@ -40,8 +41,10 @@ var lit = false:
 	set(value):
 		if value:
 			light.enabled = true
-			if laser_origin and just_lit == false:
-				raycast.target_position = laser_origin.global_position - global_position
+			if laser and laser_origin and just_lit == false:
+				raycast.target_position = to_local(laser_origin.global_position)
+				if _incoming_light_color != laser.laser_color_enum:
+					_incoming_light_color = laser.laser_color_enum
 				just_lit = true
 			# Create laser.
 			if not is_instance_valid(_laser_instance):
@@ -74,7 +77,7 @@ func _ready():
 func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 	_incoming_light_color = color
 
-	# Update laser color if it already exists (this function is *not* called every frame while the object is active, not sure what the difference is).
+	# Update laser color if it already exists.
 	if is_instance_valid(_laser_instance):
 		var final_laser_color: Color
 		final_laser_color = COLOR_MAP.get(_incoming_light_color, Color.BLACK)
@@ -86,8 +89,10 @@ func change_lit_status(new_status: bool) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# Raycast target position is rotation-dependent. This fixes that.
-	raycast.rotation = -rotation
+	if _position.x != global_position.x and movement_axis == 1:
+		global_position.x = _position.x
+	if  _position.y != global_position.y and movement_axis == 2:
+		global_position.y = _position.y
 	# Keep rotation value between 0 and 360.
 	var angle: float
 	if is_instance_valid(laser):
@@ -100,7 +105,7 @@ func _physics_process(_delta: float) -> void:
 	if blocked == true:
 		change_lit_status(false)
 	# Check whether it is currently transferring a laser and it has not moved.
-	elif is_instance_valid(laser) and angle < 170 and raycast.is_colliding() and raycast.get_collider() == laser_origin:
+	elif is_instance_valid(laser) and angle < 170 and raycast.is_colliding() and raycast.get_collider() == laser_origin and laser.raycast.is_colliding():
 		change_lit_status(true)
 	# Default state.
 	else:
