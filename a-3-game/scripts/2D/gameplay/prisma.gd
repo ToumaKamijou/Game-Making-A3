@@ -147,6 +147,8 @@ func change_lit_status(new_status: bool) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not is_instance_valid(_laser_instance):
+		_update_block_texture(_color_type)
 # 	Check whether received laser is currently being blocked.
 	if blocked == true:
 		change_lit_status(false)
