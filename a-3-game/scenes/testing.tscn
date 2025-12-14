@@ -217,7 +217,6 @@ position = Vector2(27, -329)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_jjnc2")
-_color = Color(0.24115604, 0.24115604, 0.24115601, 1)
 
 [node name="TileMapControl" type="Node2D" parent="ViewportMover"]
 scale = Vector2(2, 2)
@@ -236,8 +235,8 @@ tile_set = SubResource("TileSet_5jxlq")
 metadata/_edit_lock_ = true
 
 [node name="LightSquare" parent="ViewportMover" groups=["Pushable"] instance=ExtResource("4_8mr64")]
-position = Vector2(74, 4)
-rotation = 0.030208945
+position = Vector2(3, 229)
+rotation = 3.1415927
 movement_axis = 2
 _color_type = 1
 
@@ -263,7 +262,7 @@ _base_value = 2
 _button_position_x = 157.0
 
 [node name="StaticLight2" parent="ViewportMover" instance=ExtResource("8_ci1tm")]
-position = Vector2(-128, -578)
+position = Vector2(96, 143)
 _base_value = 1
 _button_position_x = -203.5
 
