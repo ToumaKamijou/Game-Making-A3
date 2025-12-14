@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
 
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
+[ext_resource type="Script" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
 [ext_resource type="PackedScene" uid="uid://nyscdpe5o7jn" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
@@ -22,7 +22,6 @@ script = ExtResource("1_d6ul8")
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
-_color = Color(0.24115604, 0.24115604, 0.24115601, 1)
 
 [node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
 metadata/_edit_lock_ = true

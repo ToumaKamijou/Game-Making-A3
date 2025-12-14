@@ -1,0 +1,10 @@
+[gd_resource type="GradientTexture2D" load_steps=2 format=3 uid="uid://cl2oshgxa4ewx"]
+
+[sub_resource type="Gradient" id="Gradient_laser"]
+offsets = PackedFloat32Array(0.29333332, 0.5, 0.70666665)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[resource]
+gradient = SubResource("Gradient_laser")
+width = 256
+height = 512
