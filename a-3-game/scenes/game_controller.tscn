@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=15 format=3 uid="uid://beicvrs5be67n"]
 
-[ext_resource type="Script" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
+[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
 [ext_resource type="PackedScene" uid="uid://nyscdpe5o7jn" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
@@ -11,14 +11,14 @@
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
+[ext_resource type="PackedScene" uid="uid://cvygxqc55h7vc" path="res://scenes/2D/levels/tutorial_pt_2.tscn" id="9_j76ji"]
+[ext_resource type="PackedScene" uid="uid://dtm5x3xdp4o0d" path="res://scenes/2D/levels/mirror_level_pt_2.tscn" id="10_oy6oc"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
 
 [node name="ViewportMover" type="Node2D" parent="."]
-
-[node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
@@ -38,6 +38,15 @@ metadata/_edit_lock_ = true
 [node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
 position = Vector2(-2600, -3588)
 metadata/_edit_lock_ = true
+
+[node name="Tutorial pt2" parent="ViewportMover" instance=ExtResource("9_j76ji")]
+position = Vector2(18, 1554)
+
+[node name="Mirror_Level_pt2" parent="ViewportMover/Tutorial pt2" instance=ExtResource("10_oy6oc")]
+position = Vector2(906, -300)
+
+[node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(1043, 1361)
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
@@ -65,6 +74,9 @@ position = Vector2(-2358, -3798)
 
 [node name="Checkpoint8" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(-3239, -3794)
+
+[node name="Checkpoint9" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(894, 1377)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
