@@ -4,7 +4,7 @@ extends Node2D
 @onready var raycast: RayCast2D = $RayCastCollision
 @onready var visual: RayCast2D = $RayCastVisual
 @onready var line: Line2D = $Line2D
-@onready var light_line: Line2D = $Line2D/LightLine2D
+@onready var light_line: PointLight2D = $Line2D/LightLine2D
 @onready var color_line: Line2D = $Line2D/ColorLine2D
 
 var laser_color_enum: Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
@@ -33,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		cast_point = visual.target_position
 	line.set_point_position(1, cast_point)
-	light_line.set_point_position(1, cast_point)
+	light_line.scale.y = cast_point.length() / 512
 	color_line.set_point_position(1, cast_point)
 	
 	# Handle activating other objects
