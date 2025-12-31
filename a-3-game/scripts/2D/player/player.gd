@@ -25,6 +25,8 @@ var score: int = 0
 var checkpoint: Area2D
 var light_control: Node2D
 
+var old_modulate: Color
+
 var flash_color: Global.LIGHT_COLOR = 0 as Global.LIGHT_COLOR: # White
 	set(value):
 		var new_value: int = int(value)
@@ -57,7 +59,14 @@ func respawn():
 
 
 func _physics_process(delta: float) -> void:
-	# Get the input direction and apply it to the character
+	# Attempt at forcing player to let go of object when it exits grab range. Doesn't work and not important enough for me to bother fixing it right now. Feel free to look into it.
+	#if held_object and _object_check.is_colliding():
+		#for i in range(_object_check.get_collision_count()):
+			#if _object_check.get_collider(i).is_in_group("Pushable") and not held_object:
+				#held_object.particles.emitting = false
+				#held_object.linear_velocity = Vector2.ZERO
+				#held_object = null
+	 #Get the input direction and apply it to the character
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var movement_dir := input_dir.normalized()
 	
@@ -79,7 +88,13 @@ func _physics_process(delta: float) -> void:
 			elif Input.is_action_just_pressed("rotate_right"):
 				held_object.rotation += deg_to_rad(45)
 				held_object.change_lit_status(false)
-				
+		
+		# Patchwork solution to prevent stupidly complicated raycast problems with dynamic updating
+		if held_object.has_method("change_lit_status"):
+			held_object.lit = false
+			held_object.light.enabled = false
+			held_object.modulate = Color(0.176, 0.176, 0.176, 1.0)
+	
 	elif movement_dir:
 		velocity = movement_dir * _walk_speed
 	else:
@@ -191,7 +206,9 @@ func _input(event: InputEvent) -> void:
 		
 		# Release held object if it exists
 		if held_object:
-			held_object.particles.emitting = false
+			#held_object.particles.emitting = false
+			held_object.linear_velocity = Vector2.ZERO
+			held_object.modulate = old_modulate
 			held_object = null
 		else:
 			# Grab closest object
@@ -210,7 +227,8 @@ func _input(event: InputEvent) -> void:
 				
 				if closest_obj:
 					held_object = closest_obj
-					held_object.particles.emitting = true
+					old_modulate = held_object.modulate
+					#held_object.particles.emitting = true
 					# Determine movement axis
 					if held_object.movement_axis == 1:
 						push_axis = Vector2(0, 1)

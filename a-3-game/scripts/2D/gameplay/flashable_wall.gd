@@ -13,7 +13,9 @@ var laser_color: int
 var player_lit := false
 var override := false
 var matched := false
+# For blocking logic
 var just_lit := false
+var laser_original_position: Vector2
 
 @onready var mesh: MeshInstance2D = $MeshInstance2D
 
@@ -46,18 +48,14 @@ var lit = false:
 				tween.tween_property(self, "modulate:a", 0.0, 0.3)
 				set_collision_layer_value(1, false)
 				add_to_group("Disappeared")
-				if laser and laser_origin and just_lit == false:
-					raycast.position = to_local(laser.raycast.get_collision_point())
-					raycast.target_position = to_local(laser_origin.global_position) - raycast.position
-					just_lit = true
 			else:
-				just_lit = false
 				var tween = create_tween()
 				tween.tween_property(self, "modulate:a", 1.0, 0.3)
 				# Waiting creates issues with the lasers. --> It looks like it most likely doesn't anymore, but I did not test this extensively.
 				await get_tree().create_timer(0.15).timeout
 				set_collision_layer_value(1, true)
 				remove_from_group("Disappeared")
+				just_lit = false
 
 
 func _ready() -> void:
@@ -69,11 +67,18 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	# If I really feel like making it work smoothly I might return here still and fix this. Probably not gonna bother anymore. Currently a more complicated way to do the same thing that was already working with the previous method.
+	if laser and laser_origin and not just_lit:
+		laser_original_position = laser_origin.global_position
+		just_lit = true
+	if laser and laser_origin:
+		# I honestly have no idea why laser.raycast.get_collision_point() doesn't just update properly. This is scuffed but it does work (it's irrelevant anyway with current implementation)
+		raycast.position = to_local(laser.raycast.get_collision_point() - (laser_original_position - laser_origin.global_position))
+		raycast.target_position = to_local(laser_origin.global_position) - raycast.position
 	if raycast.is_colliding():
 		collider = raycast.get_collider()
 	# Check whether laser is currently being blocked. This is *not* calling the change_lit_status function because it should not be changing groups.
 	if laser and laser_origin and is_in_group("Disappeared") and collider and collider != laser_origin and collider is not TileMapLayer and player_lit == false and override == false:
-		just_lit = false
 		var tween = create_tween()
 		tween.tween_property(self, "modulate:a", 1.0, 0.3)
 		await get_tree().create_timer(0.15).timeout
