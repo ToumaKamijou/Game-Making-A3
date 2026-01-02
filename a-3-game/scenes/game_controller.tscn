@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=14 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
+[ext_resource type="PackedScene" uid="uid://boycimxxia2od" path="res://scenes/2D/levels/color_levels2.tscn" id="10_j76ji"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
 
 [node name="GameController" type="Node2D"]
@@ -19,6 +20,7 @@ script = ExtResource("1_d6ul8")
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(-969, -2726)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
@@ -44,6 +46,9 @@ script = ExtResource("7_burlk")
 [node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(960, -3122)
 
+[node name="Checkpoint9" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-991, -2735)
+
 [node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(2883, -3293)
 
@@ -64,6 +69,9 @@ position = Vector2(-2358, -3798)
 
 [node name="Checkpoint8" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(-3239, -3794)
+
+[node name="ColorLevels2" parent="ViewportMover" instance=ExtResource("10_j76ji")]
+position = Vector2(-952.0049, -2638.5723)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
