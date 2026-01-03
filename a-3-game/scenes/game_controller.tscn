@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=16 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cvygxqc55h7vc" path="res://scenes/2D/levels/tutorial_pt_2.tscn" id="9_j76ji"]
 [ext_resource type="PackedScene" uid="uid://dtm5x3xdp4o0d" path="res://scenes/2D/levels/mirror_level_pt_2.tscn" id="10_oy6oc"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
+[ext_resource type="PackedScene" uid="uid://biol66f7gkogq" path="res://scenes/2D/levels/spike_level_pt_2.tscn" id="12_twqac"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
@@ -46,7 +47,10 @@ position = Vector2(18, 1554)
 position = Vector2(174, 1710)
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(75, 2909)
+position = Vector2(-194, 2570)
+
+[node name="Spike_Level_pt2" parent="ViewportMover" instance=ExtResource("12_twqac")]
+position = Vector2(-554, 2906)
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
@@ -76,10 +80,13 @@ position = Vector2(-2358, -3798)
 position = Vector2(-3239, -3794)
 
 [node name="Checkpoint9" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-130, 1846)
+position = Vector2(117, 1839)
 
 [node name="Checkpoint10" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(1388, 2672)
+position = Vector2(1126, 2674)
+
+[node name="Checkpoint11" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-270, 2813)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
