@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dtm5x3xdp4o0d"]
+[gd_scene load_steps=18 format=4 uid="uid://c6ol0735nqh2y"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="1_87p55"]
 [ext_resource type="Texture2D" uid="uid://bgi2caci3fe2t" path="res://assets/2D/sprites/skid lines.png" id="2_p3bd1"]
@@ -287,6 +287,7 @@ size = Vector2(48, 52)
 [node name="Mirror_Level_pt2" type="Node2D"]
 
 [node name="TileMapLayers" type="Node2D" parent="."]
+position = Vector2(-1, -1)
 
 [node name="TileMapLayerFloor" type="TileMapLayer" parent="TileMapLayers"]
 z_as_relative = false
@@ -522,13 +523,6 @@ position = Vector2(832, 78.00001)
 scale = Vector2(1, 1.5)
 _color_type = 3
 
-[node name="Wall3" parent="WallsContainer" instance=ExtResource("10_tyu26")]
-z_index = 0
-position = Vector2(1222, 542)
-rotation = 1.5707964
-scale = Vector2(0.6, 1.5)
-_color_type = 2
-
 [node name="Wall4" parent="WallsContainer" instance=ExtResource("10_tyu26")]
 z_index = 0
 position = Vector2(1088, 235.00002)
@@ -562,8 +556,8 @@ _color_type = 1
 
 [node name="Wall9" parent="WallsContainer" instance=ExtResource("10_tyu26")]
 z_index = 0
-position = Vector2(182, 1144)
-scale = Vector2(1, 3)
+position = Vector2(182, 1166)
+scale = Vector2(1, 2.5)
 _color_type = 4
 
 [node name="Wall10" parent="WallsContainer" instance=ExtResource("10_tyu26")]

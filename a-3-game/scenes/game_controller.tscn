@@ -1,21 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=12 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
-[ext_resource type="PackedScene" uid="uid://nyscdpe5o7jn" path="res://scenes/2D/levels/tutorial_area.tscn" id="1_vc4nx"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
-[ext_resource type="PackedScene" uid="uid://3sqr1jld0bm4" path="res://scenes/2D/levels/static_lights_level.tscn" id="4_burlk"]
 [ext_resource type="FontFile" uid="uid://du8u17lf4xy1n" path="res://assets/fonts/Pixeled.ttf" id="6_e85df"]
-[ext_resource type="PackedScene" uid="uid://bqgcl7o5n8lih" path="res://scenes/2D/levels/color_levels.tscn" id="7_1awvl"]
 [ext_resource type="Script" uid="uid://kbay1d6mjx8i" path="res://scenes/2D/levels/checkpoint_manager.gd" id="7_burlk"]
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
-[ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
-[ext_resource type="PackedScene" uid="uid://boycimxxia2od" path="res://scenes/2D/levels/color_levels2.tscn" id="10_j76ji"]
-[ext_resource type="PackedScene" uid="uid://cvygxqc55h7vc" path="res://scenes/2D/levels/tutorial_pt_2.tscn" id="9_j76ji"]
-[ext_resource type="PackedScene" uid="uid://dtm5x3xdp4o0d" path="res://scenes/2D/levels/mirror_level_pt_2.tscn" id="10_oy6oc"]
-[ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
-[ext_resource type="PackedScene" uid="uid://biol66f7gkogq" path="res://scenes/2D/levels/spike_level_pt_2.tscn" id="12_twqac"]
+[ext_resource type="PackedScene" uid="uid://cffj445ljjp8q" path="res://scenes/2D/levels/tutorial_pt_2.tscn" id="9_j76ji"]
+[ext_resource type="PackedScene" uid="uid://b17813cq3e7lm" path="res://scenes/2D/levels/color_levels2.tscn" id="10_j76ji"]
+[ext_resource type="PackedScene" uid="uid://c6ol0735nqh2y" path="res://scenes/2D/levels/mirror_level_pt_2.tscn" id="10_oy6oc"]
+[ext_resource type="PackedScene" uid="uid://b0kt3dfkvd1d3" path="res://scenes/2D/levels/spike_level_pt_2.tscn" id="12_twqac"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
@@ -23,78 +18,37 @@ script = ExtResource("1_d6ul8")
 [node name="ViewportMover" type="Node2D" parent="."]
 
 [node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(-969, -2726)
+position = Vector2(-1105, -9)
 
 [node name="Fog" type="CanvasModulate" parent="ViewportMover"]
 script = ExtResource("2_rc0pn")
 
-[node name="TutorialArea" parent="ViewportMover" instance=ExtResource("1_vc4nx")]
-metadata/_edit_lock_ = true
-
-[node name="Glass Level" parent="ViewportMover" instance=ExtResource("8_h0hye")]
-position = Vector2(1768, -4472)
-metadata/_edit_lock_ = true
-
-[node name="ColorLevels" parent="ViewportMover" instance=ExtResource("7_1awvl")]
-position = Vector2(208, -3172)
-metadata/_edit_lock_ = true
-
-[node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
-position = Vector2(-2600, -3588)
-metadata/_edit_lock_ = true
-
 [node name="Tutorial pt2" parent="ViewportMover" instance=ExtResource("9_j76ji")]
-position = Vector2(18, 1554)
+position = Vector2(-1104, 119)
 
 [node name="Mirror_Level_pt2" parent="ViewportMover" instance=ExtResource("10_oy6oc")]
-position = Vector2(174, 1710)
+position = Vector2(-948, 275)
 
 [node name="Spike_Level_pt2" parent="ViewportMover" instance=ExtResource("12_twqac")]
-position = Vector2(-554, 2906)
+position = Vector2(-1676, 1471)
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
 
-[node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(960, -3122)
-
-[node name="Checkpoint9" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-991, -2735)
-
 [node name="Checkpoint2" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(2883, -3293)
+position = Vector2(-1015, 413)
+
+[node name="Checkpoint" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-1388, 1366)
 
 [node name="Checkpoint3" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(2883, -2461)
+position = Vector2(-2047, 2046)
 
 [node name="Checkpoint4" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(2571, -3164)
-
-[node name="Checkpoint5" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(1724, -4333)
-
-[node name="Checkpoint6" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-1485, -3342)
-
-[node name="Checkpoint7" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-2358, -3798)
-
-[node name="Checkpoint8" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-3239, -3794)
+position = Vector2(-1416, 2608)
 
 [node name="ColorLevels2" parent="ViewportMover" instance=ExtResource("10_j76ji")]
-position = Vector2(-952.0049, -2638.5723)
-[node name="Checkpoint9" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(117, 1839)
-
-[node name="Checkpoint10" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(1126, 2674)
-
-[node name="Checkpoint11" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-270, 2813)
-
-[node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(-1026, 3487)
+position = Vector2(-1520, 2823)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
@@ -109,6 +63,7 @@ render_target_update_mode = 4
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_vq0e2")
+autoplay = true
 
 [node name="Display" type="Control" parent="."]
 layout_mode = 3
@@ -128,6 +83,3 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "SCORE: 0"
 visible_characters_behavior = 1
-
-[node name="Coin" parent="." instance=ExtResource("12_kredl")]
-position = Vector2(-256, 74)

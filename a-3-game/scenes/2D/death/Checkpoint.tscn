@@ -24,6 +24,7 @@ point_count = 2
 size = Vector2(200, 200)
 
 [node name="Checkpoint" type="Area2D"]
+z_index = 5
 collision_layer = 4
 script = ExtResource("1_6rm0u")
 metadata/_edit_group_ = true
@@ -36,6 +37,7 @@ range_z_max = 1
 texture = SubResource("GradientTexture2D_vq8ws")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 6
 amount = 64
 lifetime = 0.3
 preprocess = 1.0
