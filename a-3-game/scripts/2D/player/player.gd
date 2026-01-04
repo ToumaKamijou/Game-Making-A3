@@ -19,7 +19,7 @@ var _collided_zones: Array[Area2D] = []
 @onready var _area_check: ShapeCast2D = $AreaCheck
 var safe := false
 
-var score: int = 0
+var score: int = 6
 @onready var _score_text: RichTextLabel = $"../../Display/ScoreContainer/Score"
 
 var checkpoint: Area2D
@@ -240,5 +240,8 @@ func _input(event: InputEvent) -> void:
 
 # Tracks collectibles. That this is a score on a text label right now is purely placeholder; easily adaptable to track by different methods such as lighting up an object or some such.
 func add_score(score_amount):
-	score += score_amount
-	_score_text.text = str("SCORE: ", score)
+	if score <= 0:
+		_score_text.text = "THE DOOR IS OPEN"
+	else:
+		score -= score_amount
+		_score_text.text = str(str(score) + " REMAINING")

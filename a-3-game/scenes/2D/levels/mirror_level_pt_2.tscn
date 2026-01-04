@@ -393,7 +393,7 @@ rotation = -0.7853982
 movement_axis = 2
 
 [node name="MirrorHor2" parent="MirrorsContainer" instance=ExtResource("8_0pa0k")]
-position = Vector2(199, 84)
+position = Vector2(200, 133)
 rotation = -2.3561945
 scale = Vector2(0.99999994, 0.99999994)
 movement_axis = 2
@@ -448,7 +448,7 @@ scale = Vector2(0.9999999, 0.9999999)
 [node name="SkidLinesContainer" type="Node2D" parent="."]
 
 [node name="SkidLinesHor1" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("9_7mxpx")]
-position = Vector2(199, 84)
+position = Vector2(200, 133)
 rotation = 1.5707964
 parent = NodePath("../../MirrorsContainer/MirrorHor2")
 rotate_90_degrees = true

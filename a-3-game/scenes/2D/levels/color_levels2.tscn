@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://b17813cq3e7lm"]
+[gd_scene load_steps=25 format=4 uid="uid://b17813cq3e7lm"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="1_x5xqm"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/gameplay/static_light.tscn" id="2_0mnyi"]
@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bg7a1774lopyx" path="res://scenes/2D/gameplay/prisma.tscn" id="5_psyka"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="6_hwp11"]
 [ext_resource type="Script" uid="uid://ckvqv5mlwlo4y" path="res://scripts/2D/gameplay/final_wall.gd" id="8_dtykf"]
+[ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="9_dtykf"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="10_dtykf"]
+[ext_resource type="Texture2D" uid="uid://buj08bvsrfyg0" path="res://assets/2D/sprites/chalice_sprite.png" id="10_esgft"]
+[ext_resource type="Script" uid="uid://dftsurvbesg14" path="res://scripts/2D/gameplay/chalice.gd" id="10_psyka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wl7t8"]
 texture = ExtResource("1_x5xqm")
@@ -229,6 +232,12 @@ sources/0 = SubResource("TileSetAtlasSource_esgft")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwp11"]
 size = Vector2(99.79135, 43)
 
+[sub_resource type="Gradient" id="Gradient_psyka"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hwp11"]
+gradient = SubResource("Gradient_psyka")
+
 [sub_resource type="Curve2D" id="Curve2D_dtykf"]
 resource_local_to_scene = true
 _data = {
@@ -267,15 +276,14 @@ tile_set = SubResource("TileSet_2mk2c")
 
 [node name="Spikes" type="TileMapLayer" parent="TileMapControl"]
 texture_filter = 1
-scale = Vector2(2, 2)
-tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAD+/wEAAAAAAAAAAAABAAEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD9/wIAAAAAAAAAAAACAAIAAAAAAAAAAAD+/wQAAAAAAAAAAAD//wQAAAAAAAAAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAD+/wUAAAAAAAAAAAD//wUAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAD9/wYAAAAAAAAAAAACAAYAAAAAAAAAAAD9/wgAAAAAAAAAAAD9/wwAAAAAAAAAAAACAAgAAAAAAAAAAAACAAwAAAAAAAAAAAD+/wsAAAAAAAAAAAD+/woAAAAAAAAAAAD//woAAAAAAAAAAAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAABAAsAAAAAAAAAAAAAAAsAAAAAAAAAAAD//wsAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD+/wAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAD+/wEAAAAAAAAAAAABAAEAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD9/wIAAAAAAAAAAAACAAIAAAAAAAAAAAD9/wgAAAAAAAAAAAACAAgAAAAAAAAAAAD+/wsAAAAAAAAAAAD+/woAAAAAAAAAAAD//woAAAAAAAAAAAAAAAoAAAAAAAAAAAABAAoAAAAAAAAAAAABAAsAAAAAAAAAAAAAAAsAAAAAAAAAAAD//wsAAAAAAAAAAAD9/wAAAAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD9/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD7/wUAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAADAAgAAAAAAAAAAAABAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAD//wgAAAAAAAAAAAD+/wgAAAAAAAAAAAD8/wgAAAAAAAAAAAD8/wkAAAAAAAAAAAD8/woAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAACAAsAAAAAAAAAAAADAAsAAAAAAAAAAAADAAoAAAAAAAAAAAADAAkAAAAAAAAAAAACAAkAAAAAAAAAAAABAAkAAAAAAAAAAAAAAAkAAAAAAAAAAAD//wkAAAAAAAAAAAD+/wkAAAAAAAAAAAD9/wkAAAAAAAAAAAACAAoAAAAAAAAAAAD8/wsAAAAAAAAAAAD7/wwAAAAAAAAAAAD6/wwAAAAAAAAAAAD6/w0AAAAAAAAAAAD7/w0AAAAAAAAAAAAEAAwAAAAAAAAAAAAFAAwAAAAAAAAAAAAFAA0AAAAAAAAAAAAEAA0AAAAAAAAAAAAEABAAAAAAAAAAAAAEABEAAAAAAAAAAAAFABEAAAAAAAAAAAAFABAAAAAAAAAAAAD7/xAAAAAAAAAAAAD6/xAAAAAAAAAAAAD6/xEAAAAAAAAAAAD7/xEAAAAAAAAAAAD7/xgAAAAAAAAAAAD6/xgAAAAAAAAAAAD6/xkAAAAAAAAAAAD7/xkAAAAAAAAAAAAEABgAAAAAAAAAAAAFABgAAAAAAAAAAAAFABkAAAAAAAAAAAAEABkAAAAAAAAAAAADABQAAAAAAAAAAAACABQAAAAAAAAAAAABABQAAAAAAAAAAAAAABQAAAAAAAAAAAD//xQAAAAAAAAAAAD+/xQAAAAAAAAAAAD9/xQAAAAAAAAAAAD8/xQAAAAAAAAAAAD8/xUAAAAAAAAAAAD8/xYAAAAAAAAAAAD8/xcAAAAAAAAAAAD9/xcAAAAAAAAAAAD+/xcAAAAAAAAAAAD//xcAAAAAAAAAAAAAABcAAAAAAAAAAAABABcAAAAAAAAAAAACABcAAAAAAAAAAAADABcAAAAAAAAAAAADABYAAAAAAAAAAAADABUAAAAAAAAAAAACABUAAAAAAAAAAAACABYAAAAAAAAAAAABABYAAAAAAAAAAAABABUAAAAAAAAAAAAAABUAAAAAAAAAAAAAABYAAAAAAAAAAAD//xYAAAAAAAAAAAD//xUAAAAAAAAAAAD+/xYAAAAAAAAAAAD+/xUAAAAAAAAAAAD9/xUAAAAAAAAAAAD9/xYAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_psyka")
 collision_enabled = false
 metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="TileMapControl/Spikes" groups=["Hazard"]]
-position = Vector2(-1, 0)
-scale = Vector2(1.0020908, 1)
+position = Vector2(-2, 0)
+scale = Vector2(2.0041816, 2)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapControl/Spikes/Area2D"]
@@ -417,13 +425,23 @@ scale = Vector2(1, 1.985)
 _color_type = 4
 
 [node name="FinalWall" parent="ColorWallContainer" instance=ExtResource("6_hwp11")]
-position = Vector2(102, -234)
+position = Vector2(104, -234)
 rotation = 1.5707964
 script = ExtResource("8_dtykf")
+
+[node name="MeshInstance2D" parent="ColorWallContainer/FinalWall" index="0"]
+texture = SubResource("GradientTexture1D_hwp11")
 
 [node name="SkidContainer" type="Node2D" parent="."]
 
 [node name="CoinContainer" type="Node2D" parent="."]
+
+[node name="Chalice" parent="CoinContainer" instance=ExtResource("9_dtykf")]
+position = Vector2(0, 1872)
+
+[node name="Sprite2D" parent="CoinContainer/Chalice" index="0"]
+texture = ExtResource("10_esgft")
+script = ExtResource("10_psyka")
 
 [node name="PlatformContainer" type="Node2D" parent="."]
 
@@ -444,3 +462,6 @@ position = Vector2(132, 1068)
 curve = SubResource("Curve2D_esgft")
 distance_to_end = Vector2(0.01, 180)
 duration = 3
+
+[editable path="ColorWallContainer/FinalWall"]
+[editable path="CoinContainer/Chalice"]
