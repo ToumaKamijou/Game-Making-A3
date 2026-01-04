@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://b17813cq3e7lm"]
+[gd_scene load_steps=18 format=4 uid="uid://b17813cq3e7lm"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="1_x5xqm"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/gameplay/static_light.tscn" id="2_0mnyi"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b7tbu28c0oin8" path="res://scenes/2D/gameplay/mirror.tscn" id="4_esgft"]
 [ext_resource type="PackedScene" uid="uid://bg7a1774lopyx" path="res://scenes/2D/gameplay/prisma.tscn" id="5_psyka"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="6_hwp11"]
-[ext_resource type="PackedScene" uid="uid://dbp1386a3bu16" path="res://scenes/2D/levels/skid_lines.tscn" id="7_nx681"]
 [ext_resource type="Script" uid="uid://ckvqv5mlwlo4y" path="res://scripts/2D/gameplay/final_wall.gd" id="8_dtykf"]
 [ext_resource type="PackedScene" uid="uid://dlt1kbk32vxm2" path="res://scenes/2D/platforms/moving_platform.tscn" id="10_dtykf"]
 
@@ -230,24 +229,10 @@ sources/0 = SubResource("TileSetAtlasSource_esgft")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwp11"]
 size = Vector2(99.79135, 43)
 
-[sub_resource type="Curve2D" id="Curve2D_dtykf"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 100)
-}
-point_count = 2
-
 [sub_resource type="Curve2D" id="Curve2D_0mnyi"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 100)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_esgft"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 100)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
 }
 point_count = 2
 
@@ -342,6 +327,7 @@ shape = SubResource("RectangleShape2D_hwp11")
 position = Vector2(-231, -112)
 rotation = -1.5707964
 _size = 4.6
+_button_enabled = false
 
 [node name="LasersContainer" type="Node2D" parent="."]
 
@@ -390,16 +376,16 @@ _color_type = 2
 position = Vector2(-362, 242)
 _color_type = 3
 
-[node name="Prisma3" parent="PrismaContainer" groups=["Pushable"] instance=ExtResource("5_psyka")]
+[node name="Prisma3" parent="PrismaContainer" instance=ExtResource("5_psyka")]
 position = Vector2(1, 678)
 movement_axis = 2
 
-[node name="Prisma4" parent="PrismaContainer" groups=["Pushable"] instance=ExtResource("5_psyka")]
+[node name="Prisma4" parent="PrismaContainer" instance=ExtResource("5_psyka")]
 position = Vector2(-365, 887)
 movement_axis = 2
 _color_type = 2
 
-[node name="Prisma5" parent="PrismaContainer" groups=["Pushable"] instance=ExtResource("5_psyka")]
+[node name="Prisma5" parent="PrismaContainer" instance=ExtResource("5_psyka")]
 position = Vector2(366, 885)
 movement_axis = 2
 _color_type = 1
@@ -423,36 +409,22 @@ script = ExtResource("8_dtykf")
 
 [node name="SkidContainer" type="Node2D" parent="."]
 
-[node name="SkidLines" parent="SkidContainer" node_paths=PackedStringArray("parent") instance=ExtResource("7_nx681")]
-position = Vector2(366, 885)
-rotation = 1.5707964
-parent = NodePath("../../PrismaContainer/Prisma5")
-rotate_90_degrees = true
-
-[node name="SkidLines2" parent="SkidContainer" node_paths=PackedStringArray("parent") instance=ExtResource("7_nx681")]
-position = Vector2(-365, 887)
-rotation = 1.5707964
-parent = NodePath("../../PrismaContainer/Prisma4")
-rotate_90_degrees = true
-
-[node name="SkidLines3" parent="SkidContainer" node_paths=PackedStringArray("parent") instance=ExtResource("7_nx681")]
-position = Vector2(1, 678)
-rotation = 1.5707964
-parent = NodePath("../../PrismaContainer/Prisma3")
-rotate_90_degrees = true
-
 [node name="CoinContainer" type="Node2D" parent="."]
 
 [node name="PlatformContainer" type="Node2D" parent="."]
 
 [node name="MovingPlatform" parent="PlatformContainer" instance=ExtResource("10_dtykf")]
 position = Vector2(141, -1)
-curve = SubResource("Curve2D_dtykf")
+distance_to_end = Vector2(0.01, 180)
+duration = 3
 
 [node name="MovingPlatform2" parent="PlatformContainer" instance=ExtResource("10_dtykf")]
 position = Vector2(135, 426)
 curve = SubResource("Curve2D_0mnyi")
+distance_to_end = Vector2(0.01, 180)
+duration = 3
 
 [node name="MovingPlatform3" parent="PlatformContainer" instance=ExtResource("10_dtykf")]
 position = Vector2(132, 1068)
-curve = SubResource("Curve2D_esgft")
+distance_to_end = Vector2(0.01, 180)
+duration = 3

@@ -22,6 +22,7 @@ distance_to_end = Vector2(0.01, 0.01)
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotation = -1.5707964
+rotates = false
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")

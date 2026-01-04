@@ -95,6 +95,8 @@ func _physics_process(delta: float) -> void:
 			held_object.light.enabled = false
 			held_object.modulate = Color(0.176, 0.176, 0.176, 1.0)
 	
+	elif movement_dir and velocity != movement_dir * _walk_speed:
+		velocity = velocity.move_toward(movement_dir * _walk_speed, delta * 2000)
 	elif movement_dir:
 		velocity = movement_dir * _walk_speed
 	else:
@@ -188,7 +190,7 @@ func _physics_process(delta: float) -> void:
 		if not current_collisions_zones.has(i):
 			if i.is_in_group("Mover"):
 				safe = false
-			if i.is_in_group("Button"):
+			if light_control and i.is_in_group("Button"):
 				light_control._button_light.enabled = false
 				light_control = null
 	

@@ -343,6 +343,8 @@ _button_enabled = false
 [node name="StaticLightNB2" parent="StaticLightsContainer" instance=ExtResource("6_j7l3d")]
 position = Vector2(371, 530)
 _rotation_value = 45
+_button_position_x = -128.5
+_button_position_y = -18.0
 _button_enabled = false
 
 [node name="StaticLight2" parent="StaticLightsContainer" instance=ExtResource("6_j7l3d")]

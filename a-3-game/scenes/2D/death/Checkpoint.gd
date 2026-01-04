@@ -4,8 +4,6 @@ extends Area2D
 @onready var particles := $CPUParticles2D
 
 @onready var _respawn := $RespawnPoint
-
-# This variable and its operations are currently adding nothing, but intended to be used in the future for changing state based on whether or not it is the active checkpoint.
 var active := false
 
 func _on_body_entered(body: Node2D) -> void:
@@ -18,7 +16,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if active == true:
-		particles.hue_variation_min = 1
+		particles.hue_variation_min = -1
 		particles.hue_variation_max = 1
 	else:
 		particles.hue_variation_min = 0

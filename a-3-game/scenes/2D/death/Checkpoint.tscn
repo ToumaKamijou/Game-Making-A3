@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfxd2d47uaq1q"]
+[gd_scene load_steps=7 format=3 uid="uid://bfxd2d47uaq1q"]
 
 [ext_resource type="Script" uid="uid://nsml3ec71qjh" path="res://scenes/2D/death/Checkpoint.gd" id="1_6rm0u"]
 
@@ -15,6 +15,9 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.90000004, 0.2)
 metadata/_snap_enabled = true
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rbkcw"]
+light_mode = 1
+
 [sub_resource type="Curve" id="Curve_rbkcw"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, -0.092947364), 0.0, 0.0, 0, 0]
@@ -24,7 +27,7 @@ point_count = 2
 size = Vector2(200, 200)
 
 [node name="Checkpoint" type="Area2D"]
-z_index = 5
+z_index = 10
 collision_layer = 4
 script = ExtResource("1_6rm0u")
 metadata/_edit_group_ = true
@@ -37,7 +40,7 @@ range_z_max = 1
 texture = SubResource("GradientTexture2D_vq8ws")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-z_index = 6
+material = SubResource("CanvasItemMaterial_rbkcw")
 amount = 64
 lifetime = 0.3
 preprocess = 1.0
@@ -52,6 +55,7 @@ initial_velocity_min = 50.0
 initial_velocity_max = 50.0
 scale_amount_min = 2.0
 scale_amount_max = 2.0
+color = Color(0.4635867, 0.4635868, 0.46358645, 1)
 hue_variation_curve = SubResource("Curve_rbkcw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
