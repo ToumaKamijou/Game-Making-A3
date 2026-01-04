@@ -46,9 +46,6 @@ position = Vector2(18, 1554)
 [node name="Mirror_Level_pt2" parent="ViewportMover" instance=ExtResource("10_oy6oc")]
 position = Vector2(174, 1710)
 
-[node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
-position = Vector2(-194, 2570)
-
 [node name="Spike_Level_pt2" parent="ViewportMover" instance=ExtResource("12_twqac")]
 position = Vector2(-554, 2906)
 
@@ -87,6 +84,9 @@ position = Vector2(1126, 2674)
 
 [node name="Checkpoint11" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(-270, 2813)
+
+[node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(-1026, 3487)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0

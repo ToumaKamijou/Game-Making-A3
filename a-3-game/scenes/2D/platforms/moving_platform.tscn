@@ -11,7 +11,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bk33d"]
-size = Vector2(40, 40)
+size = Vector2(47.999996, 48)
 
 [node name="MovingPlatform" type="Path2D" node_paths=PackedStringArray("path_follow_2D")]
 scale = Vector2(2, 2)
@@ -38,5 +38,5 @@ texture = ExtResource("1_ncti2")
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/MovingPlatformArea"]
-position = Vector2(-2.1855659e-08, 0.49999952)
+position = Vector2(8.940697e-07, 4.1723254e-07)
 shape = SubResource("RectangleShape2D_bk33d")
