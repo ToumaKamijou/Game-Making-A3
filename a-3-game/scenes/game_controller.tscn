@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=16 format=3 uid="uid://beicvrs5be67n"]
 
 [ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://bfxd2d47uaq1q" path="res://scenes/2D/death/Checkpoint.tscn" id="7_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://c7cj176uek2m6" path="res://scenes/2D/levels/glass_level.tscn" id="8_h0hye"]
 [ext_resource type="PackedScene" uid="uid://boycimxxia2od" path="res://scenes/2D/levels/color_levels2.tscn" id="10_j76ji"]
+[ext_resource type="PackedScene" uid="uid://cvygxqc55h7vc" path="res://scenes/2D/levels/tutorial_pt_2.tscn" id="9_j76ji"]
+[ext_resource type="PackedScene" uid="uid://dtm5x3xdp4o0d" path="res://scenes/2D/levels/mirror_level_pt_2.tscn" id="10_oy6oc"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="12_kredl"]
+[ext_resource type="PackedScene" uid="uid://biol66f7gkogq" path="res://scenes/2D/levels/spike_level_pt_2.tscn" id="12_twqac"]
 
 [node name="GameController" type="Node2D"]
 script = ExtResource("1_d6ul8")
@@ -39,6 +42,18 @@ metadata/_edit_lock_ = true
 [node name="StaticLightsLevel" parent="ViewportMover" instance=ExtResource("4_burlk")]
 position = Vector2(-2600, -3588)
 metadata/_edit_lock_ = true
+
+[node name="Tutorial pt2" parent="ViewportMover" instance=ExtResource("9_j76ji")]
+position = Vector2(18, 1554)
+
+[node name="Mirror_Level_pt2" parent="ViewportMover" instance=ExtResource("10_oy6oc")]
+position = Vector2(174, 1710)
+
+[node name="Player" parent="ViewportMover" instance=ExtResource("1_ts4rt")]
+position = Vector2(-194, 2570)
+
+[node name="Spike_Level_pt2" parent="ViewportMover" instance=ExtResource("12_twqac")]
+position = Vector2(-554, 2906)
 
 [node name="CheckpointManager" type="Node2D" parent="ViewportMover"]
 script = ExtResource("7_burlk")
@@ -72,6 +87,14 @@ position = Vector2(-3239, -3794)
 
 [node name="ColorLevels2" parent="ViewportMover" instance=ExtResource("10_j76ji")]
 position = Vector2(-952.0049, -2638.5723)
+[node name="Checkpoint9" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(117, 1839)
+
+[node name="Checkpoint10" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(1126, 2674)
+
+[node name="Checkpoint11" parent="ViewportMover/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(-270, 2813)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0
