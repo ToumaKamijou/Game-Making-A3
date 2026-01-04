@@ -513,6 +513,13 @@ position = Vector2(250, 962.00006)
 scale = Vector2(1, 1.5)
 _color_type = 3
 
+[node name="Wall11" parent="WallsContainer" instance=ExtResource("9_6rfic")]
+z_index = 0
+position = Vector2(-493.99997, 833)
+rotation = 1.5707964
+scale = Vector2(1, 1.5)
+_color_type = 3
+
 [node name="coin" parent="." instance=ExtResource("10_bj4ee")]
 position = Vector2(-834, 932)
 
