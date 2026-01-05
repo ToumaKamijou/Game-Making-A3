@@ -399,10 +399,12 @@ _button_rotation = 315
 
 [node name="StaticLight4" parent="StaticLightsContainer" instance=ExtResource("5_18ixe")]
 position = Vector2(-667, 519)
+rotation = -2.3561945
 _base_value = 3
 _rotation_value = 45
 _button_position_x = 227.5
 _button_position_y = -48.0
+_button_rotation = 135
 
 [node name="StaticLight5" parent="StaticLightsContainer" instance=ExtResource("5_18ixe")]
 position = Vector2(204, 622)
@@ -414,7 +416,7 @@ _button_position_y = 79.5
 _button_rotation = 180
 
 [node name="StaticLight6" parent="StaticLightsContainer" instance=ExtResource("5_18ixe")]
-position = Vector2(-225, 959)
+position = Vector2(-312, 959)
 rotation = -4.712389
 _base_value = 1
 _rotation_value = 45
@@ -508,7 +510,7 @@ _color_type = 2
 
 [node name="Wall8" parent="WallsContainer" instance=ExtResource("9_6rfic")]
 z_index = 0
-position = Vector2(-130, 963)
+position = Vector2(-205, 962)
 scale = Vector2(1, 1.5)
 _color_type = 1
 
