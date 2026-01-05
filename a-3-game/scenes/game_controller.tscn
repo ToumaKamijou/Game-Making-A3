@@ -1,6 +1,6 @@
 [gd_scene load_steps=56 format=4 uid="uid://cucv4r1l6ra5x"]
 
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
+[ext_resource type="Script" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
@@ -1049,7 +1049,7 @@ position = Vector2(-565, 3933)
 position = Vector2(224, 4756)
 
 [node name="Player" parent="GameWorld" instance=ExtResource("1_ts4rt")]
-position = Vector2(-939, 2418)
+position = Vector2(-1128, 6)
 
 [node name="TextContainer" type="Control" parent="."]
 layout_mode = 3
