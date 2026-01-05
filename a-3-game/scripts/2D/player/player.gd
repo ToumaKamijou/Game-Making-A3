@@ -132,7 +132,8 @@ func _physics_process(delta: float) -> void:
 			if color_match:
 				if collided.is_in_group("Prisma") and not collided.is_in_group("Mirror"):
 					if not collided.is_in_group("Yellow") and not collided.is_in_group("Purple") and not collided.is_in_group("Cyan") or flash_color == 0:
-						collided.set_incoming_light_color(flash_color)
+						if not collided.transferring == true:
+							collided.set_incoming_light_color(flash_color)
 					else:
 						continue
 				

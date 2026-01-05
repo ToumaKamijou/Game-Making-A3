@@ -308,7 +308,8 @@ position = Vector2(-774, -1042)
 _button_enabled = false
 
 [node name="StaticLightNB2" parent="StaticLightsContainer" instance=ExtResource("3_agthl")]
-position = Vector2(-529, -526)
+position = Vector2(-453.00003, -415.00003)
+rotation = 1.5707964
 _button_enabled = false
 
 [node name="StaticLight8" parent="StaticLightsContainer" instance=ExtResource("3_agthl")]
@@ -326,14 +327,14 @@ position = Vector2(-406, -967)
 movement_axis = 2
 _color_type = 1
 
-[node name="Laser3" parent="LasersContainer" instance=ExtResource("4_nkmqq")]
-position = Vector2(-531, -605)
+[node name="Laser3" parent="LasersContainer" groups=["Pushable"] instance=ExtResource("4_nkmqq")]
+position = Vector2(-791, -550)
 rotation = 1.5707964
 movement_axis = 2
 _color_type = 1
 
 [node name="Laser5" parent="LasersContainer" instance=ExtResource("4_nkmqq")]
-position = Vector2(-666, -408)
+position = Vector2(-559, -385)
 rotation = 3.1415927
 movement_axis = 2
 _color_type = 2
@@ -352,10 +353,9 @@ parent = NodePath("../../LasersContainer/Laser")
 rotate_90_degrees = true
 
 [node name="SkidLines2" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("5_vclov")]
-position = Vector2(-666, -408)
+position = Vector2(-791, -550)
 rotation = 1.5707964
-parent = NodePath("../../LasersContainer/Laser5")
-rotate_90_degrees = true
+parent = NodePath("../../LasersContainer/Laser3")
 
 [node name="SkidLines3" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("5_vclov")]
 position = Vector2(-1604, -73)
@@ -403,4 +403,4 @@ scale = Vector2(1, 1.5)
 _color_type = 1
 
 [node name="coin3" parent="." instance=ExtResource("10_dowgs")]
-position = Vector2(-623, -80)
+position = Vector2(-622, -51)
