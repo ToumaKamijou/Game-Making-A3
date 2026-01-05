@@ -9,11 +9,13 @@ var laser: Node2D
 var player_lit := false
 var override := false
 var matched := false
+# For blocking logic
 var just_lit := false
 
 var base_color_type : Global.LIGHT_COLOR = Global.LIGHT_COLOR.WHITE
 
 var laser_origin: Node2D
+var collider: Node2D
 
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var _laser_origin: Node2D = $LaserOrigin
@@ -112,9 +114,9 @@ func set_incoming_light_color(color: Global.LIGHT_COLOR) -> void:
 var lit = false:
 	set(value):
 		if value:
-			light.enabled = true
+			# I can't get the light to turn off properly. Now that the lasers themselves emit light it's fairly superfluous anyway.
+			#light.enabled = true
 			if laser and laser_origin and just_lit == false:
-				raycast.target_position = to_local(laser_origin.global_position) - raycast.position
 				just_lit = true
 			# Create laser.
 			if not is_instance_valid(_laser_instance):
@@ -154,10 +156,18 @@ func _physics_process(_delta: float) -> void:
 		global_position.x = _position.x
 	if  _position.y != global_position.y and movement_axis == 2:
 		global_position.y = _position.y
-# 	Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
-	if player_lit == false and blocked == true:
+	# Blocking logic is adapted code from the flashable walls. It's messy but it works.
+	# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
+	if laser and laser_origin:
+		raycast.position = to_local(laser.raycast.get_collision_point())
+		raycast.target_position = to_local(laser_origin.global_position) - raycast.position
+	if raycast.is_colliding():
+		collider = raycast.get_collider()
+	# Check whether laser is currently being blocked.
+	if laser and laser_origin and collider and collider != laser_origin and collider is not TileMapLayer and player_lit == false and override == false:
+		light.enabled = false
 		change_lit_status(false)
-	# Check whether it is currently transferring a lasera nd it has not moved.
+	# Check whether it is currently transferring a laser and it has not moved.
 	elif transferring == true and is_instance_valid(laser) and raycast.is_colliding() and raycast.get_collider() == laser_origin:
 		change_lit_status(true)
 	# Check whether player is interacting and a static light is not overriding this.
@@ -168,4 +178,5 @@ func _physics_process(_delta: float) -> void:
 		change_lit_status(true)
 	# Default state.
 	else:
+		light.enabled = false
 		change_lit_status(false)

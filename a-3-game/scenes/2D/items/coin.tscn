@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3wlvkrkhjw2b"]
 
 [ext_resource type="Texture2D" uid="uid://c1uieuqmeuj70" path="res://assets/2D/sprites/coin.png" id="1_5jyeu"]
-[ext_resource type="Script" path="res://scripts/2D/gameplay/coin.gd" id="1_bmwih"]
-[ext_resource type="AudioStream" uid="uid://brf65vvyu0374" path="res://assets/sfx/coin.ogg" id="3_xilg1"]
+[ext_resource type="Script" uid="uid://dwo3hq0loeh7n" path="res://scripts/2D/gameplay/coin.gd" id="1_bmwih"]
+[ext_resource type="AudioStream" uid="uid://cav1d75j8x4rm" path="res://assets/sfx/coin_new.mp3" id="3_xilg1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jyeu"]
 radius = 3.0
@@ -22,5 +22,6 @@ shape = SubResource("CircleShape2D_5jyeu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xilg1")
+volume_db = 15.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

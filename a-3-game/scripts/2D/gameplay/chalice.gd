@@ -1,19 +1,54 @@
-extends Sprite2D
+extends Area2D
 
 
-@export var _bob_speed : float = 1.5
-@export var _bob_height : float = 25.0
+# Values adjustable in inspector per separate instance. Change here to adjust defaults.
+@export var _score_amount: int = 1
+@export var _bob_height: float = 15.0
+@export var _bob_speed: float = 2.0
 
+@onready var _audio := $AudioStreamPlayer
+@onready var _particles := $"../CPUParticles2D"
+
+# Fetch starting position and time for bob function.
+@onready var _start_y: float = global_position.y
 var t: float = 0.0
-var _start_y : float
 
+var _collected = false
 
-func _ready() -> void:
-	_start_y = global_position.y
 
 
 func _physics_process(delta: float) -> void:
 	# Bob up and down.
-	t += delta
-	var d = sin((t * _bob_speed) + 1) / 2
-	global_position.y = _start_y + (d * _bob_height)
+	if _collected == false:
+		t += delta
+		var d = sin((t * _bob_speed) + 1) / 2
+		global_position.y = _start_y + (d * _bob_height)
+
+func _on_body_entered(body: Node2D) -> void:
+	# Add score (or track in other ways).
+	if body.is_in_group("Player") and _collected == false:
+		_collect_coin()
+
+
+func _collect_coin() -> void:
+	# Play sound and then destroy self if collected.
+	_collected = true
+	_particles.emitting = true
+	
+	# If it works...
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.BLACK, .5)
+	tween.tween_property(self, "modulate", Color.WHITE, .5)
+	tween.tween_property(self, "modulate", Color.BLACK, .5)
+	tween.tween_property(self, "modulate", Color.WHITE, .5)
+	tween.tween_property(self, "modulate", Color.BLACK, .5)
+	tween.tween_property(self, "modulate", Color.WHITE, .5)
+
+	
+	tween.tween_property(self, "scale", Vector2(0.0, 0.5), 0.3)
+	_audio.play()
+	
+	# queue_free() crashes due to the player areacheck shapecast. score amount change here is a safeguard, should not affect anything.
+	await tween.finished
+	visible = false
+	_score_amount = 0
