@@ -353,7 +353,7 @@ parent = NodePath("../../LasersContainer/Laser")
 rotate_90_degrees = true
 
 [node name="SkidLines2" parent="SkidLinesContainer" node_paths=PackedStringArray("parent") instance=ExtResource("5_vclov")]
-position = Vector2(-666, -408)
+position = Vector2(-791, -550)
 rotation = 1.5707964
 parent = NodePath("../../LasersContainer/Laser3")
 
@@ -403,4 +403,4 @@ scale = Vector2(1, 1.5)
 _color_type = 1
 
 [node name="coin3" parent="." instance=ExtResource("10_dowgs")]
-position = Vector2(-623, -80)
+position = Vector2(-622, -51)
