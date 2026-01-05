@@ -232,8 +232,10 @@ tile_map_data = PackedByteArray("AAD4//r/AAAFAAYAAAD4//v/AAAFAAYAAAD4//z/AAAFAAY
 tile_set = SubResource("TileSet_3k5e8")
 
 [node name="LightControl" type="Node2D" parent="."]
+visibility_layer = 64
 
 [node name="Area1Light" type="PointLight2D" parent="LightControl"]
+visibility_layer = 64
 position = Vector2(0, -151)
 scale = Vector2(9.771069, 9.771069)
 color = Color(0.4217312, 0.42173126, 0.42173123, 1)
