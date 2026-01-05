@@ -11,6 +11,7 @@ var player_lit := false
 var override := false
 var matched := false
 var just_lit := false
+var collider: Node2D
 
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var _laser_origin: Node2D = $LaserOrigin
@@ -101,8 +102,15 @@ func _physics_process(_delta: float) -> void:
 			angle += 360
 		elif angle > 360:
 			angle -= 360
-	# Check whether received laser is currently being blocked. Overriden by the player shining a matching light.
-	if blocked == true:
+	# Blocking logic is adapted code from the flashable walls. It's messy but it works.
+	if laser and laser_origin:
+		raycast.position = to_local(laser.raycast.get_collision_point())
+		raycast.target_position = to_local(laser_origin.global_position) - raycast.position
+	if raycast.is_colliding():
+		collider = raycast.get_collider()
+	# Check whether laser is currently being blocked.
+	if laser and laser_origin and collider and collider != laser_origin and collider is not TileMapLayer and player_lit == false and override == false:
+		light.enabled = false
 		change_lit_status(false)
 	# Check whether it is currently transferring a laser and it has not moved.
 	elif is_instance_valid(laser) and angle < 170 and raycast.is_colliding() and raycast.get_collider() == laser_origin and laser.raycast.is_colliding():
