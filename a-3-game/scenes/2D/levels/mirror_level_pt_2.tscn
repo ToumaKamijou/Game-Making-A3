@@ -561,13 +561,13 @@ _color_type = 3
 
 [node name="Wall8" parent="WallsContainer" instance=ExtResource("10_tyu26")]
 z_index = 0
-position = Vector2(338, 1144)
+position = Vector2(337, 1144)
 scale = Vector2(1, 3)
 _color_type = 1
 
 [node name="Wall9" parent="WallsContainer" instance=ExtResource("10_tyu26")]
 z_index = 0
-position = Vector2(182, 1166)
+position = Vector2(181, 1170)
 scale = Vector2(1, 2.5)
 _color_type = 4
 
