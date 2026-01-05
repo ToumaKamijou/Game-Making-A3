@@ -21,28 +21,28 @@ script = ExtResource("1_d6ul8")
 script = ExtResource("2_rc0pn")
 
 [node name="Mirror_Level_pt2" parent="GameWorld" instance=ExtResource("10_oy6oc")]
-position = Vector2(-532, 3760)
+position = Vector2(597, 3772)
 
 [node name="Spike_Level_pt2" parent="GameWorld" instance=ExtResource("12_twqac")]
-position = Vector2(-1000, 743)
+position = Vector2(129, 755)
 
 [node name="ColorLevels2" parent="GameWorld" instance=ExtResource("10_j76ji")]
-position = Vector2(-844, 2095)
+position = Vector2(285, 2107)
 
 [node name="CheckpointManager" type="Node2D" parent="GameWorld"]
 script = ExtResource("7_burlk")
 
 [node name="Checkpoint2" parent="GameWorld/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-723, 630)
+position = Vector2(406, 642)
 
 [node name="Checkpoint" parent="GameWorld/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-742, 1822)
+position = Vector2(391, 1909)
 
 [node name="Checkpoint3" parent="GameWorld/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-1375, 1317)
+position = Vector2(-79, 1331)
 
 [node name="Checkpoint4" parent="GameWorld/CheckpointManager" instance=ExtResource("7_d6ul8")]
-position = Vector2(-715, 3928)
+position = Vector2(462, 3904)
 
 [node name="ViewportMover#Player" parent="." instance=ExtResource("1_ts4rt")]
 
@@ -154,18 +154,19 @@ visible_characters_behavior = 1
 [node name="TutorialText6" type="RichTextLabel" parent="TextContainer"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -642.0
-offset_top = 3769.0
-offset_right = -43.043457
-offset_bottom = 3881.0
+offset_left = 487.0
+offset_top = 3775.0
+offset_right = 1085.9565
+offset_bottom = 3887.0
 theme_override_colors/font_shadow_color = Color(0.5921569, 0.4862745, 0.38039216, 1)
 theme_override_constants/shadow_outline_size = 11
 theme_override_fonts/normal_font = ExtResource("10_kredl")
-theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "Press F to drag and
 
-ARROW KEYS to rotate"
+ARROW KEYS / MOUSE BUTTONS
+ to rotate"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -174,10 +175,10 @@ visible_characters_behavior = 1
 [node name="EndGameText" type="RichTextLabel" parent="TextContainer"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -1565.0
-offset_top = 4606.0
-offset_right = -966.04346
-offset_bottom = 4718.0
+offset_left = -430.0
+offset_top = 4665.0
+offset_right = 168.95654
+offset_bottom = 4777.0
 theme_override_colors/font_shadow_color = Color(0.5921569, 0.4862745, 0.38039216, 1)
 theme_override_constants/shadow_outline_size = 11
 theme_override_fonts/normal_font = ExtResource("10_kredl")
