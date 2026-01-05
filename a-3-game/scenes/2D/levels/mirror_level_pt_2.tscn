@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ckvqv5mlwlo4y" path="res://scripts/2D/gameplay/final_wall.gd" id="9_87p55"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="10_tyu26"]
 [ext_resource type="Texture2D" uid="uid://buj08bvsrfyg0" path="res://assets/2D/sprites/chalice_sprite.png" id="11_le0qv"]
-[ext_resource type="Script" uid="uid://dftsurvbesg14" path="res://scripts/2D/gameplay/chalice.gd" id="12_2ib3k"]
+[ext_resource type="Script" path="res://scripts/2D/gameplay/chalice.gd" id="12_2ib3k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61tf0"]
 texture = ExtResource("1_87p55")
