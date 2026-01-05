@@ -1045,8 +1045,11 @@ position = Vector2(-1209, 1329)
 [node name="Checkpoint4" parent="GameWorld/CheckpointManager" instance=ExtResource("7_d6ul8")]
 position = Vector2(-565, 3933)
 
+[node name="Checkpoint5" parent="GameWorld/CheckpointManager" instance=ExtResource("7_d6ul8")]
+position = Vector2(224, 4756)
+
 [node name="Player" parent="GameWorld" instance=ExtResource("1_ts4rt")]
-position = Vector2(-1130, 0)
+position = Vector2(-1122, -21)
 
 [node name="TextContainer" type="Control" parent="."]
 layout_mode = 3
