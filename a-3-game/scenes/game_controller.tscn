@@ -1,6 +1,6 @@
-[gd_scene load_steps=52 format=4 uid="uid://beicvrs5be67n"]
+[gd_scene load_steps=52 format=4 uid="uid://cucv4r1l6ra5x"]
 
-[ext_resource type="Script" uid="uid://cyl32akq4gu64" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
+[ext_resource type="Script" path="res://scripts/UI/game_controller.gd" id="1_d6ul8"]
 [ext_resource type="PackedScene" uid="uid://cxwyepp3mbvej" path="res://scenes/2D/player/player.tscn" id="1_ts4rt"]
 [ext_resource type="AudioStream" uid="uid://dwaybla8sbbyb" path="res://assets/music/A3 bg music 1.mp3" id="1_vq0e2"]
 [ext_resource type="Script" uid="uid://c8pjnmrby13h4" path="res://scripts/2D/environment/fog.gd" id="2_rc0pn"]
@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://b17813cq3e7lm" path="res://scenes/2D/levels/color_levels2.tscn" id="10_j76ji"]
 [ext_resource type="FontFile" uid="uid://brue5v4ekn8q6" path="res://assets/fonts/ari-w9500-display.ttf" id="10_kredl"]
 [ext_resource type="PackedScene" uid="uid://c6ol0735nqh2y" path="res://scenes/2D/levels/mirror_level_pt_2.tscn" id="10_oy6oc"]
-[ext_resource type="Script" uid="uid://b74ls1bqtcp0p" path="res://scripts/UI/minimap_viewport.gd" id="11_kredl"]
+[ext_resource type="Script" path="res://scripts/UI/minimap_viewport.gd" id="11_kredl"]
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="12_13gk1"]
-[ext_resource type="Script" uid="uid://bxjdurq1kltbj" path="res://scripts/UI/display_viewport.gd" id="12_j76ji"]
+[ext_resource type="Script" path="res://scripts/UI/display_viewport.gd" id="12_j76ji"]
 [ext_resource type="PackedScene" uid="uid://b0kt3dfkvd1d3" path="res://scenes/2D/levels/spike_level_pt_2.tscn" id="12_twqac"]
 [ext_resource type="PackedScene" uid="uid://d0jhjdqfm8j12" path="res://scenes/2D/gameplay/flashable_wall.tscn" id="13_endrn"]
 [ext_resource type="Texture2D" uid="uid://bgi2caci3fe2t" path="res://assets/2D/sprites/skid lines.png" id="14_shnkw"]
@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://ckvqv5mlwlo4y" path="res://scripts/2D/gameplay/final_wall.gd" id="16_1m60t"]
 [ext_resource type="PackedScene" uid="uid://d3wlvkrkhjw2b" path="res://scenes/2D/items/coin.tscn" id="17_fpu5w"]
 [ext_resource type="Texture2D" uid="uid://buj08bvsrfyg0" path="res://assets/2D/sprites/chalice_sprite.png" id="18_3d517"]
-[ext_resource type="Script" uid="uid://dftsurvbesg14" path="res://scripts/2D/gameplay/chalice.gd" id="19_d2e6m"]
+[ext_resource type="Script" path="res://scripts/2D/gameplay/chalice.gd" id="19_d2e6m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vclov"]
 texture = ExtResource("12_13gk1")
@@ -1034,7 +1034,7 @@ position = Vector2(-1210, 1331)
 position = Vector2(-32, 3904)
 
 [node name="Player" parent="GameWorld" instance=ExtResource("1_ts4rt")]
-position = Vector2(-1214, 4692)
+position = Vector2(-1118, 15)
 
 [node name="TextContainer" type="Control" parent="."]
 layout_mode = 3
