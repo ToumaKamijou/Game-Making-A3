@@ -1034,7 +1034,7 @@ position = Vector2(-1210, 1331)
 position = Vector2(-32, 3904)
 
 [node name="Player" parent="GameWorld" instance=ExtResource("1_ts4rt")]
-position = Vector2(-1118, 15)
+position = Vector2(-1130, 0)
 
 [node name="TextContainer" type="Control" parent="."]
 layout_mode = 3

@@ -1,3 +1,4 @@
+@tool
 extends StaticBody2D
 
 
@@ -34,10 +35,11 @@ var _size: float:
 var _collided_objects: Array[Object] = [] # Holds all the objects seen by the light
 
 func _ready() -> void:
-	await get_tree().create_timer(0.05).timeout
-	rotation_degrees += 180
-	await get_tree().create_timer(0.05).timeout
-	rotation_degrees += 180
+	if not Engine.is_editor_hint():
+		await get_tree().create_timer(0.05).timeout
+		rotation_degrees += 180
+		await get_tree().create_timer(0.05).timeout
+		rotation_degrees += 180
 
 func _physics_process(_delta: float) -> void:
 	var current_collisions_objects: Array[Object]

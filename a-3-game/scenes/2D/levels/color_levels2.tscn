@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://b17813cq3e7lm"]
+[gd_scene load_steps=18 format=4 uid="uid://b17813cq3e7lm"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="1_x5xqm"]
 [ext_resource type="PackedScene" uid="uid://dvarbtspidjhf" path="res://scenes/2D/gameplay/static_light.tscn" id="2_0mnyi"]
@@ -228,26 +228,19 @@ sources/0 = SubResource("TileSetAtlasSource_esgft")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwp11"]
 size = Vector2(99.79135, 43)
 
-[sub_resource type="Curve2D" id="Curve2D_dtykf"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
-}
-point_count = 2
-
 [sub_resource type="Curve2D" id="Curve2D_0mnyi"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0.005, 90)
 }
-point_count = 2
+point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_esgft"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0.005, 90)
 }
-point_count = 2
+point_count = 3
 
 [node name="ColorLevels" type="Node2D"]
 
@@ -422,7 +415,6 @@ _color_type = 4
 
 [node name="MovingPlatform" parent="PlatformContainer" instance=ExtResource("10_dtykf")]
 position = Vector2(141, -1)
-curve = SubResource("Curve2D_dtykf")
 distance_to_end = Vector2(0.01, 180)
 duration = 3
 

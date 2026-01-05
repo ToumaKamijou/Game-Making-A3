@@ -6,6 +6,7 @@ class_name MovingPlatform
 @export var duration: int
 @onready var center: AnimatableBody2D = $AnimatableBody2D
 var old: Vector2 = Vector2(0,0)
+var older: Vector2
 
 func _ready() -> void:
 	curve.add_point(distance_to_end/2)
@@ -19,4 +20,6 @@ func move_tween():
 
 func _physics_process(_delta: float) -> void:
 	# Store previous frame's position to be able to access relative distance in the player script.
+	# This used to work with only one variable but for some reason the order they update in was changed. The second variable is just artificially delaying things by one frame.
+	older = old
 	old = center.global_position
