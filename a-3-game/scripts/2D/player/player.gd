@@ -240,7 +240,7 @@ func _input(event: InputEvent) -> void:
 
 # Tracks collectibles. That this is a score on a text label right now is purely placeholder; easily adaptable to track by different methods such as lighting up an object or some such.
 func add_score(score_amount):
-	if score < 0:
+	if score == 0 or score < 0:
 		_score_text.text = "THE DOOR IS OPEN"
 	else:
 		score -= score_amount
