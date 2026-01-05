@@ -1628,7 +1628,6 @@ metadata/_edit_use_anchors_ = true
 [node name="GameViewContainer" type="CanvasLayer" parent="."]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="GameViewContainer"]
-visible = false
 light_mask = 2
 visibility_layer = 2
 anchors_preset = 1
@@ -1642,7 +1641,7 @@ grow_horizontal = 0
 handle_input_locally = false
 canvas_cull_mask = 4294967231
 size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+render_target_update_mode = 4
 script = ExtResource("12_j76ji")
 
 [node name="Camera2D" type="Camera2D" parent="GameViewContainer/SubViewportContainer/DisplayViewport"]
@@ -1678,7 +1677,6 @@ visible_characters_behavior = 1
 layer = 2
 
 [node name="GameWindow" type="TextureRect" parent="Display/CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
