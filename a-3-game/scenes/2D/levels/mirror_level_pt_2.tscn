@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://c6ol0735nqh2y"]
+[gd_scene load_steps=27 format=4 uid="uid://c6ol0735nqh2y"]
 
 [ext_resource type="Texture2D" uid="uid://hh5xt8teuyrd" path="res://assets/2D/sprites/tilemaps/tiles_a3.png" id="1_87p55"]
 [ext_resource type="Texture2D" uid="uid://bgi2caci3fe2t" path="res://assets/2D/sprites/skid lines.png" id="2_p3bd1"]
@@ -292,6 +292,13 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_p3bd1"]
 gradient = SubResource("Gradient_psyka")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_le0qv"]
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_2ib3k"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_s4v5h"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -606,10 +613,31 @@ position = Vector2(754, 1223)
 
 [node name="Chalice" parent="." instance=ExtResource("4_2ib3k")]
 position = Vector2(-728, 1025)
+script = ExtResource("12_2ib3k")
 
 [node name="Sprite2D" parent="Chalice" index="0"]
 texture = ExtResource("11_le0qv")
-script = ExtResource("12_2ib3k")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+self_modulate = Color(1, 0.53, 0.53, 1)
+material = SubResource("CanvasItemMaterial_le0qv")
+position = Vector2(-728, 1025)
+scale = Vector2(2, 2)
+emitting = false
+amount = 128
+lifetime = 3.0
+one_shot = true
+lifetime_randomness = 0.1
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 35.0
+angle_max = 90.0
+scale_amount_min = 3.0
+scale_amount_max = 3.0
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_2ib3k")
 
 [node name="Area1Light" type="PointLight2D" parent="."]
 visibility_layer = 64

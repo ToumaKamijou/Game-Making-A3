@@ -1006,7 +1006,6 @@ script = ExtResource("1_d6ul8")
 
 [node name="Fog" type="CanvasModulate" parent="GameWorld"]
 script = ExtResource("2_rc0pn")
-_color = Color(0.13803375, 0.13803375, 0.13803372, 1)
 
 [node name="Tutorial_pt2" parent="GameWorld" instance=ExtResource("9_j76ji")]
 position = Vector2(-1104, 119)
@@ -1608,10 +1607,10 @@ texture = SubResource("GradientTexture1D_p3bd1")
 
 [node name="Chalice" parent="MinimapContainer/SubViewportContainer/MinimapViewport/Mirror_Level_pt2" instance=ExtResource("17_fpu5w")]
 position = Vector2(-728, 1025)
+script = ExtResource("19_d2e6m")
 
 [node name="Sprite2D" parent="MinimapContainer/SubViewportContainer/MinimapViewport/Mirror_Level_pt2/Chalice" index="0"]
 texture = ExtResource("18_3d517")
-script = ExtResource("19_d2e6m")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="MinimapContainer/SubViewportContainer"]
 color = Color(0.55828667, 0.55828655, 0.55828655, 1)
